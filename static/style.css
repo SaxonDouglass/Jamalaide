@@ -1,6 +1,6 @@
 
 body {
-    background: #420064;
+    background: #ffffff;
 }
 
 #body {
@@ -8,8 +8,25 @@ body {
 }
 
 #content {
+    background: #6f0aaa;
     width: 768px;
     float: left;
+}
+
+#menu {
+    background: #9d3ed5;
+}
+
+#next {
+    background: #5e2580;
+}
+
+#prev {
+    background: #ac66df;
+}
+
+#contact {
+    background: #47036f;
 }
 
 .sidebar {
