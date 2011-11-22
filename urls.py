@@ -1,14 +1,12 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 
-from jamalaide.views import current_datetime
-
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+handler500 = 'djangotoolbox.errorviews.server_error'
 
 urlpatterns = patterns('',
-    ('^$', current_datetime),
+    ('^_ah/warmup$', 'djangoappengine.views.warmup'),
+    ('^$', 'django.views.generic.simple.direct_to_template',
+     {'template': 'base.html'}),
 )
 
 if settings.DEBUG:
@@ -16,4 +14,3 @@ if settings.DEBUG:
         (r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
     )
-
