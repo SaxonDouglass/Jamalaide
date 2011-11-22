@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <div id="body">
+        <img src="/static/img/header.png" />
+       
+        <div id="menu"><ul>
+            <li>News</li>
+            <li>Upcoming</li>
+            <li>Games</li>
+            <li>Jams</li>
+            <li>About</li>
+        </ul></div>
+        
+        <div id="content">
+            blah
+            {% block content %}{% endblock %}
+        </div>
+        
+        <div id="next" class="sidebar">
+            <h1>Next time:</h1>
+            Ludum Dare: 16-19th December
+        </div>
+        
+        <div id="prev" class="sidebar">
+            <h1>Last time:</h1>
+            Adelaide Game Jam
+        </div>
+        
+        <div id="contact" class="sidebar">
+            <h1>Contact:</h1>
+            Email: <a href="mailto:contact@jamalaide.org.au">contact@jamalaide.org.au</a><br />
+            IRC: <a href="https://webchat.freenode.net/?randomnick=1&channels=jamalaide">#jamalaide on irc.freenode.net</a>
+        </div>
+    </div>
+</body>
+</html>
+

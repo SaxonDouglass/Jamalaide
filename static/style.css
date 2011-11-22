@@ -1,0 +1,21 @@
+
+body {
+    background: #420064;
+}
+
+#body {
+    max-width: 1024px;
+}
+
+#content {
+    width: 768px;
+    float: left;
+}
+
+.sidebar {
+    display: block;
+    clear: both;
+    width: 256px;
+    float: left;
+}
+
