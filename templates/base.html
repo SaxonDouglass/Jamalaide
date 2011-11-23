@@ -7,36 +7,59 @@
 
 <body>
     <div id="body">
-        <img src="/static/img/header.png" />
+        <div id="header">
+	  <img src="/static/img/header6.png" />
+	</div>
        
         <div id="menu"><ul>
-            <li>News</li>
-            <li>Coming Soon</li>
-            <li>Games</li>
-            <li>Jams</li>
-            <li>About</li>
+            <a href="/news"><li>News</li></a>
+            <a href="/jams/soon"><li>Coming Soon</li></a>
+            <a href="/games"><li>Games</li></a>
+            <a href="/jams"><li>Jams</li></a>
+            <a href="/about"><li>About</li></a>
         </ul></div>
-        
-        <div id="content">
-            blah
-            {% block content %}{% endblock %}
-        </div>
-        
+	
         <div id="next" class="sidebar">
-            <h1>Next time:</h1>
+            <h1>Next time</h1>
             Ludum Dare: 16-19th December
         </div>
         
         <div id="prev" class="sidebar">
-            <h1>Last time:</h1>
+            <h1>Last time</h1>
             Adelaide Game Jam
         </div>
         
         <div id="contact" class="sidebar">
-            <h1>Contact:</h1>
+            <h1>Contact</h1>
             Email: <a href="mailto:contact@jamalaide.org.au">contact@jamalaide.org.au</a><br />
-            IRC: <a href="https://webchat.freenode.net/?randomnick=1&channels=jamalaide">#jamalaide on irc.freenode.net</a>
+            IRC: <a href="https://webchat.freenode.net/?randomnick=1&channels=jamalaide">#jamalaide on freenode</a>
         </div>
+        
+        <div id="content">
+	  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sapien nec justo viverra varius ac in velit. Mauris sollicitudin, elit et laoreet fringilla, sapien risus pulvinar nulla, ut volutpat est sapien dictum nisi. Curabitur sagittis tristique aliquet. Aliquam urna augue, sagittis ac bibendum cursus, laoreet vel odio. Phasellus porttitor diam nulla. Vivamus non tristique ipsum. Donec placerat varius eros, et hendrerit massa luctus nec. Nulla pellentesque lorem non felis suscipit id dictum tellus accumsan. Vestibulum luctus tincidunt commodo. Pellentesque ut urna turpis. Suspendisse dictum, ligula quis tempus elementum, est massa gravida urna, vel laoreet lectus quam quis libero. Suspendisse mollis sodales erat, vitae blandit lorem consequat sit amet.</p>
+
+	  <p>Integer ornare fringilla ante, a auctor lacus semper nec. Nam rutrum turpis eu felis aliquet eleifend. Nulla congue auctor neque, in semper leo imperdiet vel. Quisque consequat, dolor id pharetra semper, diam felis venenatis enim, sollicitudin consequat orci mauris quis ligula. Phasellus iaculis arcu sit amet augue laoreet iaculis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elit est, vehicula vitae lobortis rhoncus, auctor sed ipsum. Etiam interdum dui non magna rhoncus venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque dictum semper mollis. Proin porta congue sapien, nec faucibus neque mattis quis. Etiam volutpat nisl et arcu sagittis vel aliquam libero dapibus. Etiam dignissim pellentesque pharetra. Sed tincidunt faucibus viverra. Quisque aliquet orci et sem volutpat vitae porta orci laoreet.</p>
+
+	  <p>Quisque fermentum metus at elit vestibulum scelerisque. Suspendisse consectetur nunc at ante dapibus dictum. Ut at facilisis justo. Nulla mi leo, lacinia ac bibendum nec, condimentum eget eros. Praesent pellentesque urna quis odio porta auctor. Aenean vitae vulputate diam. Maecenas id eros at purus consectetur vehicula sed ac nisl. Donec ac nibh odio, et consequat ligula. Curabitur consequat, mauris et cursus accumsan, ipsum libero egestas massa, vel faucibus augue erat sit amet urna. Curabitur hendrerit, sem sed venenatis mattis, urna odio dignissim orci, volutpat egestas velit ante a nisi. Sed vel purus sit amet lectus molestie ultrices. Sed diam magna, pharetra ac gravida id, consectetur at turpis. Etiam ut tellus justo. Cras a faucibus libero.</p>
+            {% block content %}{% endblock %}
+        </div>
+	<div id="footer">
+	  <p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+	    <a rel="license"
+	       href="http://creativecommons.org/publicdomain/zero/1.0/">
+	      <img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" style="border-style: none;" alt="CC0" />
+	    </a>
+	    <br />
+	    To the extent possible under law,
+	    <span property="dct:title">Finn Stokes and Saxon Douglass</span>
+	    have waived all copyright and related or neighboring rights to the
+	    <span property="dct:title">Jamalaide</span> website.
+	    This work is published from:
+	    <span property="vcard:Country" datatype="dct:ISO3166"
+		  content="AU" about="jamalaide.org.au">
+	      Australia</span>.
+	  </p>
+	</div>
     </div>
 </body>
 </html>

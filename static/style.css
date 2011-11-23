@@ -1,38 +1,77 @@
+// Colour scheme:
+// - #ac66df
+// - #6f0aaa
+// - #9d3ed5
+// - #5e2580
+// - #47036f
+
 
 body {
     background: #ffffff;
 }
 
-#body {
-    max-width: 1024px;
+a, a:visited {
+    color: #47036f;
+    text-decoration: none;
 }
 
-#content {
-    background: #6f0aaa;
-    width: 768px;
-    float: left;
+a:hover, a:active {
+    color: #6f0aaa;
+    text-decoration: none;
+}
+
+#body {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+#header {
+    text-align: center;
+    margin-right: 256px;
 }
 
 #menu {
-    background: #9d3ed5;
+    text-align: center;
+    margin-right: 256px;
 }
 
-#next {
-    background: #5e2580;
+#menu li {
+    display: inline;
+    border-bottom: 2px solid #9d3ed5;
+    margin: 0 1em;
+    padding: 0 0.5em;
 }
 
-#prev {
-    background: #ac66df;
+#menu li:hover {
+    border-bottom: none;
 }
 
-#contact {
-    background: #47036f;
+#content {
+    margin-right: 256px;
+    padding-right: 2em;
+    text-align: justify;
+}
+
+#footer {
+    clear: both;
+    color: #aaaaaa;
+    text-align: center;
 }
 
 .sidebar {
     display: block;
-    clear: both;
+    float: right;
+    clear: right;
     width: 256px;
-    float: left;
+    border-left: 2px solid #9d3ed5;
+    margin-bottom: 1em;
+    padding-left: 0.75em;
 }
 
+.sidebar h1 {
+    margin: 0;
+    padding: 0;
+    margin-left: -0.25em;
+    font-size: 1.5em;
+    color: #47036f;
+}
