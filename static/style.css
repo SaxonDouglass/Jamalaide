@@ -21,6 +21,7 @@ a:hover, a:active {
 }
 
 #body {
+    font-family: Arial, Helvetica, sans-serif;
     max-width: 1024px;
     margin: 0 auto;
 }
@@ -47,6 +48,7 @@ a:hover, a:active {
 }
 
 #content {
+    line-height: 1.5em;
     margin-right: 256px;
     padding-right: 2em;
     text-align: justify;
