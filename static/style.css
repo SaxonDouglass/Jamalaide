@@ -54,6 +54,30 @@ a:hover, a:active {
     text-align: justify;
 }
 
+.news_item {
+    margin-bottom: 2em;
+}
+
+.news_item p {
+    margin: 0.5em 0;
+}
+
+#content h1 {
+    color: #47036f;
+}
+
+#content h2 {
+    margin: 0;
+    padding: 0;
+    color: #47036f;
+}
+
+.news_item .date {
+    margin: 0;
+    padding: 0;
+    color: #666666;
+}
+
 #footer {
     clear: both;
     color: #aaaaaa;
