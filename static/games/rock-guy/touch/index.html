@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)http://stickymill.com/gamejam/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title></title>
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes"> 
+	<style>
+		body { margin: 0; padding: 0; }
+	</style>
+</head>
+<body>
+<span id="log">Dist p to m: 476</span>
+<span id="test1">test1</span>
+<span id="delta"> Delta: 0.016</span><br>
+
+<canvas width="1024" height="680" id="bgcanvas" style="position:absolute; z-index: 0;"></canvas>
+<canvas width="1024" height="680" id="canvas" style="position:absolute; z-index: 1"></canvas>
+<script type="text/javascript" src="requestAnimFrame.js"></script>
+<script type="text/javascript" src="assetmanager.js"></script>
+<script type="text/javascript" src="imageLoad.js"></script>
+<script type="text/javascript" src="math.js"></script>
+<script type="text/javascript" src="variables.js"></script>
+<script type="text/javascript" src="render.js"></script>
+<script type="text/javascript" src="actions.js"></script>
+<script type="text/javascript" src="update.js"></script>
+<script type="text/javascript" src="touch.js"></script>
+<script type="text/javascript">
+var then = Date.now();
+function getDelta() {
+	var now = Date.now();
+	var delta = now - then;
+
+	then = now;
+	return delta / 1000;
+}
+
+function animate(){
+	// UPDATE
+	update();
+	document.getElementById("delta").innerHTML = " Delta: " + getDelta();
+	document.getElementById("log").innerHTML = "Dist p to m: " + getDist(player1, monster);
+	
+	// CLEAR
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	
+	// RENDER
+	render();	
+	
+	// request new frame
+	requestAnimFrame(function(){
+		animate();
+	});
+}
+
+window.onload = function(){
+	// Event Listeners
+	canvas.ontouchmove = touchMove;
+	canvas.ontouchstart = touchStart;
+	canvas.ontouchend = touchEnd;
+	
+	// Initalize Stage
+	monster.x = canvas.width - monster.w - 100;
+	monster.y = canvas.height / 2 - monster.h /2;
+	player2.x = 40;
+	player2.y = 200;
+	
+	ASSET_MANAGER.downloadAll(function(){ 
+		animate();
+	});
+};
+</script> 
+
+ </body></html>
