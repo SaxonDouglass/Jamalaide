@@ -1,0 +1,142 @@
+// Colour scheme:
+// - #ac66df
+// - #6f0aaa
+// - #9d3ed5
+// - #5e2580
+// - #47036f
+
+body {
+    background: #ffffff;
+}
+
+a, a:visited {
+    color: #47036f;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    color: #6f0aaa;
+    text-decoration: none;
+}
+
+#content a h2, #content a:visited h2 {
+    color: #47036f;
+}
+
+#content a:hover h2, #content a:active h2 {
+    color: #6f0aaa;
+}
+
+#body {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+#header {
+    text-align: center;
+    margin-right: 256px;
+}
+
+#menu {
+    text-align: center;
+    margin-right: 256px;
+}
+
+#menu li {
+    display: inline-block;
+    border-bottom: 2px solid #9d3ed5;
+    margin: 0 1em;
+    padding: 0 0.5em;
+}
+
+#menu li:hover {
+    border-bottom: none;
+}
+
+#content {
+    line-height: 1.5em;
+    margin-right: 256px;
+    padding-right: 2em;
+    text-align: justify;
+}
+
+.news_item {
+    margin-bottom: 2em;
+}
+
+.item p {
+    margin: 0.5em 0;
+}
+
+#content h1 {
+    color: #47036f;
+}
+
+#content h2 {
+    margin: 0;
+    padding: 0;
+    color: #47036f;
+}
+
+#content td.label {
+    font-weight: bold;
+    vertical-align: top;
+    color: #47036f;
+    padding-right: 1em;
+    text-align: right;
+}
+
+.item .date {
+    margin: 0;
+    padding: 0;
+    color: #666666;
+}
+
+#footer {
+    clear: both;
+    color: #aaaaaa;
+    text-align: center;
+}
+
+.sidebar {
+    display: block;
+    float: right;
+    clear: right;
+    width: 256px;
+    border-left: 2px solid #9d3ed5;
+    margin-bottom: 1em;
+    padding-left: 0.75em;
+}
+
+.sidebar h1 {
+    margin: 0;
+    padding: 0;
+    margin-left: -0.25em;
+    font-size: 1.5em;
+    color: #47036f;
+}
+
+#game_list {
+    text-align: left;
+}
+
+.game {
+    //float: left;
+    //clear: none;
+    display: inline-block;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    margin: 1em;
+    line-height: 1em;
+}
+
+.game a {
+    display: block;
+}
+
+.game img {
+    margin: 0;
+    padding: 0;
+}
