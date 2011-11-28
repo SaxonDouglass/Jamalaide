@@ -12,6 +12,10 @@ a:hover, a:active {
     text-decoration: none;
 }
 
+a img {
+    border: none;
+}
+
 #content a h2, #content a:visited h2 {
     color: #47036f;
 }
