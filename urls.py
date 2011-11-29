@@ -5,6 +5,8 @@ handler500 = 'djangotoolbox.errorviews.server_error'
 
 urlpatterns = patterns('',
     ('^_ah/warmup$', 'djangoappengine.views.warmup'),
+    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to',
+        {'url': '/static/img/favicon.ico'}),
     ('^$', 'django.views.generic.simple.direct_to_template',
      {'template': 'news.html'}),
     ('^games$', 'django.views.generic.simple.direct_to_template',
