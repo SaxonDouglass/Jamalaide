@@ -26,8 +26,8 @@ a img {
 
 #body {
     font-family: Arial, Helvetica, sans-serif;
-    max-width: 1216px;
-    min-width: 970px;
+    max-width: 1234px;
+    min-width: 1008px;
     margin: 0 auto;
 }
 
@@ -63,7 +63,7 @@ a img {
     padding: 0 1em;
     min-height: 230px;
     margin-left: 192px;
-    margin-right: 256px;
+    margin-right: 273px;
     text-align: justify;
     background: #ffffff;
     border: 8px solid #7227a2;
@@ -96,6 +96,10 @@ a img {
     text-align: right;
 }
 
+#content img {
+    max-width: 496px;
+}
+
 .item .date {
     margin: 0;
     padding: 0;
@@ -113,10 +117,13 @@ a img {
     float: right;
     width: 236px;
     background: #d5b5ea;
-    border-top: 8px solid #7227a2;
-    border-right: 8px solid #7227a2;
-    border-bottom: 8px solid #7227a2;
-    padding-left: 0.75em;
+    padding-left: 12px;
+    padding-right: -12px;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    border: 24px solid #7227a2; 
+    border-left: none;
+    -webkit-border-image: url("/static/img/sidebar.png") 24 24 repeat;
 }
 
 #sidebar h1 {
