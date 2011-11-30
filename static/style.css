@@ -124,6 +124,9 @@ a img {
     border: 24px solid #7227a2; 
     border-left: none;
     -webkit-border-image: url("/static/img/sidebar.png") 24 24 repeat;
+    -moz-border-image: url("/static/img/sidebar.png") 24 24 repeat;
+    -o-border-image: url("/static/img/sidebar.png") 24 24 repeat;
+    border-image: url("/static/img/sidebar.png") 24 24 repeat;
 }
 
 #sidebar h1 {
