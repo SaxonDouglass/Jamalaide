@@ -130,6 +130,8 @@ a img {
 
 #footer {
     clear: both;
+    margin-left: 128px;
+    margin-right: 276px;
     color: #58356e;
     text-align: center;
 }
