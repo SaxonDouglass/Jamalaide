@@ -1,5 +1,5 @@
 application: jamalaide
-version: 1
+version: 2
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -25,6 +25,10 @@ handlers:
 - url: /media/admin
   static_dir: django/contrib/admin/media
   expiration: '0'
+
+- url: /favicon\.ico
+  static_files: static/img/favicon.ico
+  upload: static/img/favicon\.ico
 
 - url: /static
   static_dir: static

@@ -6,20 +6,27 @@
 <h1>Global Game Jam</h1>
 <table>
   <tr>
-    <td class="label">Venue</td>
+    <th>Venue</td>
     <td>TBA</td>
   </tr><tr>
-    <td class="label">Website</td>
+    <th>Website</td>
     <td><a href="http://globalgamejam.org/">http://globalgamejam.org/</a></td>
   </tr><tr>
-    <td class="label">Start Date</td>
+    <th>Start Date</td>
     <td>2012-01-27</td>
   </tr><tr>
-    <td class="label">End Date</td>
+    <th>End Date</td>
     <td>2012-01-29</td>
   </tr><tr>
-    <td class="label">Duration</td>
+    <th>Duration</td>
     <td>48 hours</td>
   </tr>
 </table>
+<h2>Registration</h2>
+<form action="/jams/2012/01/27" method="post">{% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <input type="submit" value="Register" />
+</form><br />
 {% endblock %}
