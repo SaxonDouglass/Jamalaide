@@ -120,8 +120,12 @@ a img {
     text-align: right;
 }
 
-#content img {
-    max-width: 496px;
+#image {
+    max-width: 640px;
+}
+
+#image img {
+    width: 100%;
 }
 
 #footer {
