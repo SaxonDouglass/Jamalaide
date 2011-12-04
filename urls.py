@@ -1,56 +1,11 @@
 from django.conf.urls.defaults import *
-from django.conf import settings
 
-handler500 = 'djangotoolbox.errorviews.server_error'
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
     ('^_ah/warmup$', 'djangoappengine.views.warmup'),
-    ('^$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'news.html'}),
-    ('^games$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'games.html'}),
-    ('^games/curse$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'curse.html'}),
-    ('^games/matt-and-chris$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'matt-and-chris.html'}),
-    ('^games/operation-cooperation$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'operation-cooperation.html'}),
-    ('^games/robojam$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'robojam.html'}),
-    ('^games/rock-guy$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'rock-guy.html'}),
-    ('^games/some-game-by-james$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'some-game-by-james.html'}),
-    ('^games/sound-and-vision$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'sound-and-vision.html'}),
-    ('^games/three-jumping-dudes$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'three-jumping-dudes.html'}),
-    ('^games/tunnel-experience$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'tunnel-experience.html'}),
-    ('^games/unamed$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'unamed.html'}),
-    ('^games/violence-chap$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'violence-chap.html'}),
-    ('^games/joshs-game$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'joshs-game.html'}),
-    ('^games/the-game$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'the-game.html'}),
-    ('^jams$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'jams.html'}),
-    ('^jams/upcoming$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'upcoming.html'}),
-    ('^jams/2011-11-19$', 'django.views.generic.simple.direct_to_template',
-     {'template': '2011-11-19.html'}),
-    ('^jams/2011-12-16$', 'django.views.generic.simple.direct_to_template',
-     {'template': '2011-12-16.html'}),
-    ('^jams/2012-01-27$', 'django.views.generic.simple.direct_to_template',
-     {'template': '2012-01-27.html'}),
-    ('^about$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'about.html'}),
+    url(r'^jams/', include('jams.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
 
-if settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': settings.MEDIA_ROOT}),
-    )
