@@ -26,8 +26,8 @@ a img {
 
 #body {
     font-family: Arial, Helvetica, sans-serif;
-    max-width: 1186px;
-    min-width: 960px;
+    max-width: 1172px;
+    min-width: 940px;
     margin: 0 auto;
 }
 
@@ -63,7 +63,7 @@ a img {
     padding: 0 1em;
     min-height: 312px;
     margin-left: 128px;
-    margin-right: 292px;
+    margin-right: 276px;
     text-align: justify;
     background: #ffffff;
     border: 8px solid #7227a2;
@@ -112,17 +112,16 @@ a img {
     text-align: center;
 }
 
-#sidebar {
+#sidebar div {
     display: block;
-    float: right;
-    width: 252px;
+    width: 256px;
     line-height: 1.5em;
-    background: #d5b5ea;
-    border: 24px solid #7227a2; 
-    -webkit-border-image: url("/static/img/sidebar.png") 24 24 repeat;
-    -moz-border-image: url("/static/img/sidebar.png") 24 24 repeat;
-    -o-border-image: url("/static/img/sidebar.png") 24 24 repeat;
-    border-image: url("/static/img/sidebar.png") 24 24 repeat;
+    background: #ffffff;
+    border: 8px solid #d5b5ea;
+    border-left: none;
+    margin-bottom: -8px;
+    padding: 0.5em 0;
+    padding-left: 0.75em;
 }
 
 #sidebar h1 {
@@ -133,8 +132,10 @@ a img {
     color: #47036f;
 }
 
-#sidebar div {
-    padding: 0.5em 0;
+#sidebar {
+    display: block;
+    float: right;
+    padding-top: 16px;
 }
 
 #gamelist {
