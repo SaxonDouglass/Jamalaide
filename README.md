@@ -6,6 +6,7 @@ game jams and other social events. A game jam is an event where participants att
 non-digital) within a short time period (typically 24 or 48 hours).
 
 The website (<http://www.jamalaide.org.au>) is made using Django and runs on Google App Engine. Planned features include:
+
  * Library of games from past jams, searchable by author, jam, awards, etc.
  * Registration for future jams
  * Information on futher development on games after jams
