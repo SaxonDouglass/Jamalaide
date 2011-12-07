@@ -13,6 +13,8 @@ inbound_services:
 libraries:
 - name: django
   version: latest
+- name: PIL
+  version: latest
 
 handlers:
 - url: /_ah/queue/deferred

@@ -36,7 +36,17 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: jams_game
+  properties:
+  - name: __key__
+    direction: desc
+
 - kind: jams_jam
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: jams_person
   properties:
   - name: __key__
     direction: desc

@@ -11,6 +11,7 @@ class Person(models.Model):
 
 class Jam(models.Model):
     name = models.CharField(max_length=30)
+    url = models.CharField(max_length=30)
     start = models.DateTimeField()
     end = models.DateTimeField()
     venue = models.CharField(max_length=200)
@@ -21,6 +22,7 @@ class Jam(models.Model):
 
 class Game(models.Model):
     name = models.CharField(max_length=80)
+    url = models.CharField(max_length=30)
     creators = models.ManyToManyField(Person)
     jam = models.ForeignKey(Jam)
     image = models.ImageField(upload_to='file/img/game')
