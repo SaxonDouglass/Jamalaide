@@ -4,6 +4,42 @@
 
 {% block content %}
 <h1>{{jam.name}}</h1>
-This is descriptive crap.
+<table>
+  <tr>
+    <th>Venue</td>
+    <td>{{jam.venue}}</td>
+  </tr><tr>
+    <th>Start Date</td>
+    <td>{{jam.start|date:"Y-m-d H:i"}}</td>
+  </tr><tr>
+    <th>End Date</td>
+    <td>{{jam.end|date:"Y-m-d H:i"}}</td>
+  </tr><tr>
+    <th>Duration</td>
+    <td>{{jam.duration}}</td>
+  </tr><tr>
+    <th>Overall Winner</td>
+    <td><a href="/jams/agj-1/matt-and-chris">Matt and Chris</a></td>
+  </tr><tr>
+    <th>Aesthetics Winner</td>
+    <td><a href="/jams/agj-1/violence-chap">Violence Chap and Friends</a></td>
+  </tr><tr>
+    <th>Mechanics Winner</td>
+    <td><a href="/jams/agj-1/matt-and-chris">Matt and Chris</a></td>
+  </tr><tr>
+    <th>Technology Winner</td>
+    <td><a href="/jams/agj-1/some-game-by-james">Some Game by James</a></td>
+  </tr><tr>
+    <th>Story Winner</td>
+    <td><a href="/jams/agj-1/the-game">The Game</a></td>
+  </tr><tr>
+    <th>Theme Winner</td>
+    <td><a href="/jams/agj-1/sound-and-vision">Sound and Vision</a></td>
+  </tr><tr>
+    <th>Jam Jar Award</td>
+    <td>Robert Reed<br />
+        Aidan Snoswell</td>
+  </tr>
+</table>
 {% endblock %}
 

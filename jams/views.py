@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.core.mail import send_mail
 
-from jams.models import Jam
+from jams.models import *
 
 from django.shortcuts import render_to_response, get_list_or_404, get_object_or_404
 
@@ -17,10 +17,14 @@ def jam(request, jam_url):
     return render_to_response('jams/jam.html', {'jam': jam})
 
 def games(request):
-    pass
+    games = get_list_or_404(Game, )
+    return render_to_response('jams/games.html', {'games': games})
 
-def game(request):
-    pass
+def game(request, jam_url, game_url):
+    jam = get_object_or_404(Jam, url=jam_url)
+    game = get_object_or_404(Game, url=game_url, jam=jam)
+    creators = game.creators
+    return render_to_response('jams/game.html', {'game': game, 'creators': creators})
 
 class RegistrationForm(forms.Form):
     name = forms.CharField(max_length=100)

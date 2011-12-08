@@ -26,6 +26,7 @@ INSTALLED_APPS = (
     'djangotoolbox',
     'autoload',
     'dbindexer',
+    'filetransfers',
     
     # our apps
     'jams',
