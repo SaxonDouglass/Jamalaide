@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Jamalaide - {{game.name}}{% endblock %}
+
+{% block content %}
+<h1>{{game}}</h1>
+<div id="image">
+    <img src="{{game.image}}" alt="" />
+</div>
+<table>
+  <tr>
+    <th>Creator{% if game.creators|length > 1 %}s{% endif %}</td>
+    <td>{% for creator in creators %}{{creator}}{% endfor %}</td>
+  </tr><tr>
+    <th>Jam</td>
+    <td>{{game.jam}}</td>
+  </tr><tr>
+    <th>Source Code</td>
+    <td>{{game.source}}</td>
+  </tr><tr>
+    <th>Play</td>
+    <td>{{game.game}}</td>
+  </tr>
+</table>
+{% endblock %}
+
