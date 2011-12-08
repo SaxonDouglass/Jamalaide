@@ -36,6 +36,11 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: jams_creator
+  properties:
+  - name: __key__
+    direction: desc
+
 - kind: jams_game
   properties:
   - name: __key__

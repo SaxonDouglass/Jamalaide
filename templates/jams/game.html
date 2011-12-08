@@ -10,7 +10,11 @@
 <table>
   <tr>
     <th>Creator{% if game.creators|length > 1 %}s{% endif %}</td>
-    <td>{% for creator in creators %}{{creator}}{% endfor %}</td>
+    <td>
+{% for creator in creators %}
+    {{creator.person.first_name}} {{creator.person.last_name}}<br />
+    {% endfor %}
+    </td>
   </tr><tr>
     <th>Jam</td>
     <td>{{game.jam}}</td>

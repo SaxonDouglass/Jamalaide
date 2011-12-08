@@ -23,7 +23,7 @@ def games(request):
 def game(request, jam_url, game_url):
     jam = get_object_or_404(Jam, url=jam_url)
     game = get_object_or_404(Game, url=game_url, jam=jam)
-    creators = game.creators
+    creators = get_list_or_404(Creator, game=game)
     return render_to_response('jams/game.html', {'game': game, 'creators': creators})
 
 class RegistrationForm(forms.Form):
