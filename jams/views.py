@@ -8,6 +8,8 @@ from jams.models import *
 
 from django.shortcuts import render_to_response, get_list_or_404, get_object_or_404
 
+from filetransfers.api import prepare_upload
+
 import re
 
 def index(request):
@@ -47,26 +49,22 @@ def register(request):
     c.update(csrf(request))
     return render_to_response('jams/index.html', c)
 
-class GameForm(forms.Form):
-    name = forms.CharField(max_length=80)
+class GameForm(forms.ModelForm):
     creators = forms.ModelMultipleChoiceField(queryset=Person.objects.all())
-    image = forms.FileField(required=False)
-    game = forms.FileField(required=False)
-    source = forms.FileField(required=False)
+
+    class Meta:
+        model = Game
 
 def submit(request, jam_url):
     jam = get_object_or_404(Jam, url=jam_url)
     if request.method == 'POST':
         form = GameForm(request.POST, request.FILES)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            url = '-'.join(name.split()).lower()
+            game = form.save(commit=False)
+            url = '-'.join(game.name.split()).lower()
             url = re.sub(r'[^\w-]+','',url)
-            game = Game(
-                name=name,
-                url=url,
-                jam=jam,
-            )
+            game.jam=jam
+            game.url = url
             if 'image' in request.FILES:
                 game.image = form.cleaned_data['image']
             if 'game' in request.FILES:
@@ -84,9 +82,13 @@ def submit(request, jam_url):
     else:
         form = GameForm()
     
+    upload_url, upload_data = prepare_upload(request, '/jams/'+jam.url+'/submit')
+    
     c = {
         'form':form,
         'jam':jam,
+        'upload_url':upload_url,
+        'upload_data':upload_data,
     }
     c.update(csrf(request))
     return render_to_response('jams/submit.html', c)
