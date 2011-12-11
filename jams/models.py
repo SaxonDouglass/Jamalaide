@@ -5,7 +5,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField(max_length=80)
-    photo = models.ImageField(upload_to='uploads/person/photo', blank=True)
+    photo = models.FileField(upload_to='uploads/person/photo', blank=True)
     def __unicode__(self):
         return self.first_name+' '+self.last_name
 
@@ -26,7 +26,7 @@ class Game(models.Model):
     name = models.CharField(max_length=80)
     url = models.CharField(max_length=30)
     jam = models.ForeignKey(Jam)
-    image = models.ImageField(upload_to='uploads/game/image', blank=True)
+    image = models.FileField(upload_to='uploads/game/image', blank=True)
     game = models.FileField(upload_to='uploads/game/game', blank=True)
     source = models.FileField(upload_to='uploads/game/source', blank=True)
     def __unicode__(self):
