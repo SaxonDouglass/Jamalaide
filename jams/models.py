@@ -24,8 +24,8 @@ class Jam(models.Model):
 
 class Game(models.Model):
     name = models.CharField(max_length=80)
-    url = models.CharField(max_length=30)
-    jam = models.ForeignKey(Jam)
+    url = models.CharField(max_length=30,editable=False)
+    jam = models.ForeignKey(Jam,editable=False)
     image = models.FileField(upload_to='uploads/game/image', blank=True)
     game = models.FileField(upload_to='uploads/game/game', blank=True)
     source = models.FileField(upload_to='uploads/game/source', blank=True)
@@ -38,4 +38,3 @@ class Creator(models.Model):
     def __unicode__(self):
         return self.game.name + " - " + self.person.first_name + " " + \
                 self.person.last_name
-
