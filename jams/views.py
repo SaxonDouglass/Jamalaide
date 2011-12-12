@@ -8,7 +8,7 @@ from jams.models import *
 
 from django.shortcuts import render_to_response, get_list_or_404, get_object_or_404
 
-from filetransfers.api import prepare_upload
+from filetransfers.api import prepare_upload, serve_file
 
 import re
 
@@ -92,3 +92,15 @@ def submit(request, jam_url):
     }
     c.update(csrf(request))
     return render_to_response('jams/submit.html', c)
+
+def download_image(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    return serve_file(request, game.image)
+
+def download_source(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    return serve_file(request, game.source, save_as=game.url+"-src.zip")
+
+def download_game(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    return serve_file(request, game.game, save_as=game.url+"-game.zip")

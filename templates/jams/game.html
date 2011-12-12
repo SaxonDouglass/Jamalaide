@@ -1,29 +1,40 @@
 {% extends "base.html" %}
+{% load filetransfers %}
 
 {% block title %}Jamalaide - {{game.name}}{% endblock %}
 
 {% block content %}
+{% url jams.views.download_image pk=game.pk as fallback_image %}
+{% url jams.views.download_source pk=game.pk as fallback_source %}
+{% url jams.views.download_game pk=game.pk as fallback_game %}
+
 <h1>{{game}}</h1>
+{% if game.image %}
 <div id="image">
-    <img src="{{game.image}}" alt="" />
+    <img src="{{fallback_image}}" title="{% firstof game.image|public_download_url fallback_image %}" alt="" />
 </div>
+{% endif %}
 <table>
   <tr>
     <th>Creator{% if game.creators|length > 1 %}s{% endif %}</td>
     <td>
-{% for creator in creators %}
-    {{creator.person.first_name}} {{creator.person.last_name}}<br />
+    {% for creator in creators %}
+      {{creator.person.first_name}} {{creator.person.last_name}}<br />
     {% endfor %}
     </td>
   </tr><tr>
     <th>Jam</td>
     <td>{{game.jam}}</td>
+  {% if game.source %}
   </tr><tr>
     <th>Source Code</td>
-    <td>{{game.source}}</td>
+    <td><a href="{% firstof game.source|public_download_url fallback_source %}">Download</a></td>
+  {% endif %}
+  {% if game.game %}
   </tr><tr>
     <th>Play</td>
-    <td>{{game.game}}</td>
+    <td><a href="{% firstof game.game|public_download_url fallback_game %}">Download</a></td>
+  {% endif %}
   </tr>
 </table>
 {% endblock %}
