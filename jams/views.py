@@ -99,8 +99,12 @@ def download_image(request, pk):
 
 def download_source(request, pk):
     game = get_object_or_404(Game, pk=pk)
-    return serve_file(request, game.source, save_as=game.url+"-src.zip")
+    pattern = re.compile('([.][^/]+)$')
+    ext = pattern.search(game.source.name).group(0)
+    return serve_file(request, game.source, save_as=game.url+"-src"+ext)
 
 def download_game(request, pk):
     game = get_object_or_404(Game, pk=pk)
-    return serve_file(request, game.game, save_as=game.url+"-game.zip")
+    pattern = re.compile('([.][^/]+)$')
+    ext = pattern.search(game.game.name).group(0)
+    return serve_file(request, game.game, save_as=game.url+"-game"+ext)
