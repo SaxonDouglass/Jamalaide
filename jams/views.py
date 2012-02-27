@@ -16,8 +16,8 @@ def register(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             address = form.cleaned_data['email']
-            send_mail('Register: '+name, name+'\n'+address, 'registrations@jamalaide.appspotmail.com', ['contact@jamalaide.org.au']);
-            return HttpResponseRedirect('/jams/ggj-2012/registered')
+            send_mail('Register (PKJ): '+name, name+'\n'+address, 'registrations@jamalaide.appspotmail.com', ['contact@jamalaide.org.au']);
+            return HttpResponseRedirect('/jams/pkj-2012/registered')
     else:
         form = RegistrationForm()
     
