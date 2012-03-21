@@ -21,22 +21,7 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
-- kind: jam_game
-  properties:
-  - name: __key__
-    direction: desc
-
 - kind: jam_jam
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: jam_person
-  properties:
-  - name: __key__
-    direction: desc
-
-- kind: jams_game
   properties:
   - name: __key__
     direction: desc
@@ -46,7 +31,7 @@ indexes:
   - name: __key__
     direction: desc
 
-- kind: jams_person
+- kind: news_newsitem
   properties:
   - name: __key__
     direction: desc
