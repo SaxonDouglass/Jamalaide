@@ -4,8 +4,13 @@
 
 {% block content %}
 <h1>Jams</h1>
-{% for j in jams %}
-    <a href="/jams/{{j.url}}">{{j.name}}</a><br />
+{% for jam in jams %}
+<div class="item">
+  <a href="/jams/{{jam.url}}">
+    <h2>{{jam.name}}</h2>
+  </a>
+  <p class="date">{{jam.start|date:"Y-m-d"}}</p>
+</div>
 {% endfor %}
 {% endblock %}
 
