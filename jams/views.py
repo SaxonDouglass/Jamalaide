@@ -10,6 +10,8 @@ from django.shortcuts import render_to_response, get_list_or_404, get_object_or_
 
 from filetransfers.api import prepare_upload, serve_file
 
+from PIL import Image, ImageOps
+
 import re
 
 def index(request):
@@ -67,6 +69,27 @@ def submit(request, jam_url):
             game.url = url
             if 'image' in request.FILES:
                 game.image = form.cleaned_data['image']
+                image = Image.open(game.image)
+                if image.mode not in ('L', 'RGB'):
+                    image = image.convert('RGB')
+                x = 192
+                y = 144
+                img_ratio = float(image.size[0]) / image.size[1]
+                resize_ratio = float(x) / y
+                if img_ratio > resize_ratio:
+                    output_width = x * image_size[1] / y
+                    output_height = image.size[1]
+                    originX = image.size[0] / 2 - output_width / 2
+                    originY = 0
+                else:
+                    output_width = image.size[0]
+                    output_height = y * image_size[0] / x
+                    originX = 0
+                    originY = image.size[1] / 2 - output_height / 2
+                cropBox = (originX, originY, originX + output_width, originY + output_height)
+                image = image.crop(cropBox)
+                image.thumbnail([x, y], Image.ANTIALIAS)
+                game.thumbnail = image
             if 'game' in request.FILES:
                 game.game = form.cleaned_data['game']
             if 'source' in request.FILES:
@@ -96,6 +119,10 @@ def submit(request, jam_url):
 def download_image(request, pk):
     game = get_object_or_404(Game, pk=pk)
     return serve_file(request, game.image)
+
+def download_thumb(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    return serve_file(request, game.thumbnail)
 
 def download_source(request, pk):
     game = get_object_or_404(Game, pk=pk)

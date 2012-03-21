@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Jamalaide - Games{% endblock %}
+
+{% block content %}
+<h1>Games</h1>
+<div id="game_list">
+  {% for game in games %}
+  <div class="game">
+    <a href="/jams/{{ game.jam.url }}/{{ game.url }}">
+      <img src="/jams/thumb/{{ game.pk }}" alt="" /><br />
+      {{ game.name }}
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

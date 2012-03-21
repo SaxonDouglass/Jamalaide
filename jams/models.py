@@ -27,6 +27,7 @@ class Game(models.Model):
     url = models.CharField(max_length=30,editable=False)
     jam = models.ForeignKey(Jam,editable=False)
     image = models.FileField(upload_to='uploads/game/image', blank=True)
+    thumbnail = models.ImageField(upload_to='uploads/game/thumb', blank=True, editable=False)
     game = models.FileField(upload_to='uploads/game/game', blank=True)
     source = models.FileField(upload_to='uploads/game/source', blank=True)
     def __unicode__(self):
