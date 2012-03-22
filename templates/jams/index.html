@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Jamalaide - Jams{% endblock %}
+{% block title %}Jamalaide - {{title}}{% endblock %}
 
 {% block content %}
-<h1>Jams</h1>
+<h1>{{title}}</h1>
 {% for jam in jams %}
 <div class="item">
   <a href="/jams/{{jam.url}}">

@@ -1,16 +1,15 @@
-from django import forms
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
-from django.core.context_processors import csrf
-from django.core.mail import send_mail
+import datetime
+from django.shortcuts import render_to_response, get_list_or_404, get_object_or_404
 
 from jams.models import Jam
 
-from django.shortcuts import render_to_response, get_list_or_404, get_object_or_404
+def future(request):
+    jams = get_list_or_404(Jam, end__gt=datetime.datetime.now())
+    return render_to_response('jams/index.html', {'jams': jams, 'title': "Upcoming Jams"})
 
-def index(request):
-    jams = get_list_or_404(Jam, )
-    return render_to_response('jams/index.html', {'jams': jams})
+def past(request):
+    jams = get_list_or_404(Jam, end__lt=datetime.datetime.now())
+    return render_to_response('jams/index.html', {'jams': jams, 'title': "Jams"})
 
 def jam(request, jam_url):
     jam = get_object_or_404(Jam, url=jam_url)
