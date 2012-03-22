@@ -1,0 +1,31 @@
+	<div id="sidebar">
+            <div id="next">
+                <h1>Next time</h1>
+                <a href="/jams/{{next.url}}">
+                  {{ next.name }}<br />
+                </a>
+                {% if next.start.month == next.end.month %}
+                {{ next.start|date:"dS" }}-{{ next.end|date:"dS" }} {{ next.start|date:"F" }}
+                {% else %}
+                {{ next.start|date:"dS" }} {{ next.start|date:"N" }}-{{ next.end|date:"dS" }} {{ next.end|date:"N" }}
+                {% endif %}
+            </div>
+        
+            <div id="prev">
+                <h1>Last time</h1>
+                <a href="/jams/{{prev.url}}">
+                  {{ prev.name }}
+                </a><br />
+                {% if prev.start.month == prev.end.month %}
+                {{ prev.start|date:"dS" }}-{{ prev.end|date:"dS" }} {{ prev.start|date:"F" }}
+                {% else %}
+                {{ prev.start|date:"dS" }} {{ prev.start|date:"N" }}-{{ prev.end|date:"dS" }} {{ prev.end|date:"N" }}
+                {% endif %}
+            </div>
+        
+            <div id="contact">
+                <h1>Contact</h1>
+                Email: <a href="mailto:contact@jamalaide.org.au">contact@jamalaide.org.au</a><br />
+                IRC: <a href="https://webchat.freenode.net/?randomnick=1&amp;channels=jamalaide">#jamalaide on freenode</a>
+            </div>
+	</div>

@@ -1,14 +1,14 @@
 import datetime
-from django.shortcuts import render_to_response, get_list_or_404, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404
 
 from jams.models import Jam
 
 def future(request):
-    jams = get_list_or_404(Jam, end__gt=datetime.datetime.now())
+    jams = Jam.objects.filter(end__gt=datetime.datetime.now()).order_by('end')
     return render_to_response('jams/index.html', {'jams': jams, 'title': "Upcoming Jams"})
 
 def past(request):
-    jams = get_list_or_404(Jam, end__lt=datetime.datetime.now())
+    jams = Jam.objects.filter(end__lt=datetime.datetime.now()).order_by('-end')
     return render_to_response('jams/index.html', {'jams': jams, 'title': "Jams"})
 
 def jam(request, jam_url):
