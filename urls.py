@@ -41,4 +41,3 @@ urlpatterns = patterns('',
     (r'^about$', 'django.views.generic.simple.direct_to_template',
      {'template': 'about.html'}),
 )
-
