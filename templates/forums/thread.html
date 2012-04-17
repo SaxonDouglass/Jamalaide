@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Jamalaide - Forums - {{thread.title}}{% endblock %}
+
+{% block content %}
+<h1>{{thread.title}}</h1>
+{% for post in posts %}
+<div class="item">
+  <h2>{{post.user.first_name}} {{post.user.last_name}}</h2>
+  <p class="date">{{post.posted|date:"Y-m-d Hi"}}</p>
+  <p>{{post.message}}</p>
+</div>
+{% endfor %}
+{% endblock %}

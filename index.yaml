@@ -26,6 +26,21 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: forums_post
+  properties:
+  - name: __key__
+    direction: desc
+
+- kind: forums_post
+  properties:
+  - name: thread_id
+  - name: posted
+
+- kind: forums_thread
+  properties:
+  - name: __key__
+    direction: desc
+
 - kind: jam_jam
   properties:
   - name: __key__

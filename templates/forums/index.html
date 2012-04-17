@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Jamalaide - Forums{% endblock %}
+
+{% block content %}
+<h1>Forums</h1>
+{% for thread in threads %}
+<div class="item">
+  <h2><a href="/forums/thread/{{thread.id}}">{{thread.title}}</a></h2>
+</div>
+{% endfor %}
+{% endblock %}
