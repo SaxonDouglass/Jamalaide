@@ -31,6 +31,7 @@ INSTALLED_APPS = (
     'jams',
     'news',
     'sidebar',
+    'accounts',
 
     # djangoappengine should come last, so it can override a few manage.py commands
     'djangoappengine',
@@ -64,3 +65,8 @@ STATICFILES_DIRS = (
 )
 
 ROOT_URLCONF = 'urls'
+
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
