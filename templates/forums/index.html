@@ -7,6 +7,7 @@
 {% for thread in threads %}
 <div class="item">
   <h2><a href="/forums/thread/{{thread.id}}">{{thread.title}}</a></h2>
+  <p class="date">{{thread.last.posted|date:"Y-m-d Hi"}}</p>
 </div>
 {% endfor %}
 {% endblock %}
