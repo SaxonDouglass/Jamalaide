@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block title %}Jamalaide - Send Mail{% endblock %}
+
+{% block content %}
+
+<form method="post" action="{% url 'mailer.views.send_mail' %}">
+{% csrf_token %}
+<table>
+{{ form.as_table }}
+</table>
+
+<input type="submit" value="send" />
+</form>
+
+{% endblock %}

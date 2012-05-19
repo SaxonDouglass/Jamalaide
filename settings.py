@@ -33,6 +33,7 @@ INSTALLED_APPS = (
     'sidebar',
     'accounts',
     'forums',
+    'mailer',
 
     # djangoappengine should come last, so it can override a few manage.py commands
     'djangoappengine',
