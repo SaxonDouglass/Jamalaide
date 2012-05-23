@@ -12,9 +12,10 @@ def send_mail(request):
         if form.is_valid():
             message = EmailMessage(form.cleaned_data['subject'],
                                    form.cleaned_data['body'],
-                                   'notifications@jamalaide.appspotmail.com',
+                                   'Jamalaide <notifications@jamalaide.appspotmail.com>',
                                    headers = {'Reply-To': 'contact@jamalaide.org.au'})
-            message.to = ["contact@jamalaide.org.au"]
+            # Django requires at least one recipient in 'to' field
+            message.to = ['contact@jamalaide.org.au']
             message.bcc = [profile.user.email for profile in UserProfile.objects.filter(notify=True)]
             message.send()
             logging.info('Email "%s" sent to %s', form.cleaned_data['subject'], message.recipients())
