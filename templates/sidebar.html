@@ -1,27 +1,31 @@
 	<div id="sidebar">
-            <div id="next">
-                <h1>Next time</h1>
-                <a href="/jams/{{next.url}}">
-                  {{ next.name }}<br />
-                </a>
-                {% if next.start.month == next.end.month %}
-                {{ next.start|date:"jS" }}-{{ next.end|date:"jS" }} {{ next.start|date:"F" }}
-                {% else %}
-                {{ next.start|date:"jS" }} {{ next.start|date:"N" }}-{{ next.end|date:"jS" }} {{ next.end|date:"N" }}
-                {% endif %}
-            </div>
+            {% if next %}
+                <div id="next">
+                    <h1>Next time</h1>
+                    <a href="/jams/{{next.url}}">
+                      {{ next.name }}<br />
+                    </a>
+                    {% if next.start.month == next.end.month %}
+                    {{ next.start|date:"jS" }}-{{ next.end|date:"jS" }} {{ next.start|date:"F" }}
+                    {% else %}
+                    {{ next.start|date:"jS" }} {{ next.start|date:"N" }}-{{ next.end|date:"jS" }} {{ next.end|date:"N" }}
+                    {% endif %}
+                </div>
+            {% endif %}
         
-            <div id="prev">
-                <h1>Last time</h1>
-                <a href="/jams/{{prev.url}}">
-                  {{ prev.name }}
-                </a><br />
-                {% if prev.start.month == prev.end.month %}
-                {{ prev.start|date:"jS" }}-{{ prev.end|date:"jS" }} {{ prev.start|date:"F" }}
-                {% else %}
-                {{ prev.start|date:"jS" }} {{ prev.start|date:"N" }}-{{ prev.end|date:"jS" }} {{ prev.end|date:"N" }}
-                {% endif %}
-            </div>
+            {% if prev %}
+                <div id="prev">
+                    <h1>Last time</h1>
+                    <a href="/jams/{{prev.url}}">
+                      {{ prev.name }}
+                    </a><br />
+                    {% if prev.start.month == prev.end.month %}
+                    {{ prev.start|date:"jS" }}-{{ prev.end|date:"jS" }} {{ prev.start|date:"F" }}
+                    {% else %}
+                    {{ prev.start|date:"jS" }} {{ prev.start|date:"N" }}-{{ prev.end|date:"jS" }} {{ prev.end|date:"N" }}
+                    {% endif %}
+                </div>
+            {% endif %}
         
             <div id="contact">
                 <h1>Contact</h1>

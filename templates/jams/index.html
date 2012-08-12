@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Jamalaide - {{title}}{% endblock %}
+{% block title %}{{title}}{% endblock %}
 
 {% block content %}
 <h1>{{title}}</h1>
@@ -9,7 +9,9 @@
   <a href="/jams/{{jam.url}}">
     <h2>{{jam.name}}</h2>
   </a>
-  <p class="date">{{jam.start|date:"Y-m-d"}}</p>
+  <p class="date">
+    {{ jam.start|date:"jS F Y" }}
+  </p>
 </div>
 {% endfor %}
 {% endblock %}
