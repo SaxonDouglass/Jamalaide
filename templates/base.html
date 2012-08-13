@@ -24,6 +24,11 @@
         {% sidebar %}
         
         <div id="content">
+            {% if user.is_authenticated %}
+                <p>Welcome, {{ user.username }}. Thanks for logging in. <a href="{% url accounts-logout %}">Logout?</a></p>
+            {% else %}
+                <p>Welcome, new user. Please <a href="{% url accounts-login %}">login</a>. </p>
+            {% endif %}
             {% block content %}{% endblock %}
         </div>
 	<div id="footer">

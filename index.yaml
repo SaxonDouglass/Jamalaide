@@ -35,3 +35,8 @@ indexes:
   properties:
   - name: __key__
     direction: desc
+
+- kind: pages_page
+  properties:
+  - name: __key__
+    direction: desc

@@ -28,6 +28,8 @@ INSTALLED_APPS = (
     'dbindexer',
     
     # our apps
+    'accounts',
+    'pages',
     'jams',
     'news',
     'sidebar',
@@ -65,3 +67,5 @@ STATICFILES_DIRS = (
 )
 
 ROOT_URLCONF = 'urls'
+
+LOGIN_REDIRECT_URL = '/'
