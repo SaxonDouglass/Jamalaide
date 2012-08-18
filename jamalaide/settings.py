@@ -22,8 +22,6 @@ TIME_ZONE = 'Australia/Adelaide'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-SITE_ID = 1
-
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
@@ -34,6 +32,15 @@ USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_URL = '/media/'
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+STATIC_URL = '/static/'
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -63,13 +70,12 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'jamalaide.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'jamalaide.wsgi.application'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
@@ -78,12 +84,12 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     # our apps
-    'accounts',
-    'pages',
-    'jams',
-    'news',
-    'sidebar',
-    'markdown',
+    'jamalaide.accounts',
+    'jamalaide.pages',
+    'jamalaide.jams',
+    'jamalaide.news',
+    'jamalaide.sidebar',
+    'jamalaide.markdown',
 )
 
 # A sample logging configuration. The only tangible logging

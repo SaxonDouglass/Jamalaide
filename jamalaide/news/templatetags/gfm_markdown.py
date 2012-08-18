@@ -1,6 +1,6 @@
 from django import template
 from django.template.defaultfilters import stringfilter
-import markdown
+import jamalaide.markdown
 
 register = template.Library()
 
@@ -8,4 +8,4 @@ register = template.Library()
 @stringfilter
 def gfm_markdown(value):
   """processes markdown on the string"""
-  return markdown.markdown(value)
+  return jamalaide.markdown.markdown(value)
