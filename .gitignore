@@ -1,3 +1,5 @@
 *.pyc
 *~
-.gaedata
+local_settings.py
+/media/uploads
+

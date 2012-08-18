@@ -1,11 +1,10 @@
 from django.conf.urls.defaults import *
+from django.conf import settings
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^jams/games/?$', 'django.views.generic.simple.direct_to_template',
-     {'template': 'games.html'}),
     (r'^jams/agj-1/curse/?$', 'django.views.generic.simple.direct_to_template',
      {'template': 'curse.html'}),
     (r'^jams/agj-1/matt-and-chris/?$', 'django.views.generic.simple.direct_to_template',
@@ -35,7 +34,11 @@ urlpatterns = patterns('',
     (r'^jams/agj-1/?$', 'django.views.generic.simple.direct_to_template',
      {'template': '2011-11-19.html'}),
     url(r'^jams/', include('jams.urls')),
+    url(r'^games/?$', 'jams.views.games'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+      'document_root': settings.MEDIA_ROOT,
+    }),    
     url(r'^$', include('news.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^', include('pages.urls'))
