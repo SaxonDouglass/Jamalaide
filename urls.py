@@ -4,7 +4,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    ('^_ah/warmup$', 'djangoappengine.views.warmup'),
     (r'^jams/games/?$', 'django.views.generic.simple.direct_to_template',
      {'template': 'games.html'}),
     (r'^jams/agj-1/curse/?$', 'django.views.generic.simple.direct_to_template',
