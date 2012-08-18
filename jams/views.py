@@ -2,7 +2,7 @@ import datetime
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from jamalaide.jams.models import Jam
+from jams.models import Jam
 
 def future(request):
     jams = Jam.objects.filter(end__gt=datetime.datetime.now()).order_by('end')

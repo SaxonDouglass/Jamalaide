@@ -84,12 +84,12 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     # our apps
-    'jamalaide.accounts',
-    'jamalaide.pages',
-    'jamalaide.jams',
-    'jamalaide.news',
-    'jamalaide.sidebar',
-    'jamalaide.markdown',
+    'accounts',
+    'pages',
+    'jams',
+    'news',
+    'sidebar',
+    'markdown',
 )
 
 # A sample logging configuration. The only tangible logging

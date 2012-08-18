@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('jamalaide.news.views',
+urlpatterns = patterns('news.views',
     url(r'^$', 'index'),
 )
 

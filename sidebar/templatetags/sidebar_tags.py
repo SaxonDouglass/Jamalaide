@@ -4,7 +4,7 @@ from django import template
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
-from jamalaide.jams.models import Jam
+from jams.models import Jam
 
 register = template.Library()
 

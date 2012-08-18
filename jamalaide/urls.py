@@ -34,9 +34,9 @@ urlpatterns = patterns('',
      {'template': 'the-game.html'}),
     (r'^jams/agj-1/?$', 'django.views.generic.simple.direct_to_template',
      {'template': '2011-11-19.html'}),
-    url(r'^jams/', include('jamalaide.jams.urls')),
+    url(r'^jams/', include('jams.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', include('jamalaide.news.urls')),
-    url(r'^accounts/', include('jamalaide.accounts.urls')),
-    url(r'^', include('jamalaide.pages.urls'))
+    url(r'^$', include('news.urls')),
+    url(r'^accounts/', include('accounts.urls')),
+    url(r'^', include('pages.urls'))
 )
