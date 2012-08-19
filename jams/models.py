@@ -75,7 +75,7 @@ class GameForm(forms.ModelForm):
 
 class GameResource(models.Model):
     name = models.CharField(max_length=20)
-    game = models.ForeignKey(Game)
+    game = models.ForeignKey(Game,related_name='resources')
     link = models.CharField(max_length=256,blank=True,null=True)
     file = models.FileField(upload_to=lambda instance, filename: 'game/'+instance.game.url+'/'+slugify(instance.name),blank=True,null=True)
     url = models.CharField(max_length=256,editable=False)
