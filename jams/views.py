@@ -1,6 +1,7 @@
 import datetime
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
 
 from jams.models import *
 
@@ -48,13 +49,34 @@ def submit(request, jam_url):
     else:
         form = GameForm()
     
-    upload_url, upload_data = prepare_upload(request, '/jams/'+jam.url+'/submit')
+    c = {
+        'form':form,
+        'jam':jam,
+    }
+    c.update(csrf(request))
+    return render_to_response('jams/submit.html', c,
+        context_instance=RequestContext(request))
+
+
+def add_res(request, jam_url, game_url):
+    jam = get_object_or_404(Jam, url=jam_url)
+    game = get_object_or_404(Game, url=game_url, jam=jam)
+
+    if request.method == 'POST':
+        form = GameResourceForm(request.POST, request.FILES)
+        if request.user in game.creators.all() and form.is_valid():
+            res = form.save(commit = False)
+            res.game = game
+            res.save()
+            return HttpResponseRedirect('/jams/'+game.jam.url+"/"+game.url)
+    else:
+        form = GameResourceForm()
     
     c = {
         'form':form,
         'jam':jam,
-        'upload_url':upload_url,
-        'upload_data':upload_data,
+        'game':game,
     }
     c.update(csrf(request))
-    return render_to_response('jams/submit.html', c)
+    return render_to_response('jams/add_res.html', c,
+        context_instance=RequestContext(request))

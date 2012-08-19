@@ -2,10 +2,8 @@
             {% if current %}
                 <div id="current">
                     <h1>Current Jam</h1>
-                    <a href="/jams/{{current.url}}">
-                      {{ current.name }}<br />
-                    </a>
-                    
+                    <a href="/jams/{{current.url}}">{{ current.name }}</a>
+                    (<a href="{% url jams.views.submit current.url %}">Submit</a>)
                 </div>
             {% endif %}
         

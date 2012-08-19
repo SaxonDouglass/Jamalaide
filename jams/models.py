@@ -1,9 +1,11 @@
 import datetime
+from django import forms
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.core.files.base import ContentFile
 from django.template.defaultfilters import slugify
+from django.core.context_processors import csrf
 
 from PIL import Image, ImageOps
 import StringIO
@@ -65,6 +67,10 @@ class Game(models.Model):
             self.thumbnail.save(name=self.image.name, content=cf, save=False);
         super(Game, self).save(*args, **kwargs)
 
+class GameForm(forms.ModelForm):
+    class Meta:
+        model = Game
+
 class GameResource(models.Model):
     name = models.CharField(max_length=20)
     game = models.ForeignKey(Game)
@@ -84,3 +90,8 @@ class GameResource(models.Model):
 
     def __unicode__(self):
         return self.game.name+' ('+self.name+')'
+
+class GameResourceForm(forms.ModelForm):
+    class Meta:
+        model = GameResource
+        exclude = ('game',)
