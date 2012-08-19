@@ -11,6 +11,12 @@
 <form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <table>{{ form.as_table }}</table>
+  
+  {{ formset.management_form }}
+  {% for f in formset %}
+    {{ f }}<br><br><br>
+  {% endfor %}
+  
   <input type="submit" value="Submit" />
 </form><br />
 {% endblock %}

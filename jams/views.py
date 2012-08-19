@@ -2,6 +2,7 @@ import datetime
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+from django.forms.models import inlineformset_factory
 
 from jams.models import *
 
@@ -40,6 +41,8 @@ def game(request, jam_url, game_url):
         context_instance=RequestContext(request))
 
 def edit_game(request, jam_url, game_url=None):
+    ResourceFormSet = inlineformset_factory(Game, GameResource, extra=4, max_num=4)
+    
     jam = get_object_or_404(Jam, url=jam_url)
     if game_url:
         game = get_object_or_404(Game, url=game_url)
@@ -50,19 +53,24 @@ def edit_game(request, jam_url, game_url=None):
     
     if request.method == 'POST':
         form = GameForm(request.POST, request.FILES, instance=game)
-        if form.is_valid():
+        formset = ResourceFormSet(request.POST, request.FILES,
+            instance=game)
+        if form.is_valid() and formset.is_valid():
             game = form.save(commit = False)
             game.jam = jam
             game.save()
             game.creators.add(request.user)
             game.save()
-            print(game.creators.all())
+            
+            formset.save()
             return HttpResponseRedirect('/jams/'+game.jam.url+"/"+game.url)
     else:
         form = GameForm(instance=game)
+        formset = ResourceFormSet(instance=game)
     
     c = {
         'form':form,
+        'formset': formset,
         'jam':jam,
         'game': game,
     }
