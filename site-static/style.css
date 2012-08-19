@@ -1,3 +1,10 @@
+@font-face
+{
+    font-family: ArcadeClassic;
+    src: url('/static/font/ArcadeClassic.ttf'),
+        url('/static/font/ArcadeClassic.eot'); /* IE9 */
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -16,12 +23,13 @@ a:hover, a:active {
 }
 h1, h2, h3, h4, h5, h6 {
     color: #9468B0;
-    font-family: 'Electrolize',sans-serif;
+    font-family: ArcadeClassic,sans-serif;
     margin: 32px 0 16px 0;
+    font-weight: normal;
 }
 h1 {
     color: #5C2C7B;
-    font-size: 2.5em;
+    font-size: 3em;
 }
 h2 {
     color: #774795;
@@ -34,12 +42,10 @@ h3 {
 h4 {
     color: #905FB0;
     font-size: 1.5em;
-    font-weight: normal;
 }
 h5 {
     color: #9468B0;
     font-size: 1em;
-    font-weight: normal;
 }
 dl {
     margin: 1em 0 1em 0;
@@ -72,14 +78,14 @@ p {
 }
 nav {
     border-bottom: 4px solid #774795;
-    font-family: 'Electrolize',Arial,sans-serif;
-    font-size: 18pt;
+    font-family: ArcadeClassic,Arial,sans-serif;
+    font-size: 24px;
     padding: 0 0 0 64px;
     height: 24px;
+    font-weight: normal;
 }
 nav li {
     float: left;
-    font-weight: bold;
     display: block;
     list-style-type: none;
     margin-right: 24px;
@@ -111,7 +117,7 @@ nav a:active, nav a:hover {
     float: right;
     width: 250px;
     margin-bottom: 32px;
-    font-size: 0.8em;
+    font-size: small;
     text-align: justify;
 }
 #sidebar h1 {
