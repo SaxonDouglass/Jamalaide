@@ -1,4 +1,14 @@
 	<div id="sidebar">
+            {% if current %}
+                <div id="current">
+                    <h1>Current Jam</h1>
+                    <a href="/jams/{{current.url}}">
+                      {{ current.name }}<br />
+                    </a>
+                    
+                </div>
+            {% endif %}
+        
             {% if next %}
                 <div id="next">
                     <h1>Next time</h1>

@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
@@ -8,7 +9,20 @@ from PIL import Image, ImageOps
 import StringIO
 import re
 
+class JamManager(models.Manager):
+    def get_current(self):
+        from django.core.exceptions import ObjectDoesNotExist
+        try:
+            current = Jam.objects.get(start__lt=datetime.datetime.now(), end__gt=datetime.datetime.now())
+        except ObjectDoesNotExist:
+            return None
+        except Jam.MultipleObjectsReturned:
+            return None
+        return current
+
 class Jam(models.Model):
+    objects = JamManager()
+    
     name = models.CharField(max_length=50)
     url = models.SlugField(max_length=30)
     start = models.DateTimeField()
