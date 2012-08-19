@@ -14,22 +14,17 @@
     <th>Creator{% if game.creators.all|length > 1 %}s{% endif %}</td>
     <td>
     {% for creator in game.creators.all %}
-      {{creator.first_name}} {{creator.last_name}}<br />
+      {{creator.username}}<br />
     {% endfor %}
     </td>
   </tr><tr>
     <th>Jam</td>
     <td>{{game.jam}}</td>
-  {% if game.source %}
+  {% for res in resources %}
   </tr><tr>
-    <th>Source Code</td>
-    <td><a href="{{game.source.url}}">Download</a></td>
-  {% endif %}
-  {% if game.game %}
-  </tr><tr>
-    <th>Play</td>
-    <td><a href="{{game.game.url}}">Download</a></td>
-  {% endif %}
+    <th>{{res.name}}</td>
+    <td><a href="{{res.url}}">Download</a></td>
+  {% endfor %}
   </tr>
 </table>
 {% endblock %}

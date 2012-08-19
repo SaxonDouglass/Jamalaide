@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/static/style.css" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}style.css" />
+    <link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" />
     <title>Jamalaide - {% block title %}{% endblock %}</title>
 </head>
 <body>
     <div id="body">
         <div id="header">
-	    <a href="/"><img src="/static/img/header.png" alt="Jamalaide" /></a>
+	    <a href="/"><img src="{{STATIC_URL}}img/header.png" alt="Jamalaide" /></a>
 	</div>
        
         <div id="menu"><ul>

@@ -27,12 +27,16 @@ def jam(request, jam_url):
 
 def games(request):
     games = get_list_or_404(Game, )
-    return render_to_response('jams/games.html', {'games': games})
+    return render_to_response('jams/games.html', {'games': games},
+                              context_instance=RequestContext(request))
 
 def game(request, jam_url, game_url):
     jam = get_object_or_404(Jam, url=jam_url)
     game = get_object_or_404(Game, url=game_url, jam=jam)
-    return render_to_response('jams/game.html', {'game': game})
+    resources = GameResource.objects.filter(game=game)
+    return render_to_response('jams/game.html',
+        {'game': game, 'resources': resources},
+        context_instance=RequestContext(request))
 
 def submit(request, jam_url):
     jam = get_object_or_404(Jam, url=jam_url)
