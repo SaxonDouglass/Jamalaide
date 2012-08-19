@@ -4,6 +4,9 @@
 
 {% block content %}
 <h1>{{game}}</h1>
+{% if user in game.creators.all %}
+<a href="{% url jams.views.edit_game game.jam.url game.url %}">Edit</a>
+{% endif %}
 {% if game.image %}
 <div id="image">
     <img src="{{game.image.url}}" title="{{game.image.url}}" alt="" />
@@ -23,10 +26,15 @@
   {% for res in resources %}
   </tr><tr>
     <th>{{res.name}}</td>
-    <td><a href="{{res.url}}">Download</a></td>
+    <td><a href="{{res.url}}">Download</a>
+    {% if user in game.creators.all %}
+      (<a href="{% url jams.views.edit_res game.jam.url game.url res.id %}">Edit</a>
+      <a href="{% url jams.views.rm_res game.jam.url game.url res.id %}">Delete</a>)
+    {% endif %}
+    </td>
   {% endfor %}
   {% if user in game.creators.all %}
-    <a href="{% url jams.views.add_res game.jam.url game.url %}">Add Resource</a>
+    <a href="{% url jams.views.edit_res game.jam.url game.url %}">Add Resource</a>
   {% endif %}
   </tr>
 </table>

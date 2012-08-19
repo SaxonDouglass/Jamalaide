@@ -27,7 +27,7 @@ def jam(request, jam_url):
                               context_instance=RequestContext(request))
 
 def games(request):
-    games = get_list_or_404(Game, )
+    games = Game.objects.all()
     return render_to_response('jams/games.html', {'games': games},
                               context_instance=RequestContext(request))
 
@@ -39,44 +39,64 @@ def game(request, jam_url, game_url):
         {'game': game, 'resources': resources},
         context_instance=RequestContext(request))
 
-def submit(request, jam_url):
+def edit_game(request, jam_url, game_url=None):
     jam = get_object_or_404(Jam, url=jam_url)
-    if request.method == 'POST':
-        form = GameForm(request.POST, request.FILES)
-        if form.is_valid():
-            game = form.save()
+    if game_url:
+        game = get_object_or_404(Game, url=game_url)
+        if request.user not in game.creators.all():
             return HttpResponseRedirect('/jams/'+game.jam.url+"/"+game.url)
     else:
-        form = GameForm()
+        game = Game()
+    
+    if request.method == 'POST':
+        form = GameForm(request.POST, request.FILES, instance=game)
+        if form.is_valid():
+            game = form.save(commit = False)
+            game.jam = jam
+            game.save()
+            game.creators.add(request.user)
+            game.save()
+            print(game.creators.all())
+            return HttpResponseRedirect('/jams/'+game.jam.url+"/"+game.url)
+    else:
+        form = GameForm(instance=game)
     
     c = {
         'form':form,
         'jam':jam,
+        'game': game,
     }
     c.update(csrf(request))
-    return render_to_response('jams/submit.html', c,
+    return render_to_response('jams/edit_game.html', c,
         context_instance=RequestContext(request))
 
-
-def add_res(request, jam_url, game_url):
-    jam = get_object_or_404(Jam, url=jam_url)
-    game = get_object_or_404(Game, url=game_url, jam=jam)
+def edit_res(request, jam_url, game_url, res_id=None):
+    game = get_object_or_404(Game, url=game_url)
+    if res_id:
+        res = get_object_or_404(GameResource, pk=res_id)
+    else:
+        res = GameResource()
 
     if request.method == 'POST':
-        form = GameResourceForm(request.POST, request.FILES)
+        form = GameResourceForm(request.POST, request.FILES, instance=res)
         if request.user in game.creators.all() and form.is_valid():
             res = form.save(commit = False)
             res.game = game
             res.save()
             return HttpResponseRedirect('/jams/'+game.jam.url+"/"+game.url)
     else:
-        form = GameResourceForm()
+        form = GameResourceForm(instance=res)
     
     c = {
         'form':form,
-        'jam':jam,
-        'game':game,
+        'res':res,
     }
     c.update(csrf(request))
-    return render_to_response('jams/add_res.html', c,
+    return render_to_response('jams/edit_res.html', c,
         context_instance=RequestContext(request))
+
+def rm_res(request, jam_url, game_url, res_id=None):
+    res = get_object_or_404(GameResource, pk=res_id)
+    if request.user in res.game.creators.all():
+        res.delete()
+    return HttpResponseRedirect('/jams/'+res.game.jam.url+"/"+res.game.url)

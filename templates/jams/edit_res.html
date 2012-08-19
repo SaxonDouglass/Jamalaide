@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Jamalaide - {{ jam.name }} - Submit Game{% endblock %}
+{% block title %}Jamalaide - {{ game.name }} - Add Resource{% endblock %}
 
 {% block content %}
-<h1>Submit Game</h1>
+<h1>Add Resource</h1>
 <form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <table>{{ form.as_table }}</table>

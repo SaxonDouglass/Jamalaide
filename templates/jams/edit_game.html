@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Jamalaide - {{ jam.name }} - Submit Game{% endblock %}
+
+{% block content %}
+{% if game.id %}
+  <h1>Edit Game for {{jam.name}}</h1>
+{% else %}
+  <h1>Submit Game for {{jam.name}}</h1>
+{% endif %}
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table>{{ form.as_table }}</table>
+  <input type="submit" value="Submit" />
+</form><br />
+{% endblock %}

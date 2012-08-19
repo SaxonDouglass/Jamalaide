@@ -5,13 +5,18 @@
 {% block content %}
 <h1>Games</h1>
 <div id="game_list">
-  {% for game in games %}
-  <div class="game">
-    <a href="/jams/{{ game.jam.url }}/{{ game.url }}">
-      <img src="{{ game.thumbnail.url }}" alt="" /><br />
-      {{ game.name }}
-    </a>
-  </div>
-  {% endfor %}
+  {% if games %}
+    {% for game in games %}
+    <div class="game">
+      <a href="/jams/{{ game.jam.url }}/{{ game.url }}">
+        <img src="{{ game.thumbnail.url }}" alt="" /><br />
+        {{ game.name }}
+      </a>
+    </div>
+    {% endfor %}
+  {% else %}
+    Oh dear, there don't appear to be any games! Why don't you make
+    something and submit it?
+  {% endif %}
 </div>
 {% endblock %}

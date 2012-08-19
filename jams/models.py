@@ -41,6 +41,7 @@ class Game(models.Model):
     url = models.SlugField(max_length=30, editable=False)
     jam = models.ForeignKey(Jam)
     creators = models.ManyToManyField(User)
+    description = models.TextField()
     image = models.ImageField(upload_to=
         lambda instance, filename: 'game/'+instance.url+'/image',
         blank=True)
@@ -70,6 +71,7 @@ class Game(models.Model):
 class GameForm(forms.ModelForm):
     class Meta:
         model = Game
+        exclude = ('jam',)
 
 class GameResource(models.Model):
     name = models.CharField(max_length=20)

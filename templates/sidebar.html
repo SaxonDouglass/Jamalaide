@@ -3,7 +3,7 @@
                 <div id="current">
                     <h1>Current Jam</h1>
                     <a href="/jams/{{current.url}}">{{ current.name }}</a>
-                    (<a href="{% url jams.views.submit current.url %}">Submit</a>)
+                    (<a href="{% url jams.views.edit_game current.url %}">Submit</a>)
                 </div>
             {% endif %}
         
