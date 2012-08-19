@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}style.css" />
-    <link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" />
     <title>Jamalaide - {% block title %}{% endblock %}</title>
-</head>
-<body>
-    <div id="body">
-        <div id="header">
-	    <a href="/"><img src="{{STATIC_URL}}img/header.png" alt="Jamalaide" /></a>
-	</div>
-       
-        <div id="menu"><ul>
-            <li><a href="/">News</a></li>
-            <li><a href="/jams/upcoming">Upcoming</a></li>
-            <li><a href="/games">Games</a></li>
-            <li><a href="/jams">Jams</a></li>
-            <li><a href="/about">About</a></li>
-        </ul></div>
-        
+    <link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" />
+    <link href='{{STATIC_URL}}style.css' rel='stylesheet' type='text/css'>
+    
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <div id="account">
+        {% if user.is_authenticated %}
+            <p>Welcome, <a href="{% url accounts-profile %}">{{ user.username }}</a>.<br>
+            <a href="{% url accounts-logout %}">Logout</a></p>
+        {% else %}
+            <p><a href="{% url accounts-login %}">Login</a></p>
+        {% endif %}
+        </div>
+      </header>
+      <nav>
+        <ul>
+          <a href="/"><li>NEWS</li></a>
+          <a href="/jams/upcoming"><li>UPCOMING</li></a>
+          <a href="/games"><li>GAMES</li></a>
+          <a href="/jams"><li>JAMS</li></a>
+          <a href="/about"><li>ABOUT</li></a>
+        </ul>
+      </nav>
+      <section id="sidebar">
         {% load sidebar_tags %}
         {% sidebar %}
-        
-        <div id="content">
-            {% if user.is_authenticated %}
-                <p>Welcome, {{ user.username }}. Thanks for logging in. <a href="{% url accounts-logout %}">Logout?</a></p>
-            {% else %}
-                <p>Welcome, new user. Please <a href="{% url accounts-login %}">login</a>. </p>
-            {% endif %}
-            {% block content %}{% endblock %}
-        </div>
-	<div id="footer">
-	  <p>
-            <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
-            <img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" style="border-style: none;" alt="CC0" /></a>
-	    <br />
-	    To the extent possible under law, Finn Stokes and Saxon Douglass have waived all copyright and related or
-            neighboring rights to the Jamalaide website.
-	    This work is published from: Australia.
-	  </p>
-	</div>
+      </section>
+      <article id="content">
+        {% block content %}{% endblock %}
+      </article>
+      <footer>
+        <p>
+        <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+            <img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" style="border-style: none;" alt="CC0"></a>
+        <br>
+        To the extent possible under law, we have waived all copyright and related or neighboring rights to the Jamalaide website.<br>This work is published from: Australia.
+        </p>
+      </footer>
     </div>
-</body>
+  </body>
 </html>
