@@ -10,7 +10,7 @@
 	padding: 0;
 }
 body {
-    background-color: #774795;
+    background-color: #663d80;
     color: #ffffff;
 	font-family: sans-serif;
 }
@@ -57,10 +57,16 @@ dd {
 footer {
     clear: both;
     color: #5C2C7B;
-    margin-top: 32px;
+    margin-top: 64px;
     position: relative;
     text-align: center;
     width: 950px;
+}
+footer img {
+    opacity: .5;
+}
+footer img:hover, footer img:active {
+    opacity: 1;
 }
 header {
     background-image: url('/static/img/header.png');
@@ -102,11 +108,11 @@ nav a:active, nav a:hover {
     position: relative;
 }
 #container {
-    margin: 0 auto;
+    background-color: #774795;
+    margin: 32px auto;
     padding: 32px;
     position: relative;
     width: 950px;
-    #line-height: 1.25em;
 }
 #sidebar {
     color: #dddddd;
@@ -126,6 +132,7 @@ nav a:active, nav a:hover {
     margin: 32px 0 16px 0; 
 }
 #social {
+    margin-top: 4px;
     text-align: center;
 }
 #social img {

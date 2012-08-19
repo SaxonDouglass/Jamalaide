@@ -14,7 +14,8 @@
       <header>
         <div id="account">
         {% if user.is_authenticated %}
-            <p>Welcome, <a href="{% url accounts-profile %}">{{ user.username }}</a>.<br>
+            <p>Welcome, {{ user.username }}.<br>
+            <a href="{% url accounts-profile %}">Profile</a> -
             <a href="{% url accounts-logout %}">Logout</a></p>
         {% else %}
             <p><a href="{% url accounts-login %}">Login</a></p>
