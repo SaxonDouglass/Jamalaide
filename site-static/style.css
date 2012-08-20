@@ -135,16 +135,16 @@ nav a:active, nav a:hover {
     margin: 32px 0 16px 0; 
 }
 #social {
-    margin-top: 4px;
+    margin: 4px 0;
     text-align: center;
 }
 #social img {
     margin-left: 8px;
     margin-right: 8px;
-    opacity: 0.5;
+    opacity: 1;
 }
 #social img:hover {
-    opacity: 1;
+    opacity: .5;
 }
 #content {
     margin: 32px 0;
