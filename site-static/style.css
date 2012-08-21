@@ -104,13 +104,19 @@ nav li {
     display: block;
     list-style-type: none;
     margin-right: 24px;
+}
+nav a {
     padding: 0 6px;
+}
+nav a:link, nav a:visited {
+    color: #ffffff;
 }
 nav li:active, nav li:hover {
     background-color: #ffffff;
-    color: #774795;
+    color: #58356E;
 }
 nav a:active, nav a:hover {
+    color: #58356E;
     text-decoration: none;
 }
 
@@ -154,8 +160,11 @@ nav a:active, nav a:hover {
     border: none;
     background: none;
 }
+#social img {
+    opacity: 1;
+}
 #social img:hover {
-    opacity: .25;
+    opacity: .5;
 }
 #content {
     margin: 32px 0;
