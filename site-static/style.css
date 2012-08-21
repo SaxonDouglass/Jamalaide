@@ -81,7 +81,7 @@ footer a, footer a:hover, footer a:active {
 header {
     background-image: url('/static/img/header.png');
     background-repeat: no-repeat;
-    margin: -116px auto 0 auto;
+    margin: 32px auto 0 auto;
     position: relative;
     height: 96px;
     width: 950px;
@@ -125,8 +125,8 @@ nav a:active, nav a:hover {
 }
 #container {
     background-color: #58356E;
-    margin: 116px auto 150px auto;
-    padding: 32px 32px 16px 32px;
+    margin: -12px auto 150px auto;
+    padding: 12px 32px 16px 32px;
     position: relative;
     width: 950px;
 }
