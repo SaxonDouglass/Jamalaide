@@ -4,19 +4,78 @@
 
 {% block content %}
 {% if game.id %}
-  <h1>Edit Game for {{jam.name}}</h1>
+  <h1>Edit Game</h1>
 {% else %}
-  <h1>Submit Game for {{jam.name}}</h1>
+  <h1>Submit Game</h1>
 {% endif %}
-<form method="POST" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  <table>{{ form.as_table }}</table>
   
-  {{ formset.management_form }}
-  {% for f in formset %}
-    {{ f }}<br><br><br>
-  {% endfor %}
+  <div id="fancyform">
+    
+    {{ form.non_field_errors }}
   
-  <input type="submit" value="Submit" />
+    <label>Jam
+      <div class="small">The current jam</div>
+    </label>
+    <div class="input">
+      <input type="text" readonly="readonly" value="{{jam}}" />
+    </div>
+    
+    <label for="id_name">Name
+      <div class="small">Name your game</div>
+    </label>
+    <div class="input">
+      {{ form.name }}
+      {{ form.name.errors }}
+    </div>
+    
+    <label for="id_creators">Creators
+      <div class="small">Pick multiple with Ctrl key</div>
+    </label>
+    <div class="input">
+      {{ form.creators }}<br>
+      {{ form.creators.errors }}
+    </div>
+    
+    <label for="id_description">Description
+      <div class="small">Describe your game</div>
+    </label>
+    <div class="input">
+      {{ form.description }}
+      {{ form.description.errors }}
+    </div>
+    
+    <label for="id_image">Image
+      <div class="small">Upload game image</div>
+    </label>
+    <div class="input">
+      {{ form.image }}
+      {{ form.image.errors }}
+    </div>
+    
+    <h2>Resources</h2>
+    For each resource choose a name and <strong>either</strong> a link or a
+    file upload.
+    <div id="formset">
+      {{ formset.management_form }}
+      {% for form in formset %}
+        <div class="box">
+          {% for field in form %}
+              {% if not field.is_hidden %}
+                {{ field.label_tag }}
+                <div class="input">
+                  {{ field }}
+                </div>
+              {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+    
+    <input id="submit" type="submit" value="Submit" />
+  
+  </form>
+  
 </form><br />
 {% endblock %}

@@ -69,10 +69,10 @@ footer {
     width: 950px;
 }
 footer img {
-    opacity: .5;
+    opacity: 1;
 }
 footer img:hover, footer img:active {
-    opacity: 1;
+    opacity: .5;
 }
 footer a, footer a:hover, footer a:active {
     border: none;
@@ -130,7 +130,7 @@ nav a:active, nav a:hover {
     width: 250px;
     margin-bottom: 32px;
     font-size: small;
-    text-align: justify;
+    text-align: center;
 }
 #sidebar h1 {
     font-family: ArcadeClassic,sans-serif;
@@ -183,31 +183,20 @@ nav a:active, nav a:hover {
     margin-top: 32px;
     text-align: right;
 }
-.download_set {
-    clear: left;
-    margin-bottom: 32px;
-}
-.download {
-    color: #ffffff;
+div.button {
     cursor: pointer;
-    background-color: #a9c3d1;
-    border: 4px solid #a9c3d1;
+    background-color: #d798ff;
     border-radius: 4px;
-    font-size: 1em;
-    font-weight: bold;
-    height: 50px;
-    margin: 8px 14px;
-    width: 200px;
+    color: #58356E;
+    font-family: ArcadeClassic,sans-serif;
+    font-size: 2em;
+    margin: 16px;
+    padding: 4px;
+    text-align: center;
 }
-.download:hover {
-    background-color: #869ba6;
-    border-color: #869ba6;
-}
-.download small {
-    display: block;
-    font-size: 0.5em;
-    position: relative;
-    bottom: 0;
+div.button:hover, div.button:active {
+    background-color: #ffffff;
+    color: #58356E;
 }
 .game {
     display: inline-block;
@@ -226,4 +215,90 @@ nav a:active, nav a:hover {
 .game img {
     margin: 0;
     padding: 0;
+}
+#fancyform {
+    
+}
+#fancyform label {
+    clear: left;
+    display: block;
+    float: left;
+    font-weight: bold;
+    text-align: right;
+    width: 200px;
+}
+#fancyform .errorlist {
+    color: #FF91A4;
+}
+#fancyform .small {
+    color: #dddddd;
+    font-size: small;
+    font-weight: normal;
+}
+#fancyform .input {
+    float: left;
+    margin: 0 0 32px 16px;
+    width: 300px;
+}
+#fancyform .input input {
+    background-color: #663d80;
+    border: solid 1px #d798ff;
+    color: #ffffff;
+    padding: 4px 4px;
+    width: 392px;
+}#fancyform .input input[type="checkbox"] {
+    width: auto;
+}
+#fancyform .input select {
+    background-color: #663d80;
+    border: solid 1px #d798ff;
+    color: #ffffff;
+    width: 400px;
+}
+#fancyform .input textarea {
+    background-color: #663d80;
+    border: solid 1px #d798ff;
+    color: #ffffff;
+    width: 400px;
+}
+#fancyform #formset label {
+    clear: left;
+    display: block;
+    font-weight: bold;
+    text-align: right;
+    width: 184px;
+}
+#fancyform #formset .input {
+    float: left;
+    margin: 0 0 8px 16px;
+    width: 300px;
+}
+#fancyform #formset .input input {
+    background-color: #58356E;
+}
+#fancyform #formset .box {
+    background-color: #663d80;
+    clear: both;
+    height: 120px;
+    margin: 32px 0px;
+    padding: 16px;
+    margin-bottom: 1em;
+}
+#fancyform input#submit {
+    background-color: #663d80;
+    border: solid 1px #d798ff;
+    border-radius: 4px;
+    clear: both;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto;
+    padding: 8px 16px;
+}
+#fancyform input#submit:hover,
+#fancyform input#submit:active {
+    background-color: #ffffff;
+    border: solid 1px #ffffff;
+    color: #663d80;
 }
