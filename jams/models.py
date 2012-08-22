@@ -79,13 +79,13 @@ class GameResource(models.Model):
     link = models.CharField(max_length=256,blank=True,null=True)
     file = models.FileField(upload_to=lambda instance, filename: 'game/'+instance.game.url+'/'+slugify(instance.name),blank=True,null=True)
     url = models.CharField(max_length=256,editable=False)
-    
+
     def save(self):
         super(GameResource, self).save()
-        if self.link:
-            self.url = self.link
-        elif self.file:
+        if self.file:
             self.url = self.file.url
+        elif self.link:
+            self.url = self.link
         else:
             self.url = ''
         super(GameResource, self).save()

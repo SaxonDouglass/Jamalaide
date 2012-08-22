@@ -10,65 +10,65 @@
 {% endif %}
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  
-  <div id="fancyform">
     
     {{ form.non_field_errors }}
   
-    <label>Jam
+    <label class="left">Jam
       <div class="small">The current jam</div>
     </label>
-    <div class="input">
+    <div class="right">
       <input type="text" readonly="readonly" value="{{jam}}" />
     </div>
     
-    <label for="id_name">Name
+    <label class="left" for="id_name">Name
       <div class="small">Name your game</div>
     </label>
-    <div class="input">
+    <div class="right">
       {{ form.name }}
       {{ form.name.errors }}
     </div>
     
-    <label for="id_creators">Creators
+    <label class="left" for="id_creators">Creators
       <div class="small">Pick multiple with Ctrl key</div>
     </label>
-    <div class="input">
+    <div class="right">
       {{ form.creators }}<br>
       {{ form.creators.errors }}
     </div>
     
-    <label for="id_description">Description
+    <label class="left" for="id_description">Description
       <div class="small">Describe your game</div>
     </label>
-    <div class="input">
+    <div class="right">
       {{ form.description }}
       {{ form.description.errors }}
     </div>
     
-    <label for="id_image">Image
-      <div class="small">Upload game image</div>
+    <label class="left" for="id_image">Image
+      <div class="small">Upload game image<br>(600px by 450px works best)</div>
     </label>
-    <div class="input">
+    <div class="right">
       {{ form.image }}
       {{ form.image.errors }}
     </div>
     
     <h2>Resources</h2>
-    For each resource choose a name and <strong>either</strong> a link or a
+    For each resource choose a name and only one of either a link or a
     file upload.
     <div id="formset">
       {{ formset.management_form }}
       {% for form in formset %}
+        {{form.id}}
         <div class="box">
           {% for field in form %}
               {% if not field.is_hidden %}
-                {{ field.label_tag }}
-                <div class="input">
+                <div class="left">{{ field.label_tag }}</div>
+                <div class="right">
                   {{ field }}
                 </div>
               {% endif %}
           {% endfor %}
+          <div style="clear: left; height: 0;">&nbsp;</div>
         </div>
       {% endfor %}
     </div>

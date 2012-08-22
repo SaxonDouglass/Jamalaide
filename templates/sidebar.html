@@ -5,7 +5,8 @@
                     <a href="{% url jams.views.edit_game current.url %}">
                         <div class="button">Submit Game</div>
                     </a>
-                    for <a href="/jams/{{current.url}}">{{ current.name }}</a>
+                    for <a href="/jams/{{current.url}}">{{ current.name }}</a> which ends:<br>
+                    {{ current.end|date:"g:i a l jS F Y" }}
                 </div>
             {% endif %}
         
@@ -13,8 +14,8 @@
                 <div id="next">
                     <h1>Upcoming Jams</h1>
                     <a href="/jams/{{next.url}}">
-                      {{ next.name }}<br />
-                    </a>
+                      {{ next.name }}
+                    </a><br />
                     {% if next.start.month == next.end.month %}
                     {{ next.start|date:"jS" }}-{{ next.end|date:"jS" }} {{ next.start|date:"F" }}
                     {% else %}
