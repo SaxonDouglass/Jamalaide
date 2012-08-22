@@ -10,6 +10,7 @@ from django.core.context_processors import csrf
 from PIL import Image, ImageOps
 import StringIO
 import re
+import os
 
 class JamManager(models.Manager):
     def get_current(self):
@@ -43,18 +44,30 @@ class Game(models.Model):
     creators = models.ManyToManyField(User)
     description = models.TextField()
     image = models.ImageField(upload_to=
-        lambda instance, filename: 'game/'+instance.url+'/image',
+        lambda instance, filename: 'jams/'+instance.jam.url+'/'+instance.url+'/image',
         blank=True)
-    thumbnail = models.FileField(upload_to=
-        lambda instance, filename: 'game/'+instance.url+'/thumbnail',
+    thumbnail = models.ImageField(upload_to=
+        lambda instance, filename: 'jams/'+instance.jam.url+'/'+instance.url+'/thumbnail',
         blank=True, editable=False)
 
     def __unicode__(self):
         return self.name
 
     def save(self, *args, **kwargs):
-        if not self.id :
+        if self.pk is not None:
+            old_obj = Game.objects.get(pk = self.pk)
+            if self.image is not None and self.image.path != old_obj.image.path:
+                try:
+                    os.remove(old_obj.image.path)
+                except:
+                    pass
+        else:
             self.url = slugify(self.name)
+
+        try:
+            os.remove(self.thumbnail.path)
+        except:
+            pass
         super(Game, self).save(*args, **kwargs)
         if self.image:
             imgFile = Image.open(self.image.path)
@@ -65,6 +78,10 @@ class Game(models.Model):
             fp = StringIO.StringIO()
             working.save(fp, "JPEG", quality=95)
             cf = ContentFile(fp.getvalue())
+            try:
+                os.remove(self.thumbnail.path)
+            except:
+                pass
             self.thumbnail.save(name=self.image.name, content=cf, save=False);
         super(Game, self).save(*args, **kwargs)
 
@@ -77,10 +94,18 @@ class GameResource(models.Model):
     name = models.CharField(max_length=20)
     game = models.ForeignKey(Game,related_name='resources')
     link = models.CharField(max_length=256,blank=True,null=True)
-    file = models.FileField(upload_to=lambda instance, filename: 'game/'+instance.game.url+'/'+slugify(instance.name),blank=True,null=True)
+    file = models.FileField(upload_to=lambda instance, filename: 'jams/'+instance.game.jam.url+'/'+instance.game.url+'/'+slugify(instance.name)+
+        re.search("\.[^.]*$", filename).group(),blank=True,null=True)
     url = models.CharField(max_length=256,editable=False)
 
     def save(self):
+        if self.pk is not None:
+            old = GameResource.objects.get(pk = self.pk)
+            if self.file is not None and self.file.path != old.file.path:
+                try:
+                    os.remove(old.file.path)
+                except:
+                    pass
         super(GameResource, self).save()
         if self.file:
             self.url = self.file.url
