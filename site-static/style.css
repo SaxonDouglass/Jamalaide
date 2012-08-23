@@ -64,17 +64,20 @@ dd {
     margin-left: 1em;
 }
 footer {
+    display: block;
     clear: both;
     color: #815c99;
     position: relative;
     text-align: center;
     width: 950px;
+    font-size: 14px;
 }
 footer a, footer a:hover, footer a:active {
     border: none;
     background: none;
 }
 header {
+    display: block;
     background-image: url('/static/img/header.png');
     background-repeat: no-repeat;
     margin: 32px auto 0 auto;
@@ -93,6 +96,7 @@ nav {
     padding-left: 64px;
     height: 24px;
     font-weight: normal;
+    display: block;
 }
 nav li {
     color: #ffffff;
