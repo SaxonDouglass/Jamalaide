@@ -3,33 +3,28 @@
 {% block title %}{{jam.name}}{% endblock %}
 
 {% block content %}
+
 <h1>{{jam.name}}</h1>
-<table>
-  <tr>
-    <th>Venue</th>
-    <td>{{jam.venue|linebreaksbr}}</td>
-  {% if jam.website %}
-  </tr><tr>
-    <th>Website</th>
-    <td>
-      <a href="{{jam.website}}">{{jam.website}}</a>
-    </td>
-  {% endif %}
-  </tr><tr>
-    <th>Start</th>
-    <td>{{jam.start|date:"g:i a l jS F Y"}}</td>
-  </tr><tr>
-    <th>End</th>
-    <td>{{jam.end|date:"g:i a l jS F Y"}}</td>
-  </tr><tr>
-    <th>Duration</th>
-    <td>{{hours}} hours{% if minutes > 0 %} and {{minutes}} minutes{% endif %}</td>
-  {% if jam.notes %}
-  </tr><tr>
-    <th>Notes</th>
-    <td>{{jam.notes|linebreaksbr}}</td>
-  {% endif %}
-  </tr>
-</table>
+
+<div class="left">Start</div>
+<div class="right">{{jam.start|date:"g:i a l jS F Y"}}</div>
+
+<div class="left">End</div>
+<div class="right">{{jam.end|date:"g:i a l jS F Y"}}</div>
+
+<div class="left">Duration</div>
+<div class="right">{{hours}} hours{% if minutes > 0 %} and {{minutes}} minutes{% endif %}</div>
+
+<div class="left">Venue</div>
+<div class="right">{{jam.venue}}</div>
+
+{% if jam.website %}
+<div class="left">Website</div>
+<div class="right">{{jam.website}}</div>
+{% endif %}
+
+<div class="left">Notes</div>
+<div class="right">{{jam.notes}}</div>
+
 {% endblock %}
 
