@@ -70,6 +70,7 @@ footer {
     position: relative;
     text-align: center;
     width: 950px;
+    font-size: 14px;
 }
 footer a, footer a:hover, footer a:active {
     border: none;
