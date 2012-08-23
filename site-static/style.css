@@ -79,6 +79,7 @@ footer a, footer a:hover, footer a:active {
     background: none;
 }
 header {
+    display: block;
     background-image: url('/static/img/header.png');
     background-repeat: no-repeat;
     margin: 32px auto 0 auto;
