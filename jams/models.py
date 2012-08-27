@@ -39,7 +39,7 @@ class Jam(models.Model):
 
 class Game(models.Model):
     name = models.CharField(max_length=30)
-    url = models.SlugField(max_length=30, editable=False)
+    url = models.SlugField(max_length=30, editable=False, unique=True)
     jam = models.ForeignKey(Jam)
     creators = models.ManyToManyField(User)
     description = models.TextField()

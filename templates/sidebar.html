@@ -2,10 +2,13 @@
             {% if current %}
                 <div id="current">
                     <h1>Jamming Now!</h1>
+                    {% if user.is_authenticated %}
                     <a href="{% url jams.views.edit_game current.url %}">
                         <div class="button">Submit Game</div>
                     </a>
-                    for <a href="/jams/{{current.url}}">{{ current.name }}</a> which ends:<br>
+                    for
+                    {% endif %}
+                    <a href="/jams/{{current.url}}">{{ current.name }}</a> which ends:<br>
                     {{ current.end|date:"g:i a l jS F Y" }}
                 </div>
             {% endif %}

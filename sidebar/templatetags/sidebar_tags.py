@@ -8,8 +8,9 @@ from jams.models import Jam
 
 register = template.Library()
 
-@register.inclusion_tag('sidebar.html', takes_context=True)
+@register.inclusion_tag('sidebar.html', takes_context = True)
 def sidebar(context):
+    request = context['request']
     currentJam = Jam.objects.get_current()
     nextJam = Jam.objects.filter(end__gt=datetime.datetime.now()).order_by('end')
     prevJam = Jam.objects.filter(end__lt=datetime.datetime.now()).order_by('-end')
@@ -19,5 +20,5 @@ def sidebar(context):
     if prevJam:
         prevJam = prevJam[0]
     
-    return { 'current': currentJam, 'next': nextJam, 'prev': prevJam} 
+    return { 'user': request.user, 'current': currentJam, 'next': nextJam, 'prev': prevJam} 
     
