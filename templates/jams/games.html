@@ -9,7 +9,7 @@
     {% for game in games %}
     <div class="game">
       <a href="/jams/{{ game.jam.url }}/{{ game.url }}">
-        <img src="{{ game.thumbnail.url }}" alt="" /><br />
+        <img src="{{ game.thumbnail.url }}" alt="" />
         {{ game.name }}
       </a>
     </div>

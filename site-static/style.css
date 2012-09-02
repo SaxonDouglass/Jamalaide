@@ -206,9 +206,10 @@ div.button:hover, div.button:active {
     display: inline-block;
     text-align: center;
     width: 208px;
-    height: 164px;
+    height: 184px;
     margin: 0 2px 16px 2px;
     padding: 8px 0;
+    vertical-align: top;
 }
 .game:hover, .game:active {
     background-color: #6B4683;
