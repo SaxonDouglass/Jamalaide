@@ -94,7 +94,9 @@ class GameResource(models.Model):
     name = models.CharField(max_length=20)
     game = models.ForeignKey(Game,related_name='resources')
     link = models.CharField(max_length=256,blank=True,null=True)
-    file = models.FileField(upload_to=lambda instance, filename: 'jams/'+instance.game.jam.url+'/'+instance.game.url+'/'+slugify(instance.name)+
+    file = models.FileField(upload_to=lambda instance, filename: 'jams/'+
+        instance.game.jam.url+'/'+instance.game.url+'/'+
+        instance.game.url+'-'+slugify(instance.name)+
         re.search("\.[^.]*$", filename).group(),blank=True,null=True)
     url = models.CharField(max_length=256,editable=False)
 
