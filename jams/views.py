@@ -23,8 +23,9 @@ def jam(request, jam_url):
     duration = jam.end-jam.start
     hours = duration.days*24 + duration.seconds/3600
     minutes = duration.seconds%3600/60
+    games = Game.objects.filter(jam=jam)
     return render_to_response('jams/jam.html',
-                              {'jam': jam, 'hours': hours, 'minutes': minutes},
+                              {'jam': jam, 'hours': hours, 'minutes': minutes, 'games': games},
                               context_instance=RequestContext(request))
 
 def games(request):

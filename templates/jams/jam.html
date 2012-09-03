@@ -26,5 +26,17 @@
 <div class="left">Notes</div>
 <div class="right">{{jam.notes}}</div>
 
+{% if games %}
+<h2>Games</h2>
+{% for game in games %}
+<div class="game">
+  <a href="/jams/{{ game.jam.url }}/{{ game.url }}">
+    <img src="{{ game.thumbnail.url }}" alt="" />
+    {{ game.name }}
+  </a>
+</div>
+{% endfor %}
+{% endif %}
+
 {% endblock %}
 
