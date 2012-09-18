@@ -14,11 +14,13 @@
 
 <h1>{{game.name}}</h1>
 
+<div id="image">
 {% if game.image %}
-  <div id="image">
-      <img class="gameImage" src="{{game.image.url}}" title="{{game.image.url}}" alt="{{game.name}}" />
-  </div>
+  <img class="gameImage" src="{{game.image.url}}" title="{{game.name}}" alt="{{game.name}}" />
+{% else %}
+  <img class="gameImage" src="{{STATIC_URL}}img/game-default.png" title="{{game.name}}" alt="{{game.name}}" />
 {% endif %}
+</div>
 
 {{game.description|gfm_markdown|safe}}
 

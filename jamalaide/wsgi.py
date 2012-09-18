@@ -16,7 +16,7 @@ framework.
 import os
 import sys
 
-sys.path.append('/var/www/jamalaide')
+sys.path.append('/home/saxond/webapps/jamalaide/jamalaide')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "jamalaide.settings")
 
