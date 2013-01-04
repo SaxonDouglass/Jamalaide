@@ -16,7 +16,7 @@
 <div class="right">{{hours}} hours{% if minutes > 0 %} and {{minutes}} minutes{% endif %}</div>
 
 <div class="left">Venue</div>
-<div class="right">{{jam.venue}}</div>
+<div class="right">{{jam.venue|linebreaksbr}}</div>
 
 {% if jam.website %}
 <div class="left">Website</div>
@@ -24,7 +24,7 @@
 {% endif %}
 
 <div class="left">Notes</div>
-<div class="right">{{jam.notes}}</div>
+<div class="right">{{jam.notes|linebreaksbr}}</div>
 
 {% if games %}
 <h2>Games</h2>
