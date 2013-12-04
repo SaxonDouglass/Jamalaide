@@ -10,8 +10,12 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
       'document_root': settings.MEDIA_ROOT,
-    }),    
+    }),
     url(r'^$', include('news.urls')),
     url(r'^accounts/', include('accounts.urls')),
-    url(r'^', include('pages.urls'))
+)
+
+# Flatpages
+urlpatterns += patterns('django.contrib.flatpages.views',
+    (r'^(?P<url>.*/)$', 'flatpage')
 )

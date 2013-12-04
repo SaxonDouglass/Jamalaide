@@ -76,6 +76,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 ROOT_URLCONF = 'jamalaide.urls'
 
+SITE_ID = 1
+
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
@@ -86,21 +88,22 @@ WSGI_APPLICATION = 'jamalaide.wsgi.application'
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.flatpages',
     'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
+    
+    # Uncomment the next lines to enable the admin and documentation:
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
 
     # our apps
     'accounts',
-    'pages',
     'jams',
+    'markup',
     'news',
     'sidebar',
-    'markdown',
 )
 
 # A sample logging configuration. The only tangible logging
