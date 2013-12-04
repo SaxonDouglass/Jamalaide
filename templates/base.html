@@ -14,10 +14,10 @@
       <div id="account">
       {% if user.is_authenticated %}
           <p>Welcome, {{ user.username }}.<br>
-          <a href="{% url 'accounts-profile' %}">Profile</a> -
-          <a href="{% url 'accounts-logout' %}">Logout</a></p>
+          <a href="{% url 'profile' %}">Profile</a> -
+          <a href="{% url 'logout' %}">Logout</a></p>
       {% else %}
-          <p><a href="{% url 'accounts-login' %}">Login</a></p>
+          <p><a href="{% url 'login' %}">Login</a></p>
       {% endif %}
       </div>
     </header>
