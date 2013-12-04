@@ -99,10 +99,10 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     # our apps
-    'accounts',
-    'jams',
     'markup',
-    'news',
+    'accounts',
+    'blogs',
+    'jams',
     'sidebar',
 )
 

@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', include('news.urls')),
+    url(r'^$', include('blogs.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^jams/', include('jams.urls')),
     url(r'^games/?$', 'jams.views.games'),

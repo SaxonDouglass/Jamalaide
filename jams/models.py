@@ -1,16 +1,16 @@
 import datetime
+import os
+import re
+import StringIO
+from PIL import Image, ImageOps
+
 from django import forms
+from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.core.files.base import ContentFile
 from django.template.defaultfilters import slugify
 from django.core.context_processors import csrf
-
-from PIL import Image, ImageOps
-import StringIO
-import re
-import os
 
 class JamManager(models.Manager):
     def get_current(self):
@@ -26,23 +26,24 @@ class JamManager(models.Manager):
 class Jam(models.Model):
     objects = JamManager()
     
-    name = models.CharField(max_length=50)
-    url = models.SlugField(max_length=30)
-    start = models.DateTimeField()
-    end = models.DateTimeField()
+    title = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=30)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    opening_times = models.CharField(max_length=100)
     venue = models.TextField()
-    website = models.URLField(blank=True)
-    notes = models.TextField(blank=True)
+    website = models.URLField(blank=True) # ?
+    brief = models.TextField(blank=True)
     
     def __unicode__(self):
         return self.name
 
 class Game(models.Model):
-    name = models.CharField(max_length=30)
-    url = models.SlugField(max_length=30, editable=False, unique=True)
+    title = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=30, editable=False, unique=True)
     jam = models.ForeignKey(Jam)
-    creators = models.ManyToManyField(User)
-    description = models.TextField()
+    creators = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    brief = models.TextField()
     image = models.ImageField(upload_to=
         lambda instance, filename: 'jams/'+instance.jam.url+'/'+instance.url+'/image',
         blank=True)
@@ -91,7 +92,7 @@ class GameForm(forms.ModelForm):
         exclude = ('jam',)
 
 class GameResource(models.Model):
-    name = models.CharField(max_length=20)
+    title = models.CharField(max_length=20)
     game = models.ForeignKey(Game,related_name='resources')
     link = models.CharField(max_length=256,blank=True,null=True)
     file = models.FileField(upload_to=lambda instance, filename: 'jams/'+
@@ -124,3 +125,19 @@ class GameResourceForm(forms.ModelForm):
     class Meta:
         model = GameResource
         exclude = ('game',)
+
+class Team(models.Model):
+    name = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=30, editable=False, unique=True)
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    brief = models.TextField(blank=True)
+    image = models.ImageField(upload_to=
+        lambda instance, filename: 'jams/teams/'+instance.slug+'/image',
+        blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Team, self).save(*args, **kwargs)
