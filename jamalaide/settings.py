@@ -100,6 +100,7 @@ INSTALLED_APPS = (
 
     # our apps
     'markup',
+    'mailer',
     'accounts',
     'blogs',
     'jams',

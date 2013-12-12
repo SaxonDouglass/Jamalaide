@@ -1,9 +1,11 @@
+from django import forms
+from django.conf import settings
 from django.db import models
 
 class Mail(models.Model):
     subject = models.CharField(max_length=69)
     body = models.TextField()
-    recipients = models.ManyToManyField(User)
+    recipients = models.ManyToManyField(settings.AUTH_USER_MODEL)
     
     SAVED = "SA"
     SENT = "SE"
@@ -19,5 +21,5 @@ class Mail(models.Model):
 
 class MailForm(forms.ModelForm):
     class Meta:
-        model = Game
-        exclude = ('jam',)
+        model = Mail
+#        exclude = ('jam',)

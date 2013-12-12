@@ -15,8 +15,9 @@ from django.core.context_processors import csrf
 class JamManager(models.Manager):
     def get_current(self):
         from django.core.exceptions import ObjectDoesNotExist
+        now = datetime.datetime.now()
         try:
-            current = Jam.objects.get(start__lt=datetime.datetime.now(), end__gt=datetime.datetime.now())
+            current = Jam.objects.get(start_time__lt=now, end_time__gt=now)
         except ObjectDoesNotExist:
             return None
         except Jam.MultipleObjectsReturned:

@@ -12,8 +12,8 @@ register = template.Library()
 def sidebar(context):
     request = context['request']
     currentJam = Jam.objects.get_current()
-    nextJam = Jam.objects.filter(end__gt=datetime.datetime.now()).order_by('end')
-    prevJam = Jam.objects.filter(end__lt=datetime.datetime.now()).order_by('-end')
+    nextJam = Jam.objects.filter(end_time__gt=datetime.datetime.now()).order_by('end_time')
+    prevJam = Jam.objects.filter(end_time__lt=datetime.datetime.now()).order_by('-end_time')
     
     if nextJam:
         nextJam = nextJam[0]
