@@ -8,13 +8,13 @@
   {% if games %}
     {% for game in games %}
     <div class="game">
-      <a href="/jams/{{ game.jam.url }}/{{ game.url }}">
+      <a href="/jams/{{ game.jam.slug }}/{{ game.slug }}">
         {% if game.image %}
           <img src="{{ game.thumbnail.url }}" alt="" />
         {% else %}
           <img src="{{STATIC_URL}}img/game-default-thumb.png" alt="" />
         {% endif %}
-        {{ game.name }}
+        {{ game.title }}
       </a>
     </div>
     {% endfor %}

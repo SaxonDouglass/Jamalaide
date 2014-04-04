@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% load gfm_markdown %}
+{% load markup %}
 
-{% block title %}{{game.name}}{% endblock %}
+{% block title %}{{game.title}}{% endblock %}
 
 {% block content %}
 
 {% if user in game.creators.all %}
-  <a href="{% url jams.views.edit_game game.jam.url game.url %}">
+  <a href="{% url 'jams.views.edit_game' game.jam.slug game.slug %}">
       <div class="button">Edit</div>
   </a>
 {% endif %}
 
-<h1>{{game.name}}</h1>
+<h1>{{game.title}}</h1>
 
 <div id="image">
 {% if game.image %}
@@ -22,7 +22,7 @@
 {% endif %}
 </div>
 
-{{game.description|gfm_markdown|safe}}
+{{game.description|md|safe}}
 
 <h2>Details</h2>
 
@@ -38,7 +38,7 @@
 
 <h2>Links</h2>
 {% for res in resources %}
-<div class="left">{{res.name}}</div>
+<div class="left">{{res.title}}</div>
 <div class="right"><a href="{{res.url}}">
   {% if res.file %}Download{% else %}View{% endif %}
 </a></div>

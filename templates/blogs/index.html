@@ -6,11 +6,13 @@
 
 {% block content %}
 <h1>News</h1>
-{% for item in items %}
+{% for article in object_list %}
 <div class="item">
-  <h2>{{ item.title }}</h2>
-  <p class="small">{{item.date|date:"d F Y"}}</p>
-  <p>{{ item.details|md }}</p>
+  <h2>{{ article.title }}</h2>
+  <p class="small">By <a href="/profiles/{{article.author.username}}">{{article.author.first_name}} {{article.author.last_name}}</a> on {{article.date|date:"d F Y"}}</p>
+  <p>{{ article.content|md }}</p>
 </div>
+{% empty %}
+<p>No articles yet.</p>
 {% endfor %}
 {% endblock %}

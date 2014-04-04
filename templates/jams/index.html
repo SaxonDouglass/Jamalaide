@@ -7,8 +7,8 @@
 <h1>{{title}}</h1>
 
 {% for jam in jams %}
-  <a href="/jams/{{jam.url}}">{{jam.name}}</a>
-  ({{ jam.start|date:"jS F Y" }})<br>
+  <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
+  ({{ jam.start_time|date:"jS F Y" }})<br>
 {% endfor %}
 
 {% endblock %}

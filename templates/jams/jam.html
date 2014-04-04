@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}{{jam.name}}{% endblock %}
+{% load markup %}
+
+{% block title %}{{jam.title}}{% endblock %}
 
 {% block content %}
 
 <h1>{{jam.name}}</h1>
 
 <div class="left">Start</div>
-<div class="right">{{jam.start|date:"g:i a l jS F Y"}}</div>
+<div class="right">{{jam.start_time|date:"g:i a l jS F Y"}}</div>
 
 <div class="left">End</div>
-<div class="right">{{jam.end|date:"g:i a l jS F Y"}}</div>
+<div class="right">{{jam.end_time|date:"g:i a l jS F Y"}}</div>
 
 <div class="left">Duration</div>
 <div class="right">{{hours}} hours{% if minutes > 0 %} and {{minutes}} minutes{% endif %}</div>
@@ -23,16 +25,19 @@
 <div class="right">{{jam.website}}</div>
 {% endif %}
 
+
+{% if jam.brief %}
 <div class="left">Notes</div>
-<div class="right">{{jam.notes}}</div>
+<div class="right">{{jam.brief|md}}</div>
+{% endif %}
 
 {% if games %}
 <h2>Games</h2>
 {% for game in games %}
 <div class="game">
-  <a href="/jams/{{ game.jam.url }}/{{ game.url }}">
+  <a href="/jams/{{ game.jam.slug }}/{{ game.slug }}">
     <img src="{{ game.thumbnail.url }}" alt="" />
-    {{ game.name }}
+    {{ game.title }}
   </a>
 </div>
 {% endfor %}

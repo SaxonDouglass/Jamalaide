@@ -37,7 +37,7 @@ class Jam(models.Model):
     brief = models.TextField(blank=True)
     
     def __unicode__(self):
-        return self.name
+        return self.title
 
 class Game(models.Model):
     title = models.CharField(max_length=30)
@@ -46,14 +46,14 @@ class Game(models.Model):
     creators = models.ManyToManyField(settings.AUTH_USER_MODEL)
     brief = models.TextField()
     image = models.ImageField(upload_to=
-        lambda instance, filename: 'jams/'+instance.jam.url+'/'+instance.url+'/image',
+        lambda instance, filename: 'jams/'+instance.jam.slug+'/'+instance.slug+'/image',
         blank=True)
     thumbnail = models.ImageField(upload_to=
-        lambda instance, filename: 'jams/'+instance.jam.url+'/'+instance.url+'/thumbnail',
+        lambda instance, filename: 'jams/'+instance.jam.slug+'/'+instance.slug+'/thumbnail',
         blank=True, editable=False)
 
     def __unicode__(self):
-        return self.name
+        return self.title
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -64,7 +64,7 @@ class Game(models.Model):
                 except:
                     pass
         else:
-            self.url = slugify(self.name)
+            self.slug = slugify(self.title)
 
         try:
             os.remove(self.thumbnail.path)
@@ -97,8 +97,8 @@ class GameResource(models.Model):
     game = models.ForeignKey(Game,related_name='resources')
     link = models.CharField(max_length=256,blank=True,null=True)
     file = models.FileField(upload_to=lambda instance, filename: 'jams/'+
-        instance.game.jam.url+'/'+instance.game.url+'/'+
-        instance.game.url+'-'+slugify(instance.name)+
+        instance.game.jam.slug+'/'+instance.game.slug+'/'+
+                            instance.game.slug+'-'+slugify(instance.title)+
         re.search("\.[^.]*$", filename).group(),blank=True,null=True)
     url = models.CharField(max_length=256,editable=False)
 
@@ -120,7 +120,7 @@ class GameResource(models.Model):
         super(GameResource, self).save()
 
     def __unicode__(self):
-        return self.game.name+' ('+self.name+')'
+        return self.game.title+' ('+self.title+')'
 
 class GameResourceForm(forms.ModelForm):
     class Meta:
