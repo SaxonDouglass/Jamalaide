@@ -78,10 +78,6 @@ ROOT_URLCONF = 'jamalaide.urls'
 
 SITE_ID = 1
 
-STATIC_URL = '/static/'
-
-MEDIA_URL = '/media/'
-
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'jamalaide.wsgi.application'
 

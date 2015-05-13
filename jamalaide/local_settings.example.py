@@ -28,7 +28,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/user/Jamalaide/jamalaide/static/',
+    '/home/user/Jamalaide/jamalaide/site-static/',
 )
 
 # Make this unique, and don't share it with anybody.
