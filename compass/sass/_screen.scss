@@ -1,0 +1,378 @@
+/* In this file you should write your main styles. (or centralize your imports) */
+
+@import "compass/reset";
+@import "compass/css3/border-radius";
+@import "compass/css3/font-face";
+@import "compass/css3/images";
+@import "compass/css3/inline-block";
+@import "compass/css3/opacity";
+@import "compass/css3/selection";
+@import "compass/css3/text-shadow";
+
+@import "image-rendering";
+
+@include font-face("ArcadeClassic", font-files("ArcadeClassic.ttf", "ArcadeClassic.eot"));
+
+* {
+    @include selection($colour-select-background, $colour-select-foreground);
+}
+
+html {
+    background-color: $colour-backdrop;
+    @include background-image(image-url('bg.png'));
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    background-position: center bottom;
+    @include image-rendering(pixelated);
+}
+
+body {
+    @include image-rendering(auto);
+    color: $colour-foreground;
+    font-family: sans-serif;
+}
+
+a {
+    text-decoration: none;
+    border-bottom: 1px $colour-foreground dotted;
+}
+a:link {
+    color: $colour-link;
+}
+a:visited {
+    color: $colour-visited;
+}
+a:hover, a:active {
+    border: none;
+    color: $colour-link;
+    @include text-shadow(0 0 2px $colour-link);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    clear: left;
+    color: $colour-foreground;
+    font-family: Electrolize,sans-serif;
+    margin: 32px 0 16px 0;
+    font-weight: bold;
+}
+h1 {
+    font-size: 3em;
+}
+h2 {
+    font-size: 2em;
+}
+h3 {
+    font-size: 2em;
+    font-weight: normal;
+}
+h4 {
+    font-size: 1.5em;
+    font-weight: normal;
+}
+
+dl {
+    margin: 1em 0 1em 0;
+}
+dt {
+    font-weight: bold;
+}
+dd {
+    margin-left: 1em;
+}
+
+footer {
+    display: block;
+    clear: both;
+    color: $colour-footer;
+    position: relative;
+    text-align: center;
+    width: 950px;
+    font-size: 14px;
+
+    a, a:hover, a:active {
+        border: none;
+        background: none;
+    }
+
+    a img {
+        @include opacity(0.85);
+    }
+
+    a:hover img,
+    a:active img {
+        @include opacity(1);
+    }
+}
+
+header {
+    display: block;
+    @include background-image(image-url('header.png'));
+    background-repeat: no-repeat;
+    @include image-rendering(pixelated);
+    margin: 32px auto 0 auto;
+    position: relative;
+    height: 96px;
+    width: 950px;
+    z-index: 10;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+nav {
+    border-bottom: 4px solid $colour-foreground;
+    font-family: ArcadeClassic,Arial,sans-serif;
+    font-size: 24px;
+    padding-left: 64px;
+    height: 24px;
+    font-weight: normal;
+    display: block;
+
+    li {
+        color: $colour-foreground;
+        float: left;
+        display: block;
+        list-style-type: none;
+        margin-right: 24px;
+        height: 100%;
+    }
+
+    a {
+        display: block;
+        height: 100%;
+        padding: 0 6px;
+        border: none;
+    }
+
+    a:link, a:visited {
+        color: $colour-foreground;
+    }
+
+    a:active, a:hover {
+        background-color: $colour-foreground;
+        color: $colour-background;
+        text-decoration: none;
+    }
+}
+
+#page-wrap {
+    position: relative;
+}
+
+#container {
+    background-color: $colour-background;
+    margin: -12px auto 150px auto;
+    padding: 12px 32px 16px 32px;
+    position: relative;
+    width: 950px;
+}
+
+#sidebar {
+    color: $colour-foreground-dull;
+    float: right;
+    width: 250px;
+    margin-bottom: 32px;
+    font-size: small;
+    text-align: center;
+
+    h1 {
+        font-family: ArcadeClassic,sans-serif;
+        font-weight: normal;
+        border-bottom: 2px solid $colour-foreground;
+        color: $colour-foreground;
+        font-size: 2em;
+        text-align: center;
+        margin: 32px 0 16px 0;
+    }
+}
+#social {
+    margin: 4px 0;
+    text-align: center;
+
+    img {
+        margin-left: 8px;
+        margin-right: 8px;
+        @include opacity(0.85);
+    }
+
+    a {
+        border: none;
+        background: none;
+    }
+
+    a:hover img,
+    a:active img {
+        @include opacity(1);
+    }
+}
+
+#content {
+    margin: 32px 0;
+    text-align: justify;
+    width: 650px;
+
+    ul {
+        list-style: square url(/static/img/bullet.png) outside;
+        text-indent: 0;
+        margin-left: 2em;
+    }
+
+    ol {
+        list-style-position: outside;
+        text-indent: 0;
+        margin-left: 2em;
+    }
+
+    li {
+        margin: 0.5em 0;
+    }
+
+    p {
+        line-height: 1.5em;
+    }
+}
+
+#account {
+    float: right;
+    margin-top: 32px;
+    text-align: right;
+}
+
+div.button {
+    cursor: pointer;
+    background-color: $colour-link;
+    @include border-radius(4px);
+    color: $colour-background;
+    font-family: ArcadeClassic,sans-serif;
+    font-size: 2em;
+    margin: 16px auto;
+    padding: 4px;
+    text-align: center;
+    width: 200px;
+}
+div.button:hover, div.button:active {
+    background-color: $colour-foreground;
+    color: $colour-background;
+}
+
+.game {
+    @include inline-block(top, top);
+    text-align: center;
+    width: 208px;
+    height: 184px;
+    margin: 0 2px 16px 2px;
+    padding: 8px 0;
+
+    a {
+        border: none;
+        display: block;
+    }
+
+    img {
+        height: 144px;
+        margin: 0;
+        padding: 0;
+        width: 192px;
+    }
+}
+.game:hover, .game:active {
+    background-color: $colour-link-background;
+}
+img.gameImage {
+    display: block;
+    margin: 2em auto;
+    max-height: 450px;
+    max-width: 600px;
+}
+
+.left {
+    clear: left;
+    display: block;
+    float: left;
+    font-weight: bold;
+    text-align: right;
+    width: 200px;
+}
+
+.right {
+    float: left;
+    margin: 0 0 16px 16px;
+    width: 300px;
+}
+
+.errorlist {
+    color: $colour-error;
+}
+
+.small {
+    color: $colour-foreground-dull;
+    font-size: small;
+    font-weight: normal;
+}
+
+input, select, textarea {
+    background-color: $colour-input-background;
+    border: solid 1px $colour-input-border;
+    color: $colour-input-foreground;
+}
+input {
+    padding: 4px 4px;
+    width: 392px;
+}
+
+input[type="checkbox"] {
+    width: auto;
+}
+
+select, textarea {
+    width: 400px;
+}
+
+#formset {
+    .left {
+        clear: left;
+        display: block;
+        font-weight: bold;
+        text-align: right;
+        width: 184px;
+    }
+
+    .right {
+        float: left;
+        margin: 0 0 8px 16px;
+        width: 300px;
+    }
+
+    input {
+        background-color: #58356E;
+    }
+
+    .box {
+        background-color: #663d80;
+        clear: both;
+        margin: 32px 0px;
+        padding: 16px;
+        margin-bottom: 1em;
+    }
+}
+
+#submit {
+    background-color: #663d80;
+    border: solid 1px #d798ff;
+    @include border-radius(4px);
+    clear: left;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto;
+    padding: 8px 16px;
+}
+#submit:hover,
+#submit:active {
+    background-color: #ffffff;
+    border: solid 1px #ffffff;
+    color: #663d80;
+}
+

@@ -1,7 +1,7 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/static/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* Import this theme using the following HTML or equivalent:
+ * <link href="/static/css/dark.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* Colour scheme to be used by website */
+/* In this file you should write your main styles. (or centralize your imports) */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -59,47 +59,60 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 @font-face {
-  font-family: ArcadeClassic;
-  src: url("/static/font/ArcadeClassic.ttf"), url("/static/font/ArcadeClassic.eot");
-  /* IE9 */
+  font-family: "ArcadeClassic";
+  src: url('/static/font/ArcadeClassic.ttf') format('truetype'), url('/static/font/ArcadeClassic.eot') format('embedded-opentype');
 }
-* {
-  margin: 0;
-  padding: 0;
+*::-moz-selection {
+  color: #2c1b37;
+  background-color: white;
+}
+*::selection {
+  color: #2c1b37;
+  background-color: white;
 }
 
-body {
-  background-color: #663d80;
-  background-image: url("/static/img/bg.png");
+html {
+  background-color: #663D80;
+  background-image: url('/static/img/bg.png');
   background-repeat: repeat-x;
   background-attachment: fixed;
   background-position: center bottom;
-  color: #ffffff;
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+}
+
+body {
+  -ms-interpolation-mode: bicubic;
+  image-rendering: auto;
+  color: white;
   font-family: sans-serif;
 }
 
 a {
   text-decoration: none;
-  border-bottom: 1px #ffffff dotted;
+  border-bottom: 1px white dotted;
 }
 
 a:link {
-  color: #d798ff;
+  color: #d699ff;
 }
 
 a:visited {
-  color: #ac7acc;
+  color: #ab7acd;
 }
 
 a:hover, a:active {
   border: none;
-  color: #d798ff;
-  text-shadow: 0 0 2px #d798ff;
+  color: #d699ff;
+  text-shadow: 0 0 2px #d699ff;
 }
 
 h1, h2, h3, h4, h5, h6 {
   clear: left;
-  color: #ffffff;
+  color: white;
   font-family: Electrolize,sans-serif;
   margin: 32px 0 16px 0;
   font-weight: bold;
@@ -144,16 +157,29 @@ footer {
   width: 950px;
   font-size: 14px;
 }
-
 footer a, footer a:hover, footer a:active {
   border: none;
   background: none;
 }
+footer a img {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85);
+  opacity: 0.85;
+}
+footer a:hover img,
+footer a:active img {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+}
 
 header {
   display: block;
-  background-image: url("/static/img/header.png");
+  background-image: url('/static/img/header.png');
   background-repeat: no-repeat;
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
   margin: 32px auto 0 auto;
   position: relative;
   height: 96px;
@@ -166,7 +192,7 @@ p {
 }
 
 nav {
-  border-bottom: 4px solid #ffffff;
+  border-bottom: 4px solid white;
   font-family: ArcadeClassic,Arial,sans-serif;
   font-size: 24px;
   padding-left: 64px;
@@ -174,30 +200,26 @@ nav {
   font-weight: normal;
   display: block;
 }
-
 nav li {
-  color: #ffffff;
+  color: white;
   float: left;
   display: block;
   list-style-type: none;
   margin-right: 24px;
+  height: 100%;
 }
-
 nav a {
+  display: block;
+  height: 100%;
   padding: 0 6px;
+  border: none;
 }
-
 nav a:link, nav a:visited {
-  color: #ffffff;
+  color: white;
 }
-
-nav li:active, nav li:hover {
-  background-color: #ffffff;
-  color: #58356E;
-}
-
 nav a:active, nav a:hover {
-  color: #58356E;
+  background-color: white;
+  color: #57356e;
   text-decoration: none;
 }
 
@@ -206,7 +228,7 @@ nav a:active, nav a:hover {
 }
 
 #container {
-  background-color: #58356E;
+  background-color: #57356e;
   margin: -12px auto 150px auto;
   padding: 12px 32px 16px 32px;
   position: relative;
@@ -214,19 +236,18 @@ nav a:active, nav a:hover {
 }
 
 #sidebar {
-  color: #dddddd;
+  color: #d9d9d9;
   float: right;
   width: 250px;
   margin-bottom: 32px;
   font-size: small;
   text-align: center;
 }
-
 #sidebar h1 {
   font-family: ArcadeClassic,sans-serif;
   font-weight: normal;
-  border-bottom: 2px solid #ffffff;
-  color: #ffffff;
+  border-bottom: 2px solid white;
+  color: white;
   font-size: 2em;
   text-align: center;
   margin: 32px 0 16px 0;
@@ -236,16 +257,20 @@ nav a:active, nav a:hover {
   margin: 4px 0;
   text-align: center;
 }
-
 #social img {
   margin-left: 8px;
   margin-right: 8px;
-  opacity: 1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85);
+  opacity: 0.85;
 }
-
 #social a {
   border: none;
   background: none;
+}
+#social a:hover img,
+#social a:active img {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
 }
 
 #content {
@@ -253,23 +278,19 @@ nav a:active, nav a:hover {
   text-align: justify;
   width: 650px;
 }
-
 #content ul {
   list-style: square url(/static/img/bullet.png) outside;
   text-indent: 0;
   margin-left: 2em;
 }
-
 #content ol {
   list-style-position: outside;
   text-indent: 0;
   margin-left: 2em;
 }
-
 #content li {
   margin: 0.5em 0;
 }
-
 #content p {
   line-height: 1.5em;
 }
@@ -282,9 +303,11 @@ nav a:active, nav a:hover {
 
 div.button {
   cursor: pointer;
-  background-color: #d798ff;
+  background-color: #d699ff;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
   border-radius: 4px;
-  color: #58356E;
+  color: #57356e;
   font-family: ArcadeClassic,sans-serif;
   font-size: 2em;
   margin: 16px auto;
@@ -294,34 +317,35 @@ div.button {
 }
 
 div.button:hover, div.button:active {
-  background-color: #ffffff;
-  color: #58356E;
+  background-color: white;
+  color: #57356e;
 }
 
 .game {
   display: inline-block;
+  vertical-align: top;
+  *vertical-align: top;
+  *zoom: 1;
+  *display: inline;
   text-align: center;
   width: 208px;
   height: 184px;
   margin: 0 2px 16px 2px;
   padding: 8px 0;
-  vertical-align: top;
 }
-
-.game:hover, .game:active {
-  background-color: #6B4683;
-}
-
 .game a {
   border: none;
   display: block;
 }
-
 .game img {
   height: 144px;
   margin: 0;
   padding: 0;
   width: 192px;
+}
+
+.game:hover, .game:active {
+  background-color: #694681;
 }
 
 img.gameImage {
@@ -347,19 +371,22 @@ img.gameImage {
 }
 
 .errorlist {
-  color: #FF91A4;
+  color: #ff8fa2;
 }
 
 .small {
-  color: #dddddd;
+  color: #d9d9d9;
   font-size: small;
   font-weight: normal;
 }
 
+input, select, textarea {
+  background-color: #663D80;
+  border: solid 1px #d699ff;
+  color: white;
+}
+
 input {
-  background-color: #663d80;
-  border: solid 1px #d798ff;
-  color: #ffffff;
   padding: 4px 4px;
   width: 392px;
 }
@@ -368,17 +395,7 @@ input[type="checkbox"] {
   width: auto;
 }
 
-select {
-  background-color: #663d80;
-  border: solid 1px #d798ff;
-  color: #ffffff;
-  width: 400px;
-}
-
-textarea {
-  background-color: #663d80;
-  border: solid 1px #d798ff;
-  color: #ffffff;
+select, textarea {
   width: 400px;
 }
 
@@ -389,17 +406,14 @@ textarea {
   text-align: right;
   width: 184px;
 }
-
 #formset .right {
   float: left;
   margin: 0 0 8px 16px;
   width: 300px;
 }
-
 #formset input {
   background-color: #58356E;
 }
-
 #formset .box {
   background-color: #663d80;
   clear: both;
@@ -411,6 +425,8 @@ textarea {
 #submit {
   background-color: #663d80;
   border: solid 1px #d798ff;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
   border-radius: 4px;
   clear: left;
   color: #ffffff;

@@ -1,0 +1,32 @@
+@mixin image-rendering ($mode:auto) {
+    @if ($mode == 'crisp-edges' or $mode == 'pixelated') {
+        @include for-legacy-browsers((ie: ("8", "11"))) {
+            -ms-interpolation-mode: nearest-neighbor;
+        }
+        @include for-legacy-browsers((firefox: ("31", "34"))) {
+            image-rendering: -moz-crisp-edges;
+        }
+        @include for-legacy-browsers((opera: ("11.6", "24"))) {
+            image-rendering: -o-crisp-edges;
+        }
+        @include for-legacy-browsers((safari: ("7", "8"), ios-safari: ("7.0-7.1", "8"))) {
+            image-rendering: -webkit-optimize-contrast;
+        }
+        @if ($mode != 'pixelated') {
+            @include for-legacy-browsers((chrome: ("41", "45"))) {
+                image-rendering: pixelated;
+            }
+        }
+        image-rendering: $mode;
+    } @else if ($mode == 'optimizeQuality' or $mode == 'optimizeSpeed') {
+        @warn "#{$hint} is deprecated in CSS4 http://dev.w3.org/csswg/css-images/#the-image-rendering";
+        image-rendering: $mode;
+    } @else if ($mode == 'auto') {
+        @include for-legacy-browsers((ie: "7")) {
+            -ms-interpolation-mode: bicubic;
+        }
+        image-rendering: $mode;
+    } @else {
+        @warn "'#{$hint} was ignored because it's not a valid property value for image-rendering (auto, crisp-edges, pixelated) http://dev.w3.org/csswg/css-images/#the-image-rendering";
+    }
+}

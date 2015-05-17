@@ -7,6 +7,7 @@ project_path = "../site-static"
 sass_path = "sass"
 css_dir = "css"
 images_dir = "img"
+fonts_dir = "font"
 javascripts_dir = "js"
 
 # You can select your preferred output style here (can be overridden via the command line):
@@ -24,3 +25,5 @@ line_comments = false
 # preferred_syntax = :sass
 # and then run:
 # sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
+
+asset_cache_buster :none

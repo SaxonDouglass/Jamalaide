@@ -1,0 +1,21 @@
+/* Import this theme using the following HTML or equivalent:
+ * <link href="/static/css/dark.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "colours";
+
+$colour-backdrop:          $purple;
+$colour-background:        $purple-dark;
+$colour-foreground:        $white;
+$colour-foreground-dull:   $grey;
+$colour-link:              $purple-dull-light;
+$colour-link-background:   $purple-dull-darker;
+$colour-visited:           $purple-dull;
+$colour-footer:            $purple-dull-dark;
+$colour-error:             $pale-red;
+$colour-input-background:  $purple;
+$colour-input-foreground:  $white;
+$colour-input-border:      $purple-dull-light;
+$colour-select-foreground: $purple-darker;
+$colour-select-background: $white;
+
+@import "screen";
