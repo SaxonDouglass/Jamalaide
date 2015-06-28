@@ -94,9 +94,6 @@ body {
 a {
   text-decoration: none;
   border-bottom: 1px white dotted;
-}
-
-a:link {
   color: #d699ff;
 }
 
@@ -106,7 +103,6 @@ a:visited {
 
 a:hover, a:active {
   border: none;
-  color: #d699ff;
   text-shadow: 0 0 2px #d699ff;
 }
 

@@ -35,8 +35,6 @@ body {
 a {
     text-decoration: none;
     border-bottom: 1px $colour-foreground dotted;
-}
-a:link {
     color: $colour-link;
 }
 a:visited {
@@ -44,11 +42,10 @@ a:visited {
 }
 a:hover, a:active {
     border: none;
-    color: $colour-link;
     @include text-shadow(0 0 2px $colour-link);
 }
 
-h1, h2, h3, h4, h5, h6 {
+%header {
     clear: left;
     color: $colour-foreground;
     font-family: Electrolize,sans-serif;
@@ -56,18 +53,28 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 h1 {
+    @extend %header;
     font-size: 3em;
 }
 h2 {
+    @extend %header;
     font-size: 2em;
 }
 h3 {
+    @extend %header;
     font-size: 2em;
     font-weight: normal;
 }
 h4 {
+    @extend %header;
     font-size: 1.5em;
     font-weight: normal;
+}
+h5 {
+    @extend %header
+}
+h6 {
+    @extend %header
 }
 
 dl {
