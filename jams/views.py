@@ -82,34 +82,3 @@ def edit_game(request, jam_slug, game_slug=None):
     c.update(csrf(request))
     return render_to_response('jams/edit_game.html', c,
         context_instance=RequestContext(request))
-
-def edit_res(request, jam_slug, game_slug, res_id=None):
-    game = get_object_or_404(Game, slug=game_slug)
-    if res_id:
-        res = get_object_or_404(GameResource, pk=res_id)
-    else:
-        res = GameResource()
-
-    if request.method == 'POST':
-        form = GameResourceForm(request.POST, request.FILES, instance=res)
-        if request.user in game.creators.all() and form.is_valid():
-            res = form.save(commit = False)
-            res.game = game
-            res.save()
-            return HttpResponseRedirect('/jams/'+game.jam.slug+"/"+game.slug)
-    else:
-        form = GameResourceForm(instance=res)
-    
-    c = {
-        'form':form,
-        'res':res,
-    }
-    c.update(csrf(request))
-    return render_to_response('jams/edit_res.html', c,
-        context_instance=RequestContext(request))
-
-def rm_res(request, jam_slug, game_slug, res_id=None):
-    res = get_object_or_404(GameResource, pk=res_id)
-    if request.user in res.game.creators.all():
-        res.delete()
-    return HttpResponseRedirect('/jams/'+res.game.jam.slug+"/"+res.game.slug)
