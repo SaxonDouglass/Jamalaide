@@ -7,16 +7,14 @@
 <div id="game_list">
   {% if games %}
     {% for game in games %}
-    <div class="game">
-      <a href="/jams/{{ game.jam.slug }}/{{ game.slug }}">
-        {% if game.image %}
-          <img src="{{ game.thumbnail.url }}" alt="" />
-        {% else %}
-          <img src="{{STATIC_URL}}img/game-default-thumb.png" alt="" />
-        {% endif %}
-        {{ game.title }}
-      </a>
-    </div>
+    <a class="game" href="/jams/{{ game.jam.slug }}/{{ game.slug }}">
+      {% if game.image %}
+      <img src="{{ game.thumbnail.url }}" alt="" />
+      {% else %}
+      <img src="{{STATIC_URL}}img/game-default-thumb.png" alt="" />
+      {% endif %}
+      {{ game.title }}
+    </a>
     {% endfor %}
   {% else %}
     Oh dear, there don't appear to be any games! Why don't you make

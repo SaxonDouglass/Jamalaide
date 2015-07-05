@@ -3,19 +3,32 @@
 
 @import "colours";
 
-$colour-backdrop:          $purple;
-$colour-background:        $purple-dark;
-$colour-foreground:        $white;
-$colour-foreground-dull:   $grey;
-$colour-link:              $purple-dull-light;
-$colour-link-background:   $purple-dull-darker;
-$colour-visited:           $purple-dull;
-$colour-footer:            $purple-dull-dark;
-$colour-error:             $pale-red;
-$colour-input-background:  $purple;
-$colour-input-foreground:  $white;
-$colour-input-border:      $purple-dull-light;
-$colour-select-foreground: $purple-darker;
-$colour-select-background: $white;
+$border-shade: 40%;
+
+$colour-background:               $purple-light;
+$colour-border:                   shade($colour-background, $border-shade);
+$colour-header-background:        $purple;
+$colour-header-border:            shade($colour-header-background, $border-shade);
+$colour-nav-background:           $purple-dark;
+$colour-nav-border:               shade($colour-nav-background, $border-shade);
+$colour-primary-foreground:       $white;
+$colour-primary-background:       $purple-dull-dark;
+$colour-primary-border:           shade($colour-primary-background, $border-shade);
+$colour-secondary-foreground:     $grey;
+$colour-secondary-background:     $purple-dull;
+$colour-secondary-border:         shade($colour-secondary-background, $border-shade);
+$colour-link-foreground:          lighten($purple, 40%);
+$colour-link-background:          $purple-dark;
+$colour-visited-foreground:       lighten($purple, 30%);
+$colour-footer-foreground:        lighten($colour-background, 15%);
+$colour-error-foreground:         $pale-red;
+$colour-input-foreground:         $white;
+$colour-input-background:         $purple-dark;
+$colour-input-border:             $purple-dull-light;
+$colour-input-hover-foreground:   $white;
+$colour-input-hover-background:   $purple-dark;
+$colour-input-hover-border:       $purple-dull-light;
+$colour-selection-foreground:     $colour-primary-background;
+$colour-selection-background:     $colour-primary-foreground;
 
 @import "screen";

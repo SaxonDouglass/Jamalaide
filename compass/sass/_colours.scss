@@ -2,11 +2,11 @@
 
 $white:              hsl(  0,   0, 100);  // #FFFFFF
 $grey:               hsl(  0,   0,  85);  // #DDDDDD
-$purple:             #663D80;  // hsl(276,  35,  37)
-$purple-dark:        hsl(276,  35,  32);  // #58356E
-$purple-darker:      hsl(276,  35,  16);
-$purple-dull-darker: hsl(276,  30,  39);  // #6B4683
-$purple-dull-dark:   hsl(276,  25,  48);  // #815C99
-$purple-dull:        hsl(276,  45,  64);  // #AC7ACC
-$purple-dull-light:  hsl(276, 100,  80);  // #D798FF
 $pale-red:           hsl(350, 100,  78);  // #FF91A4
+
+$purple:             hsl(276,  70,  38);
+$purple-light:       tint( $purple, 35%);
+$purple-dark:        shade($purple, 35%);
+$purple-dull:        hsl(268,  35,  37);
+$purple-dull-light:  tint( $purple-dull,  12%);
+$purple-dull-dark:   shade($purple-dull,  12%);

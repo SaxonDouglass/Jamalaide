@@ -13,13 +13,15 @@
 
 @include font-face("ArcadeClassic", font-files("ArcadeClassic.ttf", "ArcadeClassic.eot"));
 
+$page-width: 950px;
+
 * {
-    @include selection($colour-select-background, $colour-select-foreground);
+    @include selection($colour-selection-background, $colour-selection-foreground);
 }
 
 html {
-    background-color: $colour-backdrop;
-    @include background-image(image-url('bg.png'));
+    background-color: $colour-background;
+    // @include background-image(image-url('bg.png'));
     background-repeat: repeat-x;
     background-attachment: fixed;
     background-position: center bottom;
@@ -28,53 +30,60 @@ html {
 
 body {
     @include image-rendering(auto);
-    color: $colour-foreground;
+    color: $colour-primary-foreground;
     font-family: sans-serif;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
 }
 
 a {
     text-decoration: none;
-    border-bottom: 1px $colour-foreground dotted;
-    color: $colour-link;
-}
-a:visited {
-    color: $colour-visited;
-}
-a:hover, a:active {
-    border: none;
-    @include text-shadow(0 0 2px $colour-link);
+    border-bottom: 1px $colour-primary-foreground dotted;
+    color: $colour-link-foreground;
+
+    &:visited {
+        color: $colour-visited-foreground;
+    }
+    
+    &:hover,
+    &:active {
+        border: none;
+        @include text-shadow(0 0 2px $colour-link-foreground);
+    }
 }
 
-%header {
+%heading {
     clear: left;
-    color: $colour-foreground;
     font-family: Electrolize,sans-serif;
     margin: 32px 0 16px 0;
     font-weight: bold;
 }
 h1 {
-    @extend %header;
+    @extend %heading;
     font-size: 3em;
 }
 h2 {
-    @extend %header;
+    @extend %heading;
     font-size: 2em;
 }
 h3 {
-    @extend %header;
+    @extend %heading;
     font-size: 2em;
     font-weight: normal;
 }
 h4 {
-    @extend %header;
+    @extend %heading;
     font-size: 1.5em;
     font-weight: normal;
 }
 h5 {
-    @extend %header
+    @extend %heading
 }
 h6 {
-    @extend %header
+    @extend %heading
 }
 
 dl {
@@ -87,79 +96,109 @@ dd {
     margin-left: 1em;
 }
 
+p {
+    margin-bottom: 1em;
+}
+
 footer {
     display: block;
     clear: both;
-    color: $colour-footer;
+    color: $colour-footer-foreground;
     position: relative;
     text-align: center;
-    width: 950px;
+    max-width: $page-width;
     font-size: 14px;
 
-    a, a:hover, a:active {
+    a {
+        color: $colour-primary-foreground;
         border: none;
-        background: none;
-    }
 
-    a img {
-        @include opacity(0.85);
-    }
+        img {
+            @include opacity(0.85);
+        }
 
-    a:hover img,
-    a:active img {
-        @include opacity(1);
+        &:hover img,
+        &:active img {
+            @include opacity(1);
+        }
     }
 }
 
 header {
     display: block;
-    @include background-image(image-url('header.png'));
-    background-repeat: no-repeat;
+    background-color: $colour-header-border;
     @include image-rendering(pixelated);
-    margin: 32px auto 0 auto;
-    position: relative;
-    height: 96px;
-    width: 950px;
-    z-index: 10;
-}
+    width: 100%;
 
-p {
-    margin-bottom: 1em;
+    #title {
+        margin: 0 auto -12px auto;
+        padding-top: 32px;
+        height: 96px;
+        max-width: $page-width;
+        background-color: $colour-header-background;
+
+        img {
+            max-width: 100%;
+            padding-left: 1%;
+            position: relative;
+            pointer-events: none;
+        }
+
+        #account {
+            float: right;
+            padding-right: 1%;
+            margin-top: 32px;
+            text-align: right;
+        }
+    }
 }
 
 nav {
-    border-bottom: 4px solid $colour-foreground;
+    display: block;
+    max-width: 100%;
+    background-color: $colour-nav-border;
     font-family: ArcadeClassic,Arial,sans-serif;
     font-size: 24px;
-    padding-left: 64px;
-    height: 24px;
     font-weight: normal;
-    display: block;
-
+    
+    ul {
+        list-style: none;
+        display: block;
+        overflow: hidden;
+        padding-left: 61px;
+        max-width: $page-width - 61px;
+        margin: 0 auto;
+        background-color: $colour-nav-background;
+    }
+    
     li {
-        color: $colour-foreground;
+        display: block;
         float: left;
-        display: block;
-        list-style-type: none;
         margin-right: 24px;
-        height: 100%;
-    }
+        height: 24px;
 
-    a {
-        display: block;
-        height: 100%;
-        padding: 0 6px;
-        border: none;
-    }
+        &:first-child {
+            margin-left: 1%;
+        }
 
-    a:link, a:visited {
-        color: $colour-foreground;
-    }
+        a {
+            display: block;
+            height: 100%;
+            padding: 0 6px;
+            border: none;
 
-    a:active, a:hover {
-        background-color: $colour-foreground;
-        color: $colour-background;
-        text-decoration: none;
+            &:link,
+            &:visited {
+                color: $colour-primary-foreground;
+            }
+
+            &:active,
+            &:hover {
+                background-color: $colour-primary-foreground;
+                color: $colour-nav-background;
+                text-decoration: none;
+            }
+        }
     }
 }
 
@@ -168,17 +207,33 @@ nav {
 }
 
 #container {
-    background-color: $colour-background;
-    margin: -12px auto 150px auto;
-    padding: 12px 32px 16px 32px;
+    clear: both;
+    margin: 19px auto 150px auto;
     position: relative;
-    width: 950px;
+    max-width: $page-width;
+}
+
+%fill-left {
+    float: left;
+    border-style: solid;
+    margin-left: -50vw;
+    border-left-width: 50vw;
+}
+
+%fill-right {
+    float: right;
+    border-style: solid;
+    margin-right: -50vw;
+    border-right-width: 50vw;
 }
 
 #sidebar {
-    color: $colour-foreground-dull;
-    float: right;
-    width: 250px;
+    @extend %fill-left;
+    color: $colour-secondary-foreground;
+    background-color: $colour-secondary-background;
+    border-color: $colour-secondary-border;
+    width: 28%; //250px;
+    padding: 0 1% 1em 1%;
     margin-bottom: 32px;
     font-size: small;
     text-align: center;
@@ -186,8 +241,8 @@ nav {
     h1 {
         font-family: ArcadeClassic,sans-serif;
         font-weight: normal;
-        border-bottom: 2px solid $colour-foreground;
-        color: $colour-foreground;
+        border-bottom: 2px solid $colour-primary-foreground;
+        color: $colour-primary-foreground;
         font-size: 2em;
         text-align: center;
         margin: 32px 0 16px 0;
@@ -206,21 +261,25 @@ nav {
     a {
         border: none;
         background: none;
-    }
 
-    a:hover img,
-    a:active img {
-        @include opacity(1);
+        &:hover img,
+        &:active img {
+            @include opacity(1);
+        }
     }
 }
 
 #content {
-    margin: 32px 0;
+    @extend %fill-right;
     text-align: justify;
-    width: 650px;
+    padding: 0 1% 1em 1%;
+    margin-bottom: 32px;
+    width: 66%; //650px;
+    background-color: $colour-primary-background;
+    border-color: $colour-primary-border;
 
     ul {
-        list-style: square url(/static/img/bullet.png) outside;
+        list-style: square image-url('bullet.png') outside;
         text-indent: 0;
         margin-left: 2em;
     }
@@ -240,40 +299,18 @@ nav {
     }
 }
 
-#account {
-    float: right;
-    margin-top: 32px;
-    text-align: right;
-}
-
-div.button {
-    cursor: pointer;
-    background-color: $colour-link;
-    @include border-radius(4px);
-    color: $colour-background;
-    font-family: ArcadeClassic,sans-serif;
-    font-size: 2em;
-    margin: 16px auto;
-    padding: 4px;
-    text-align: center;
-    width: 200px;
-}
-div.button:hover, div.button:active {
-    background-color: $colour-foreground;
-    color: $colour-background;
-}
-
 .game {
     @include inline-block(top, top);
+    border: none;
     text-align: center;
     width: 208px;
     height: 184px;
     margin: 0 2px 16px 2px;
     padding: 8px 0;
 
-    a {
-        border: none;
-        display: block;
+    &:hover,
+    &:active {
+        background-color: $colour-link-background;
     }
 
     img {
@@ -283,10 +320,8 @@ div.button:hover, div.button:active {
         width: 192px;
     }
 }
-.game:hover, .game:active {
-    background-color: $colour-link-background;
-}
-img.gameImage {
+
+.gameImage {
     display: block;
     margin: 2em auto;
     max-height: 450px;
@@ -309,21 +344,30 @@ img.gameImage {
 }
 
 .errorlist {
-    color: $colour-error;
+    color: $colour-error-foreground;
 }
 
 .small {
-    color: $colour-foreground-dull;
+    color: $colour-secondary-foreground;
     font-size: small;
     font-weight: normal;
 }
 
-input, select, textarea {
+%input {
     background-color: $colour-input-background;
     border: solid 1px $colour-input-border;
     color: $colour-input-foreground;
+    
+    &:hover,
+    &:active {
+        background-color: $colour-input-hover-background;
+        border: solid 1px $colour-input-hover-border;
+        color: $colour-input-hover-foreground;
+    }
 }
+
 input {
+    @extend %input;
     padding: 4px 4px;
     width: 392px;
 }
@@ -332,7 +376,9 @@ input[type="checkbox"] {
     width: auto;
 }
 
-select, textarea {
+select,
+textarea {
+    @extend %input;
     width: 400px;
 }
 
@@ -364,22 +410,25 @@ select, textarea {
     }
 }
 
-#submit {
-    background-color: #663d80;
-    border: solid 1px #d798ff;
+.button {
+    display: block;
+    cursor: pointer;
+    background-color: $colour-input-background;
+    border: solid 1px $colour-input-border;
     @include border-radius(4px);
     clear: left;
-    color: #ffffff;
-    cursor: pointer;
-    font-weight: bold;
-    display: block;
-    margin: 0 auto;
-    padding: 8px 16px;
-}
-#submit:hover,
-#submit:active {
-    background-color: #ffffff;
-    border: solid 1px #ffffff;
-    color: #663d80;
-}
+    color: $colour-input-foreground;
+    font-family: ArcadeClassic,sans-serif;
+    font-size: 2em;
+    margin: 16px auto;
+    padding: 4px;
+    text-align: center;
+    width: 200px;
 
+    &:hover,
+    &:active {
+        background-color: $colour-input-hover-background;
+        border: solid 1px $colour-input-hover-border;
+        color: $colour-input-hover-foreground;
+    }
+}
