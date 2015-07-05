@@ -182,22 +182,48 @@ header {
   width: 100%;
 }
 header #title {
-  margin: 0 auto -12px auto;
-  padding-top: 32px;
-  height: 96px;
+  position: relative;
+  margin: 0 auto 0 auto;
+  height: 116px;
   max-width: 950px;
   background-color: #6e1da5;
 }
-header #title img {
+header #title #logo {
   max-width: 100%;
   padding-left: 1%;
   position: relative;
+  top: 32px;
+  height: 96px;
   pointer-events: none;
 }
+header #title #social {
+  position: absolute;
+  top: 32px;
+  right: 1%;
+  width: 160px;
+  text-align: right;
+  display: block;
+}
+header #title #social img {
+  margin-left: 8px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85);
+  opacity: 0.85;
+}
+header #title #social a {
+  border: none;
+  background: none;
+}
+header #title #social a:hover img, header #title #social a:active img {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+}
 header #title #account {
-  float: right;
-  padding-right: 1%;
-  margin-top: 32px;
+  position: absolute;
+  bottom: 8px;
+  right: 1%;
+  line-height: 1em;
+  display: block;
+  vertical-align: bottom;
   text-align: right;
 }
 
@@ -287,28 +313,9 @@ nav li a:active, nav li a:hover {
   margin: 32px 0 16px 0;
 }
 
-#social {
-  margin: 4px 0;
-  text-align: center;
-}
-#social img {
-  margin-left: 8px;
-  margin-right: 8px;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85);
-  opacity: 0.85;
-}
-#social a {
-  border: none;
-  background: none;
-}
-#social a:hover img, #social a:active img {
-  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
-  opacity: 1;
-}
-
 #content {
   text-align: justify;
-  padding: 0 1% 1em 1%;
+  padding: 1em 1% 1em 1%;
   margin-bottom: 32px;
   width: 66%;
   background-color: #50356f;
@@ -329,6 +336,19 @@ nav li a:active, nav li a:hover {
 }
 #content p {
   line-height: 1.5em;
+}
+#content .left {
+  clear: left;
+  display: block;
+  float: left;
+  font-weight: bold;
+  text-align: right;
+  width: 200px;
+}
+#content .right {
+  float: left;
+  margin: 0 0 16px 16px;
+  width: 300px;
 }
 
 .game {
@@ -359,21 +379,6 @@ nav li a:active, nav li a:hover {
   margin: 2em auto;
   max-height: 450px;
   max-width: 600px;
-}
-
-.left {
-  clear: left;
-  display: block;
-  float: left;
-  font-weight: bold;
-  text-align: right;
-  width: 200px;
-}
-
-.right {
-  float: left;
-  margin: 0 0 16px 16px;
-  width: 300px;
 }
 
 .errorlist {

@@ -130,24 +130,58 @@ header {
     @include image-rendering(pixelated);
     width: 100%;
 
+    $height:  96px;
+    $overlap: 12px;
+    $padding: 32px;
+
     #title {
-        margin: 0 auto -12px auto;
-        padding-top: 32px;
-        height: 96px;
+        position: relative;
+        margin: 0 auto 0 auto;
+        height: $height + $padding - $overlap;
         max-width: $page-width;
         background-color: $colour-header-background;
 
-        img {
+        #logo {
             max-width: 100%;
             padding-left: 1%;
             position: relative;
+            top: $padding;
+            height: $height;
             pointer-events: none;
         }
 
+        #social {
+            //margin: 4px 0;
+            position: absolute;
+            top: $padding; // 8px;
+            right: 1%;
+            width: 160px;
+            text-align: right;
+            display: block;
+
+            img {
+                margin-left: 8px;
+                @include opacity(0.85);
+            }
+
+            a {
+                border: none;
+                background: none;
+
+                &:hover img,
+                &:active img {
+                    @include opacity(1);
+                }
+            }
+        }
+
         #account {
-            float: right;
-            padding-right: 1%;
-            margin-top: 32px;
+            position: absolute;
+            bottom: 8px;
+            right: 1%;
+            line-height: 1em;
+            display: block;
+            vertical-align: bottom;
             text-align: right;
         }
     }
@@ -248,31 +282,11 @@ nav {
         margin: 32px 0 16px 0;
     }
 }
-#social {
-    margin: 4px 0;
-    text-align: center;
-
-    img {
-        margin-left: 8px;
-        margin-right: 8px;
-        @include opacity(0.85);
-    }
-
-    a {
-        border: none;
-        background: none;
-
-        &:hover img,
-        &:active img {
-            @include opacity(1);
-        }
-    }
-}
 
 #content {
     @extend %fill-right;
     text-align: justify;
-    padding: 0 1% 1em 1%;
+    padding: 1em 1% 1em 1%;
     margin-bottom: 32px;
     width: 66%; //650px;
     background-color: $colour-primary-background;
@@ -296,6 +310,21 @@ nav {
 
     p {
         line-height: 1.5em;
+    }
+
+    .left {
+        clear: left;
+        display: block;
+        float: left;
+        font-weight: bold;
+        text-align: right;
+        width: 200px;
+    }
+
+    .right {
+        float: left;
+        margin: 0 0 16px 16px;
+        width: 300px;
     }
 }
 
@@ -326,21 +355,6 @@ nav {
     margin: 2em auto;
     max-height: 450px;
     max-width: 600px;
-}
-
-.left {
-    clear: left;
-    display: block;
-    float: left;
-    font-weight: bold;
-    text-align: right;
-    width: 200px;
-}
-
-.right {
-    float: left;
-    margin: 0 0 16px 16px;
-    width: 300px;
 }
 
 .errorlist {

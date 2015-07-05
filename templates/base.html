@@ -20,16 +20,21 @@
   <body>
     <header>
       <div id="title">
-        <img src="{{STATIC_URL}}img/header.png" alt="Jamalaide" />
+        <img id="logo" src="{{STATIC_URL}}img/header.png" alt="Jamalaide" />
+        <div id="social">
+          <a href="http://www.facebook.com/jamalaide" target="_blank"><img src="{{STATIC_URL}}img/facebook.png" alt="Facebook" /></a>
+          <a href="https://twitter.com/jamalaide" target="_blank"><img src="{{STATIC_URL}}img/twitter.png" alt="Twitter" /></a>
+          <a href="https://plus.google.com/110487040627096308769" target="_blank"><img src="{{STATIC_URL}}img/gplus.png" alt="Google+" /></a>
+        </div>
         <div id="account">
           {% if user.is_authenticated %}
-          <p>Welcome, {{ user.username }}.<br>
+          Welcome, {{ user.username }}.<br>
           <a href="{% url 'profile' %}">Profile</a> -
-          <a href="{% url 'logout' %}">Logout</a></p>
+          <a href="{% url 'logout' %}">Logout</a>
           {% else %}
-          <p><a href="{% url 'login' %}">Login</a></p>
+          <a href="{% url 'login' %}">Login</a>
           {% endif %}
-        </div>
+          </div>
       </div>
       <nav>
         <ul>
