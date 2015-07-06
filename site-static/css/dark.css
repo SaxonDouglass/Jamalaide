@@ -88,6 +88,8 @@ body {
   image-rendering: auto;
   color: white;
   font-family: sans-serif;
+  min-height: 100vh;
+  position: relative;
 }
 
 html, body {
@@ -111,7 +113,7 @@ a:hover, a:active {
 h1, h2, h3, h4, h5, h6 {
   clear: left;
   font-family: Electrolize,sans-serif;
-  margin: 32px 0 16px 0;
+  margin: 24px 0 16px 0;
   font-weight: bold;
 }
 
@@ -184,25 +186,48 @@ header {
 header #title {
   position: relative;
   margin: 0 auto 0 auto;
-  height: 116px;
   max-width: 950px;
   background-color: #6e1da5;
 }
+.ie8 header #title {
+  height: 116px;
+}
+@media only screen and (min-width: 468px) {
+  header #title {
+    height: 116px;
+  }
+}
 header #title #logo {
-  max-width: 100%;
-  padding-left: 1%;
-  position: relative;
-  top: 32px;
-  height: 96px;
+  max-width: 96%;
+  padding-left: 2%;
+  padding-right: 2%;
   pointer-events: none;
+}
+.ie8 header #title #logo {
+  position: absolute;
+  bottom: -12px;
+}
+@media only screen and (min-width: 468px) {
+  header #title #logo {
+    position: absolute;
+    bottom: -12px;
+  }
 }
 header #title #social {
   position: absolute;
   top: 32px;
-  right: 1%;
+  right: 2%;
   width: 160px;
   text-align: right;
+  display: none;
+}
+.ie8 header #title #social {
   display: block;
+}
+@media only screen and (min-width: 662px) {
+  header #title #social {
+    display: block;
+  }
 }
 header #title #social img {
   margin-left: 8px;
@@ -218,13 +243,34 @@ header #title #social a:hover img, header #title #social a:active img {
   opacity: 1;
 }
 header #title #account {
-  position: absolute;
-  bottom: 8px;
-  right: 1%;
+  bottom: 0;
+  right: 0;
   line-height: 1em;
   display: block;
-  vertical-align: bottom;
   text-align: right;
+  padding: 8px 2%;
+}
+.ie8 header #title #account {
+  position: absolute;
+  vertical-align: bottom;
+}
+@media only screen and (min-width: 662px) {
+  header #title #account {
+    position: absolute;
+    vertical-align: bottom;
+  }
+}
+header #title #account p {
+  margin: 0;
+  display: inline;
+}
+.ie8 header #title #account p {
+  display: block;
+}
+@media only screen and (max-width: 290px) {
+  header #title #account p {
+    display: block;
+  }
 }
 
 nav {
@@ -232,40 +278,96 @@ nav {
   max-width: 100%;
   background-color: #2a0a40;
   font-family: ArcadeClassic,Arial,sans-serif;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: normal;
+}
+.ie8 nav #menu-link {
+  display: none;
+}
+@media only screen and (min-width: 662px) {
+  nav #menu-link {
+    display: none;
+  }
+}
+nav a {
+  display: block;
+  height: 32px;
+  padding: 0;
+  border: none;
+  text-align: center;
+  background-color: #47126b;
+}
+nav a:link, nav a:visited {
+  color: white;
+}
+nav a:active, nav a:hover {
+  background-color: white;
+  color: #47126b;
+  text-decoration: none;
+}
+@media only screen and (min-height: 240px) {
+  nav a {
+    padding: 8px 0;
+  }
+}
+.ie8 nav a {
+  padding: 8px 12px;
+}
+@media only screen and (min-width: 662px) {
+  nav a {
+    padding: 8px 12px;
+  }
 }
 nav ul {
   list-style: none;
   display: block;
   overflow: hidden;
-  padding-left: 61px;
-  max-width: 889px;
+  width: 100%;
+  max-width: 950px;
   margin: 0 auto;
   background-color: #47126b;
+  position: absolute;
+  bottom: 40px;
+}
+.ie8 nav ul {
+  position: static;
+}
+@media only screen and (min-width: 662px) {
+  nav ul {
+    position: static;
+  }
 }
 nav li {
   display: block;
+  width: 100%;
   float: left;
-  margin-right: 24px;
-  height: 24px;
 }
-nav li:first-child {
-  margin-left: 1%;
+.ie8 nav li {
+  margin-right: 24px;
+}
+@media only screen and (min-width: 786px) {
+  nav li {
+    margin-right: 24px;
+  }
+}
+.ie8 nav li {
+  width: auto;
+}
+.ie8 nav li:first-child {
+  margin-left: 79px;
+  margin-left: calc(2% + 60px);
+}
+@media only screen and (min-width: 662px) {
+  nav li {
+    width: auto;
+  }
+  nav li:first-child {
+    margin-left: 79px;
+    margin-left: calc(2% + 60px);
+  }
 }
 nav li a {
-  display: block;
-  height: 100%;
-  padding: 0 6px;
-  border: none;
-}
-nav li a:link, nav li a:visited {
-  color: white;
-}
-nav li a:active, nav li a:hover {
-  background-color: white;
-  color: #47126b;
-  text-decoration: none;
+  position: relative;
 }
 
 #page-wrap {
@@ -274,9 +376,17 @@ nav li a:active, nav li a:hover {
 
 #container {
   clear: both;
-  margin: 19px auto 150px auto;
+  margin: 19px auto 336px auto;
   position: relative;
   max-width: 950px;
+}
+.ie8 #container {
+  margin-bottom: 96px;
+}
+@media only screen and (min-width: 662px) {
+  #container {
+    margin-bottom: 96px;
+  }
 }
 
 #sidebar {
@@ -294,14 +404,23 @@ nav li a:active, nav li a:hover {
 }
 
 #sidebar {
+  display: none;
   color: #d9d9d9;
   background-color: #5c3d7f;
   border-color: #37244c;
-  width: 28%;
-  padding: 0 1% 1em 1%;
+  width: 30%;
+  padding: 0 2% 1em 2%;
   margin-bottom: 32px;
   font-size: small;
   text-align: center;
+}
+.ie8 #sidebar {
+  display: block;
+}
+@media only screen and (min-width: 662px) {
+  #sidebar {
+    display: block;
+  }
 }
 #sidebar h1 {
   font-family: ArcadeClassic,sans-serif;
@@ -314,12 +433,34 @@ nav li a:active, nav li a:hover {
 }
 
 #content {
-  text-align: justify;
-  padding: 1em 1% 1em 1%;
+  text-align: left;
+  padding: 1em 2% 1em 2%;
   margin-bottom: 32px;
-  width: 66%;
   background-color: #50356f;
+  max-width: 570px;
+  width: 100%;
+  float: left;
+  border-color: #50356f;
+}
+.ie8 #content {
+  text-align: justify;
+}
+@media only screen and (min-width: 350px) {
+  #content {
+    text-align: justify;
+  }
+}
+.ie8 #content {
+  width: 60%;
+  float: right;
   border-color: #301f42;
+}
+@media only screen and (min-width: 662px) {
+  #content {
+    width: 60%;
+    float: right;
+    border-color: #301f42;
+  }
 }
 #content ul {
   list-style: square url('/static/img/bullet.png') outside;
@@ -349,6 +490,37 @@ nav li a:active, nav li a:hover {
   float: left;
   margin: 0 0 16px 16px;
   width: 300px;
+}
+
+#to-top {
+  display: block;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  right: 0;
+  border: 0;
+  background-color: white;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85);
+  opacity: 0.85;
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+}
+.ie8 #to-top {
+  position: fixed;
+  width: auto;
+}
+@media only screen and (min-width: 662px) {
+  #to-top {
+    position: fixed;
+    width: auto;
+  }
+}
+#to-top:hover, #to-top:active {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
 }
 
 .game {

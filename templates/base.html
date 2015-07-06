@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 9]>  <html class="ie8" lang="en">     <![endif]-->
+<!--[if gt IE 8]>  <html class="ie9" lang="en">     <![endif]-->
+<!--[if !IE]><!--> <html lang="en">             <!--<![endif]-->
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,41 +9,38 @@
     <link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" />
     <link href="{{STATIC_URL}}css/dark.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="{{STATIC_URL}}css/print.css" media="print" rel="stylesheet" type="text/css" />
-    <!--[if IE]>
-      <link href="{{STATIC_URL}}css/ie.css" media="screen" rel="stylesheet" type="text/css" />
-    <![endif]-->  
     <!--[if lt IE 9]>
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
     <![endif]-->
     
     <!-- fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Electrolize" rel="stylesheet" type="text/css" />
   </head>
-  <body>
+  <body id="top">
     <header>
       <div id="title">
+        <div id="account">
+          {% if user.is_authenticated %}
+          <p>Welcome, {{ user.username }}.</p>
+          <p><a href="{% url 'profile' %}">Profile</a> - <a href="{% url 'logout' %}">Logout</a></p>
+          {% else %}
+          <p><a href="{% url 'login' %}">Login</a></p>
+          {% endif %}
+        </div>
         <img id="logo" src="{{STATIC_URL}}img/header.png" alt="Jamalaide" />
         <div id="social">
           <a href="http://www.facebook.com/jamalaide" target="_blank"><img src="{{STATIC_URL}}img/facebook.png" alt="Facebook" /></a>
           <a href="https://twitter.com/jamalaide" target="_blank"><img src="{{STATIC_URL}}img/twitter.png" alt="Twitter" /></a>
           <a href="https://plus.google.com/110487040627096308769" target="_blank"><img src="{{STATIC_URL}}img/gplus.png" alt="Google+" /></a>
         </div>
-        <div id="account">
-          {% if user.is_authenticated %}
-          Welcome, {{ user.username }}.<br>
-          <a href="{% url 'profile' %}">Profile</a> -
-          <a href="{% url 'logout' %}">Logout</a>
-          {% else %}
-          <a href="{% url 'login' %}">Login</a>
-          {% endif %}
-          </div>
       </div>
       <nav>
-        <ul>
+        <a href="#menu" id="menu-link">Menu</a>
+        <ul id="menu">
           <li><a href="/">News</a></li>
-          <li><a href="/jams/upcoming">Upcoming</a></li>
-          <li><a href="/games">Games</a></li>
           <li><a href="/jams">Jams</a></li>
+          <li><a href="/games">Games</a></li>
+          <li><a href="/devs">Devs</a></li>
           <li><a href="/about">About</a></li>
         </ul>
       </nav>
@@ -63,5 +62,6 @@
         </p>
       </footer>
     </div>
+    <a href="#top" id="to-top"><img src="{{STATIC_URL}}img/top.png" alt="To top" /></a>
   </body>
 </html>

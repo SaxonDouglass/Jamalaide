@@ -1,0 +1,15 @@
+@mixin media($name, $value) {
+    @media only screen and ($name: $value) {
+        @content
+    }
+}
+
+@mixin media-and-ie($name, $value) {
+    .ie8 & {
+        @content
+    }
+
+    @include media ($name, $value) {
+        @content
+    }
+}

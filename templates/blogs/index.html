@@ -10,7 +10,7 @@
 <div class="item">
   <h2>{{ article.title }}</h2>
   <p class="small">By <a href="/profiles/{{article.author.username}}">{{article.author.first_name}} {{article.author.last_name}}</a> on {{article.date|date:"d F Y"}}</p>
-  <p>{{ article.content|md }}</p>
+  {{ article.content|md }}
 </div>
 {% empty %}
 <p>No articles yet.</p>

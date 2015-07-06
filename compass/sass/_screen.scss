@@ -1,6 +1,7 @@
 /* In this file you should write your main styles. (or centralize your imports) */
 
 @import "compass/reset";
+@import "compass/css3/box-sizing";
 @import "compass/css3/border-radius";
 @import "compass/css3/font-face";
 @import "compass/css3/images";
@@ -11,9 +12,22 @@
 
 @import "image-rendering";
 
+@import "media";
+
 @include font-face("ArcadeClassic", font-files("ArcadeClassic.ttf", "ArcadeClassic.eot"));
 
 $page-width: 950px;
+$horizontal-padding: 2%;
+$content-width: 60%;
+
+$breakpoint-menu: 786px;
+$breakpoint-content: 662px;
+$breakpoint-to-top: $breakpoint-content; //641px;
+$breakpoint-logo: 468px;
+$breakpoint-justify: 350px;
+$breakpoint-account: 290px;
+
+//$breakpoint-to-top-height: 462px;
 
 * {
     @include selection($colour-selection-background, $colour-selection-foreground);
@@ -32,6 +46,8 @@ body {
     @include image-rendering(auto);
     color: $colour-primary-foreground;
     font-family: sans-serif;
+    min-height: 100vh;
+    position: relative;
 }
 
 html, body {
@@ -58,7 +74,7 @@ a {
 %heading {
     clear: left;
     font-family: Electrolize,sans-serif;
-    margin: 32px 0 16px 0;
+    margin: 24px 0 16px 0;
     font-weight: bold;
 }
 h1 {
@@ -137,27 +153,37 @@ header {
     #title {
         position: relative;
         margin: 0 auto 0 auto;
-        height: $height + $padding - $overlap;
         max-width: $page-width;
         background-color: $colour-header-background;
 
+        @include media-and-ie(min-width, $breakpoint-logo) {
+            height: $height + $padding - $overlap;
+        }
+        
         #logo {
-            max-width: 100%;
-            padding-left: 1%;
-            position: relative;
-            top: $padding;
-            height: $height;
+            max-width: 100% - 2 * $horizontal-padding;
+            padding-left: $horizontal-padding;
+            padding-right: $horizontal-padding;
+
+            @include media-and-ie(min-width, $breakpoint-logo) {
+                position: absolute;
+                bottom: -$overlap;
+            }
+            
             pointer-events: none;
         }
 
         #social {
-            //margin: 4px 0;
             position: absolute;
-            top: $padding; // 8px;
-            right: 1%;
+            top: $padding;
+            right: $horizontal-padding;
             width: 160px;
             text-align: right;
-            display: block;
+            display: none;
+
+            @include media-and-ie(min-width, $breakpoint-content) {            
+                display: block;
+            }
 
             img {
                 margin-left: 8px;
@@ -176,62 +202,113 @@ header {
         }
 
         #account {
-            position: absolute;
-            bottom: 8px;
-            right: 1%;
+            bottom: 0;
+            right: 0;
             line-height: 1em;
             display: block;
-            vertical-align: bottom;
             text-align: right;
+            padding: 8px $horizontal-padding;
+
+            @include media-and-ie(min-width, $breakpoint-content) {
+                position: absolute;
+                vertical-align: bottom;
+            }
+
+            p {
+                margin: 0;
+                display: inline;
+                
+                @include media-and-ie(max-width, $breakpoint-account) {
+                    display: block;
+                }
+            }
         }
     }
 }
 
 nav {
+    $font-height: 32px;
+    $bar-height: 48px;
+    
     display: block;
     max-width: 100%;
     background-color: $colour-nav-border;
     font-family: ArcadeClassic,Arial,sans-serif;
-    font-size: 24px;
+    font-size: $font-height;
     font-weight: normal;
+
+    #menu-link {
+        @include media-and-ie(min-width, $breakpoint-content) {
+            display: none;
+        }
+    }
     
+    a {
+        display: block;
+        height: $font-height;
+        padding: 0;
+        border: none;
+        text-align: center;
+        background-color: $colour-nav-background;
+
+        &:link,
+        &:visited {
+            color: $colour-primary-foreground;
+        }
+
+        &:active,
+        &:hover {
+            background-color: $colour-primary-foreground;
+            color: $colour-nav-background;
+            text-decoration: none;
+        }
+        
+        @include media(min-height, 5*$bar-height) {
+            padding: ($bar-height - $font-height)/2 0;
+        }
+
+        @include media-and-ie(min-width, $breakpoint-content) {
+            padding: ($bar-height - $font-height)/2 $bar-height/4;
+        }
+    }
+
     ul {
         list-style: none;
         display: block;
         overflow: hidden;
-        padding-left: 61px;
-        max-width: $page-width - 61px;
+        width: 100%;
+        max-width: $page-width;
         margin: 0 auto;
         background-color: $colour-nav-background;
+        
+        position: absolute;
+        bottom: 40px;
+
+        @include media-and-ie(min-width, $breakpoint-content) {
+            position: static;
+        }
     }
     
     li {
         display: block;
+        width: 100%;
         float: left;
-        margin-right: 24px;
-        height: 24px;
 
-        &:first-child {
-            margin-left: 1%;
+        @include media-and-ie(min-width, $breakpoint-menu) {
+            margin-right: $bar-height/2;
+        }
+
+        @include media-and-ie(min-width, $breakpoint-content) {
+            width: auto;
+
+            &:first-child {
+                margin-left: $page-width*($horizontal-padding/100%) + 60px;
+                margin-left: calc(#{$horizontal-padding} + 60px);
+            }
         }
 
         a {
-            display: block;
-            height: 100%;
-            padding: 0 6px;
-            border: none;
-
-            &:link,
-            &:visited {
-                color: $colour-primary-foreground;
-            }
-
-            &:active,
-            &:hover {
-                background-color: $colour-primary-foreground;
-                color: $colour-nav-background;
-                text-decoration: none;
-            }
+            position: relative;
         }
     }
 }
@@ -242,9 +319,13 @@ nav {
 
 #container {
     clear: both;
-    margin: 19px auto 150px auto;
+    margin: 19px auto 336px auto;
     position: relative;
     max-width: $page-width;
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        margin-bottom: 96px;
+    }
 }
 
 %fill-left {
@@ -262,16 +343,21 @@ nav {
 }
 
 #sidebar {
+    display: none;
     @extend %fill-left;
     color: $colour-secondary-foreground;
     background-color: $colour-secondary-background;
     border-color: $colour-secondary-border;
-    width: 28%; //250px;
-    padding: 0 1% 1em 1%;
+    width: 100% - $content-width - 5 * $horizontal-padding;
+    padding: 0 $horizontal-padding 1em $horizontal-padding;
     margin-bottom: 32px;
     font-size: small;
     text-align: center;
 
+    @include media-and-ie(min-width, $breakpoint-content) {
+        display: block;
+    }
+    
     h1 {
         font-family: ArcadeClassic,sans-serif;
         font-weight: normal;
@@ -285,13 +371,26 @@ nav {
 
 #content {
     @extend %fill-right;
-    text-align: justify;
-    padding: 1em 1% 1em 1%;
+    text-align: left;
+    padding: 1em $horizontal-padding 1em $horizontal-padding;
     margin-bottom: 32px;
-    width: 66%; //650px;
     background-color: $colour-primary-background;
-    border-color: $colour-primary-border;
 
+    max-width: 570px;
+    width: 100%;
+    float: left;
+    border-color: $colour-primary-background;
+
+    @include media-and-ie(min-width, $breakpoint-justify) {
+        text-align: justify;
+    }
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        width: $content-width;
+        float: right;
+        border-color: $colour-primary-border;
+    }
+    
     ul {
         list-style: square image-url('bullet.png') outside;
         text-indent: 0;
@@ -325,6 +424,28 @@ nav {
         float: left;
         margin: 0 0 16px 16px;
         width: 300px;
+    }
+}
+
+#to-top {
+    display: block;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    right: 0;
+    border: 0;
+    background-color: white;
+    @include opacity(0.85);
+    @include image-rendering(pixelated);
+
+    @include media-and-ie(min-width, $breakpoint-to-top) {
+        position: fixed;
+        width: auto;
+    }
+
+    &:hover,
+    &:active {
+        @include opacity(1);
     }
 }
 
