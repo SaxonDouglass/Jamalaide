@@ -2,23 +2,40 @@
 
 {% block title %}Jamalaide - Games{% endblock %}
 
+{% block body_class %}wide{% endblock %}
+
 {% block content %}
-<h1>Games</h1>
-<div id="game_list">
-  {% if games %}
-    {% for game in games %}
-    <a class="game" href="/jams/{{ game.jam.slug }}/{{ game.slug }}">
-      {% if game.image %}
-      <img src="{{ game.thumbnail.url }}" alt="" />
-      {% else %}
-      <img src="{{STATIC_URL}}img/game-default-thumb.png" alt="" />
-      {% endif %}
-      {{ game.title }}
-    </a>
-    {% endfor %}
-  {% else %}
+<section id="game-list">
+  <h1>Games</h1>
+  {% for jam in recent %}<h2>From <a href="/jams/{{ jam.slug }}">{{ jam.title }}</a></h2>
+  {% for game in jam.game_set.all %}<a class="game" href="/jams/{{ game.jam.slug }}/{{ game.slug }}">
+    {% if game.image %}
+    <img src="{{ game.thumbnail.url }}" alt="" />
+    {% else %}
+    <img src="{{STATIC_URL}}img/game-default-thumb.png" alt="" />
+    {% endif %}
+    {{ game.title }}
+  </a>{% endfor %}{% endfor %}
+  {% if spotlight %}<h2>Spotlighted games</h2>
+  {% for game in spotlight %}<a class="game" href="/jams/{{ game.jam.slug }}/{{ game.slug }}">
+    {% if game.image %}
+    <img src="{{ game.thumbnail.url }}" alt="" />
+    {% else %}
+    <img src="{{STATIC_URL}}img/game-default-thumb.png" alt="" />
+    {% endif %}
+    {{ game.title }}
+  </a>{% endfor %}{% endif %}
+  {% if games %}<h2>Other games</h2>
+  {% for game in games %}<a class="game" href="/jams/{{ game.jam.slug }}/{{ game.slug }}">
+    {% if game.image %}
+    <img src="{{ game.thumbnail.url }}" alt="" />
+    {% else %}
+    <img src="{{STATIC_URL}}img/game-default-thumb.png" alt="" />
+    {% endif %}
+    {{ game.title }}
+  </a>{% endfor %}{% else %}
     Oh dear, there don't appear to be any games! Why don't you make
     something and submit it?
   {% endif %}
-</div>
+</section>
 {% endblock %}

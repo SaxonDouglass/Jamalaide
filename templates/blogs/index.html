@@ -5,14 +5,17 @@
 {% block title %}News{% endblock %}
 
 {% block content %}
-<h1>News</h1>
-{% for article in object_list %}
-<div class="item">
-  <h2>{{ article.title }}</h2>
-  <p class="small">By <a href="/profiles/{{article.author.username}}">{{article.author.first_name}} {{article.author.last_name}}</a> on {{article.date|date:"d F Y"}}</p>
-  {{ article.content|md }}
-</div>
-{% empty %}
-<p>No articles yet.</p>
-{% endfor %}
+{% load sidebar_tags %}{% sidebar %}
+<section id="news-feed">
+  <h1>News</h1>
+  {% for article in object_list %}
+  <article class="item">
+    <h2>{{ article.title }}</h2>
+    <p class="small">By <a href="/profiles/{{article.author.username}}">{{article.author.first_name}} {{article.author.last_name}}</a> on {{article.date|date:"d F Y"}}</p>
+    {{ article.content|md }}
+  </article>
+  {% empty %}
+  <p>No articles yet.</p>
+  {% endfor %}
+</section>
 {% endblock %}

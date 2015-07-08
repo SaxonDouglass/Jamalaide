@@ -160,6 +160,12 @@ footer {
   max-width: 950px;
   font-size: 14px;
 }
+@media only screen and (min-width: 1250px) {
+  .wide footer {
+    max-width: 76vw;
+    max-width: calc(100vw - 300px);
+  }
+}
 footer a {
   color: white;
   border: none;
@@ -188,6 +194,12 @@ header #title {
   margin: 0 auto 0 auto;
   max-width: 950px;
   background-color: #6e1da5;
+}
+@media only screen and (min-width: 1250px) {
+  .wide header #title {
+    max-width: 76vw;
+    max-width: calc(100vw - 300px);
+  }
 }
 .ie8 header #title {
   height: 116px;
@@ -329,6 +341,12 @@ nav ul {
   position: absolute;
   bottom: 40px;
 }
+@media only screen and (min-width: 1250px) {
+  .wide nav ul {
+    max-width: 76vw;
+    max-width: calc(100vw - 300px);
+  }
+}
 .ie8 nav ul {
   position: static;
 }
@@ -380,6 +398,12 @@ nav li a {
   position: relative;
   max-width: 950px;
 }
+@media only screen and (min-width: 1250px) {
+  .wide #container {
+    max-width: 76vw;
+    max-width: calc(100vw - 300px);
+  }
+}
 .ie8 #container {
   margin-bottom: 96px;
 }
@@ -387,6 +411,35 @@ nav li a {
   #container {
     margin-bottom: 96px;
   }
+}
+#container ul {
+  list-style: square url('/static/img/bullet.png') outside;
+  text-indent: 0;
+  margin-left: 2em;
+}
+#container ol {
+  list-style-position: outside;
+  text-indent: 0;
+  margin-left: 2em;
+}
+#container li {
+  margin: 0.5em 0;
+}
+#container p {
+  line-height: 1.5em;
+}
+#container .left {
+  clear: left;
+  display: block;
+  float: left;
+  font-weight: bold;
+  text-align: right;
+  width: 200px;
+}
+#container .right {
+  float: left;
+  margin: 0 0 16px 16px;
+  width: 300px;
 }
 
 #sidebar {
@@ -396,11 +449,20 @@ nav li a {
   border-left-width: 50vw;
 }
 
-#content {
+#news-feed {
   float: right;
   border-style: solid;
   margin-right: -50vw;
   border-right-width: 50vw;
+}
+
+#game-list {
+  float: left;
+  border-style: solid;
+  margin-right: -50vw;
+  border-right-width: 50vw;
+  margin-left: -50vw;
+  border-left-width: 50vw;
 }
 
 #sidebar {
@@ -408,17 +470,36 @@ nav li a {
   color: #d9d9d9;
   background-color: #5c3d7f;
   border-color: #37244c;
-  width: 30%;
+  width: 96%;
   padding: 0 2% 1em 2%;
   margin-bottom: 32px;
   font-size: small;
   text-align: center;
 }
+#sidebar.important {
+  display: block;
+}
 .ie8 #sidebar {
+  width: 30%;
   display: block;
 }
 @media only screen and (min-width: 662px) {
   #sidebar {
+    width: 30%;
+    display: block;
+  }
+}
+#sidebar section {
+  display: none;
+}
+#sidebar section.important {
+  display: block;
+}
+.ie8 #sidebar section {
+  display: block;
+}
+@media only screen and (min-width: 662px) {
+  #sidebar section {
     display: block;
   }
 }
@@ -432,64 +513,53 @@ nav li a {
   margin: 32px 0 16px 0;
 }
 
-#content {
+#news-feed {
   text-align: left;
   padding: 1em 2% 1em 2%;
   margin-bottom: 32px;
   background-color: #50356f;
   max-width: 570px;
-  width: 100%;
+  width: 96%;
   float: left;
   border-color: #50356f;
 }
-.ie8 #content {
+.ie8 #news-feed {
   text-align: justify;
 }
 @media only screen and (min-width: 350px) {
-  #content {
+  #news-feed {
     text-align: justify;
   }
 }
-.ie8 #content {
+.ie8 #news-feed {
   width: 60%;
   float: right;
   border-color: #301f42;
 }
 @media only screen and (min-width: 662px) {
-  #content {
+  #news-feed {
     width: 60%;
     float: right;
     border-color: #301f42;
   }
 }
-#content ul {
-  list-style: square url('/static/img/bullet.png') outside;
-  text-indent: 0;
-  margin-left: 2em;
-}
-#content ol {
-  list-style-position: outside;
-  text-indent: 0;
-  margin-left: 2em;
-}
-#content li {
-  margin: 0.5em 0;
-}
-#content p {
-  line-height: 1.5em;
-}
-#content .left {
-  clear: left;
-  display: block;
+
+#game-list {
+  text-align: left;
+  padding: 1em 2% 1em 2%;
+  margin-bottom: 32px;
+  background-color: #50356f;
+  width: 96%;
   float: left;
-  font-weight: bold;
-  text-align: right;
-  width: 200px;
+  border-color: #50356f;
 }
-#content .right {
-  float: left;
-  margin: 0 0 16px 16px;
-  width: 300px;
+.ie8 #game-list {
+  border-color: #301f42;
+}
+@media only screen and (min-width: 662px) {
+  #game-list {
+    border-color: #301f42;
+  }
 }
 
 #to-top {
@@ -523,27 +593,42 @@ nav li a {
   opacity: 1;
 }
 
+#game-list {
+  text-align: left;
+}
+
 .game {
   display: inline-block;
-  vertical-align: top;
-  *vertical-align: top;
+  vertical-align: bottom;
+  *vertical-align: bottom;
   *zoom: 1;
   *display: inline;
   border: none;
   text-align: center;
-  width: 208px;
-  height: 184px;
+  max-width: 166.66667px;
+  width: 91.22807%;
+  width: calc(100% - 20px);
   margin: 0 2px 16px 2px;
-  padding: 8px 0;
+  padding: 28px 8px;
+}
+.ie8 .game {
+  height: 176px;
+}
+@media only screen and (min-width: 425px) {
+  .game {
+    height: 176px;
+  }
 }
 .game:hover, .game:active {
   background-color: #47126b;
 }
 .game img {
-  height: 144px;
-  margin: 0;
-  padding: 0;
-  width: 192px;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0 8px 0;
+  max-height: 144px;
+  max-width: 166.66667px;
 }
 
 .gameImage {

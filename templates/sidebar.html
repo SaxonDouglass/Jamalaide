@@ -1,50 +1,62 @@
 {% load staticfiles %}
-	<div>
-            {% if current %}
-                <div id="current">
-                    <h1>Jamming Now!</h1>
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'jams.views.edit_game' current.slug %}">
-                        <div class="button">Submit Game</div>
-                    </a>
-                    for
-                    {% endif %}
-                    <a href="/jams/{{current.slug}}">{{ current.name }}</a> which ends:<br>
-                    {{ current.end|date:"g:i a l jS F Y" }}
-                </div>
+	<section id="sidebar"{% if next %} class="important"{% endif %}>
+          {% if next %}{% if next.is_current %}<section class="important">
+            <h1>Jamming Now!</h1>
+            {% if user.is_authenticated %}
+            <a href="{% url 'jams.views.edit_game' next.slug %}">
+              <div class="button">Submit Game</div>
+            </a>
+            for
             {% endif %}
-        
-            {% if next %}
-                <div id="next">
-                    <h1>Upcoming Jams</h1>
-                    <a href="/jams/{{next.slug}}">
-                      {{ next.title }}
-                    </a><br />
-                    {% if next.start_time.month == next.end_time.month %}
-                    {{ next.start_time|date:"jS" }}-{{ next.end_time|date:"jS" }} {{ next.start_time|date:"F" }}
-                    {% else %}
-                    {{ next.start_time|date:"jS N" }}-{{ next.end_time|date:"jS N" }}
-                    {% endif %}
-                </div>
+            <a href="/jams/{{next.slug}}">{{ next.name }}</a> which ends:<br>
+            {{ next.end|date:"g:i a l jS F Y" }}
+          </section>{% else %}<section class="important">
+            <h1>Next Jam</h1>
+            <a href="/jams/{{next.slug}}">
+              {{ next.title }}
+            </a><br />
+            {% if next.start_time.month == next.end_time.month %}
+            {{ next.start_time|date:"jS" }}-{{ next.end_time|date:"jS" }} {{ next.start_time|date:"F" }}
+            {% else %}
+            {{ next.start_time|date:"jS N" }}-{{ next.end_time|date:"jS N" }}
             {% endif %}
-        
-            {% if prev %}
-                <div id="prev">
-                    <h1>Recent Jams</h1>
-                    <a href="/jams/{{prev.slug}}">
-                      {{ prev.title }}
-                    </a><br />
-                    {% if prev.start.month == prev.end.month %}
-                    {{ prev.start_time|date:"jS" }}-{{ prev.end_time|date:"jS" }} {{ prev.start_time|date:"F" }}
-                    {% else %}
-                    {{ prev.start_time|date:"jS N" }}-{{ prev.end_time|date:"jS N" }}
-                    {% endif %}
-                </div>
+          </section>{% endif %}{% endif %}
+
+          {% for jam in upcoming %}{% if jam.is_current %}<section class="important">
+            <h1>Jamming Now!</h1>
+            {% if user.is_authenticated %}
+            <a href="{% url 'jams.views.edit_game' jam.slug %}">
+              <div class="button">Submit Game</div>
+            </a>
+            for
             {% endif %}
+            <a href="/jams/{{jam.slug}}">{{ jam.name }}</a> which ends:<br>
+            {{ jam.end|date:"g:i a l jS F Y" }}
+          </section>{% else %}<section>
+            <h1>Coming Soon</h1>
+            <a href="/jams/{{jam.slug}}">
+              {{ jam.title }}
+            </a><br />
+            {% if jam.start.month == jam.end.month %}
+            {{ jam.start_time|date:"jS" }}-{{ jam.end_time|date:"jS" }} {{ jam.start_time|date:"F" }}
+            {% else %}
+            {{ jam.start_time|date:"jS N" }}-{{ jam.end_time|date:"jS N" }}
+            {% endif %}
+          </section>{% endif %}{% endfor %}
         
-            <div id="contact">
-                <h1>Stay Connected</h1>
-                Email: <a href="mailto:contact@jamalaide.org.au">contact@jamalaide.org.au</a><br />
-                IRC: <a href="https://webchat.freenode.net/?channels=jamalaide&amp;uio=MTE9Mjg353">#jamalaide on freenode</a>
-            </div>
-	</div>
+          {% for jam in recent %}<section>
+            <h1>Recent Jam</h1>
+            <a href="/jams/{{jam.slug}}">
+              {{ jam.title }}
+            </a><br />
+            {% if jam.start.month == jam.end.month %}
+            {{ jam.start_time|date:"jS" }}-{{ jam.end_time|date:"jS" }} {{ jam.start_time|date:"F" }}
+            {% else %}
+            {{ jam.start_time|date:"jS N" }}-{{ jam.end_time|date:"jS N" }}
+            {% endif %}
+          </section>{% endfor %}
+
+          {% if spotlight %}<section>
+            <h1>Spotlight</h1>
+          </section>{% endif %}
+	</section>

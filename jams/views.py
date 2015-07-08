@@ -23,14 +23,16 @@ def jam(request, jam_slug):
     duration = jam.end_time-jam.start_time
     hours = duration.days*24 + duration.seconds/3600
     minutes = duration.seconds%3600/60
-    games = Game.objects.filter(jam=jam)
+    games = jam.game_set
     return render_to_response('jams/jam.html',
                               {'jam': jam, 'hours': hours, 'minutes': minutes, 'games': games},
                               context_instance=RequestContext(request))
 
 def games(request):
-    games = Game.objects.all()
-    return render_to_response('jams/games.html', {'games': games},
+    recent = Jam.objects.filter(end_time__lt=datetime.datetime.now()).exclude(game=None).order_by('-end_time')[:2]
+    spotlighted = Game.objects.filter(spotlighted=True).exclude(jam__in=recent)
+    games = Game.objects.filter(spotlighted=False).exclude(jam__in=recent)
+    return render_to_response('jams/games.html', {'recent': recent, 'spotlight': spotlighted, 'games': games},
                               context_instance=RequestContext(request))
 
 def game(request, jam_slug, game_slug):

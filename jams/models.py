@@ -12,21 +12,7 @@ from django.core.files.base import ContentFile
 from django.template.defaultfilters import slugify
 from django.core.context_processors import csrf
 
-class JamManager(models.Manager):
-    def get_current(self):
-        from django.core.exceptions import ObjectDoesNotExist
-        now = datetime.datetime.now()
-        try:
-            current = Jam.objects.get(start_time__lt=now, end_time__gt=now)
-        except ObjectDoesNotExist:
-            return None
-        except Jam.MultipleObjectsReturned:
-            return None
-        return current
-
 class Jam(models.Model):
-    objects = JamManager()
-    
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=30)
     start_time = models.DateTimeField()
@@ -35,21 +21,31 @@ class Jam(models.Model):
     venue = models.TextField()
     website = models.URLField(blank=True) # ?
     brief = models.TextField(blank=True)
+
+    @property
+    def is_current(self):
+        now = datetime.datetime.now()
+        return self.start_time < now and self.end_time > now
     
     def __unicode__(self):
         return self.title
 
+def game_image_path(instance, filename):
+    return 'jams/'+instance.jam.slug+'/'+instance.slug+'/image'
+
+def game_thumb_path(instance,filename):
+    return 'jams/'+instance.jam.slug+'/'+instance.slug+'/thumbnail'
+    
 class Game(models.Model):
     title = models.CharField(max_length=30)
     slug = models.SlugField(max_length=30, editable=False, unique=True)
     jam = models.ForeignKey(Jam)
     creators = models.ManyToManyField(settings.AUTH_USER_MODEL)
     brief = models.TextField()
-    image = models.ImageField(upload_to=
-        lambda instance, filename: 'jams/'+instance.jam.slug+'/'+instance.slug+'/image',
+    spotlighted = models.BooleanField(default=False)
+    image = models.ImageField(upload_to=game_image_path,
         blank=True)
-    thumbnail = models.ImageField(upload_to=
-        lambda instance, filename: 'jams/'+instance.jam.slug+'/'+instance.slug+'/thumbnail',
+    thumbnail = models.ImageField(upload_to=game_thumb_path,
         blank=True, editable=False)
 
     def __unicode__(self):
@@ -90,16 +86,16 @@ class Game(models.Model):
 class GameForm(forms.ModelForm):
     class Meta:
         model = Game
-        exclude = ('jam',)
+        exclude = ('jam', 'spotlighted')
+
+def resource_file_path(instance, filename):
+    return 'jams/'+ instance.game.jam.slug+'/'+instance.game.slug+'/'+ instance.game.slug+'-'+slugify(instance.title)+re.search("\.[^.]*$", filename).group()
 
 class GameResource(models.Model):
     title = models.CharField(max_length=20)
     game = models.ForeignKey(Game,related_name='resources')
     link = models.CharField(max_length=256,blank=True,null=True)
-    file = models.FileField(upload_to=lambda instance, filename: 'jams/'+
-        instance.game.jam.slug+'/'+instance.game.slug+'/'+
-                            instance.game.slug+'-'+slugify(instance.title)+
-        re.search("\.[^.]*$", filename).group(),blank=True,null=True)
+    file = models.FileField(upload_to=resource_file_path ,blank=True,null=True)
     url = models.CharField(max_length=256,editable=False)
 
     def save(self):
@@ -127,14 +123,15 @@ class GameResourceForm(forms.ModelForm):
         model = GameResource
         exclude = ('game',)
 
+def team_image_path(instance, filename):
+        return 'jams/teams/'+instance.slug+'/image'
+
 class Team(models.Model):
     name = models.CharField(max_length=30)
     slug = models.SlugField(max_length=30, editable=False, unique=True)
     members = models.ManyToManyField(settings.AUTH_USER_MODEL)
     brief = models.TextField(blank=True)
-    image = models.ImageField(upload_to=
-        lambda instance, filename: 'jams/teams/'+instance.slug+'/image',
-        blank=True)
+    image = models.ImageField(upload_to=team_image_path, blank=True)
 
     def __unicode__(self):
         return self.name

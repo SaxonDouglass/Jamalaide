@@ -11,14 +11,12 @@ register = template.Library()
 @register.inclusion_tag('sidebar.html', takes_context = True)
 def sidebar(context):
     request = context['request']
-    currentJam = Jam.objects.get_current()
-    nextJam = Jam.objects.filter(end_time__gt=datetime.datetime.now()).order_by('end_time')
-    prevJam = Jam.objects.filter(end_time__lt=datetime.datetime.now()).order_by('-end_time')
+    upcoming = Jam.objects.filter(end_time__gt=datetime.datetime.now()).order_by('end_time')
+    recent = Jam.objects.filter(end_time__lt=datetime.datetime.now()).order_by('-end_time')[:1]
+
+    nextJam = None
+    if len(upcoming) > 0:
+        nextJam = upcoming[0]
     
-    if nextJam:
-        nextJam = nextJam[0]
-    if prevJam:
-        prevJam = prevJam[0]
-    
-    return { 'user': request.user, 'current': currentJam, 'next': nextJam, 'prev': prevJam} 
+    return { 'user': request.user, 'upcoming': upcoming[1:], 'next': nextJam, 'recent': recent} 
     

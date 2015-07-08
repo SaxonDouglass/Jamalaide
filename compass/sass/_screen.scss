@@ -23,11 +23,25 @@ $content-width: 60%;
 $breakpoint-menu: 786px;
 $breakpoint-content: 662px;
 $breakpoint-to-top: $breakpoint-content; //641px;
+$breakpoint-columns: 425px;
 $breakpoint-logo: 468px;
 $breakpoint-justify: 350px;
 $breakpoint-account: 290px;
 
 //$breakpoint-to-top-height: 462px;
+
+@mixin page-width {
+    $margin-size: 150px;
+    
+    max-width: $page-width;
+
+    @include media(min-width, $page-width + 2*$margin-size) {
+        .wide & {
+            max-width: 100vw - 2*$margin-size / ($page-width + 2*$margin-size) * 100vw;
+            max-width: calc(100vw - #{2*$margin-size})
+        }
+    }
+}
 
 * {
     @include selection($colour-selection-background, $colour-selection-foreground);
@@ -122,7 +136,7 @@ footer {
     color: $colour-footer-foreground;
     position: relative;
     text-align: center;
-    max-width: $page-width;
+    @include page-width;
     font-size: 14px;
 
     a {
@@ -153,7 +167,7 @@ header {
     #title {
         position: relative;
         margin: 0 auto 0 auto;
-        max-width: $page-width;
+        @include page-width;
         background-color: $colour-header-background;
 
         @include media-and-ie(min-width, $breakpoint-logo) {
@@ -277,7 +291,7 @@ nav {
         display: block;
         overflow: hidden;
         width: 100%;
-        max-width: $page-width;
+        @include page-width;
         margin: 0 auto;
         background-color: $colour-nav-background;
         
@@ -321,76 +335,12 @@ nav {
     clear: both;
     margin: 19px auto 336px auto;
     position: relative;
-    max-width: $page-width;
+    @include page-width;
 
     @include media-and-ie(min-width, $breakpoint-content) {
         margin-bottom: 96px;
     }
-}
 
-%fill-left {
-    float: left;
-    border-style: solid;
-    margin-left: -50vw;
-    border-left-width: 50vw;
-}
-
-%fill-right {
-    float: right;
-    border-style: solid;
-    margin-right: -50vw;
-    border-right-width: 50vw;
-}
-
-#sidebar {
-    display: none;
-    @extend %fill-left;
-    color: $colour-secondary-foreground;
-    background-color: $colour-secondary-background;
-    border-color: $colour-secondary-border;
-    width: 100% - $content-width - 5 * $horizontal-padding;
-    padding: 0 $horizontal-padding 1em $horizontal-padding;
-    margin-bottom: 32px;
-    font-size: small;
-    text-align: center;
-
-    @include media-and-ie(min-width, $breakpoint-content) {
-        display: block;
-    }
-    
-    h1 {
-        font-family: ArcadeClassic,sans-serif;
-        font-weight: normal;
-        border-bottom: 2px solid $colour-primary-foreground;
-        color: $colour-primary-foreground;
-        font-size: 2em;
-        text-align: center;
-        margin: 32px 0 16px 0;
-    }
-}
-
-#content {
-    @extend %fill-right;
-    text-align: left;
-    padding: 1em $horizontal-padding 1em $horizontal-padding;
-    margin-bottom: 32px;
-    background-color: $colour-primary-background;
-
-    max-width: 570px;
-    width: 100%;
-    float: left;
-    border-color: $colour-primary-background;
-
-    @include media-and-ie(min-width, $breakpoint-justify) {
-        text-align: justify;
-    }
-
-    @include media-and-ie(min-width, $breakpoint-content) {
-        width: $content-width;
-        float: right;
-        border-color: $colour-primary-border;
-    }
-    
     ul {
         list-style: square image-url('bullet.png') outside;
         text-indent: 0;
@@ -427,6 +377,112 @@ nav {
     }
 }
 
+%fill-left {
+    float: left;
+    border-style: solid;
+    margin-left: -50vw;
+    border-left-width: 50vw;
+}
+
+%fill-right {
+    float: right;
+    border-style: solid;
+    margin-right: -50vw;
+    border-right-width: 50vw;
+}
+
+%fill-both {
+    float: left;
+    border-style: solid;
+    margin-right: -50vw;
+    border-right-width: 50vw;
+    margin-left: -50vw;
+    border-left-width: 50vw;
+}
+
+#sidebar {
+    display: none;
+    @extend %fill-left;
+    color: $colour-secondary-foreground;
+    background-color: $colour-secondary-background;
+    border-color: $colour-secondary-border;
+    width: 100% - 2 * $horizontal-padding;
+    padding: 0 $horizontal-padding 1em $horizontal-padding;
+    margin-bottom: 32px;
+    font-size: small;
+    text-align: center;
+
+    &.important {
+        display: block;
+    }
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        width: 100% - $content-width - 5 * $horizontal-padding;
+        display: block;
+    }
+    
+    section {
+        display: none;
+
+        &.important {
+            display: block;
+        }
+
+        @include media-and-ie(min-width, $breakpoint-content) {
+            display: block;
+        }
+    }
+    
+    h1 {
+        font-family: ArcadeClassic,sans-serif;
+        font-weight: normal;
+        border-bottom: 2px solid $colour-primary-foreground;
+        color: $colour-primary-foreground;
+        font-size: 2em;
+        text-align: center;
+        margin: 32px 0 16px 0;
+    }
+}
+
+#news-feed {
+    @extend %fill-right;
+    text-align: left;
+    padding: 1em $horizontal-padding 1em $horizontal-padding;
+    margin-bottom: 32px;
+    background-color: $colour-primary-background;
+
+    max-width: 570px;
+    width: 100% - 2*$horizontal-padding;
+    float: left;
+    border-color: $colour-primary-background;
+
+    @include media-and-ie(min-width, $breakpoint-justify) {
+        text-align: justify;
+    }
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        width: $content-width;
+        float: right;
+        border-color: $colour-primary-border;
+    }
+}
+
+#game-list {
+    @extend %fill-both;
+    text-align: left;
+    padding: 1em $horizontal-padding 1em $horizontal-padding;
+    margin-bottom: 32px;
+    background-color: $colour-primary-background;
+
+    width: 100% - 2*$horizontal-padding;
+    float: left;
+    border-color: $colour-primary-background;
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        border-color: $colour-primary-border;
+    }
+}
+
 #to-top {
     display: block;
     width: 100%;
@@ -449,14 +505,27 @@ nav {
     }
 }
 
+#game-list {
+    text-align: left;
+}
+
 .game {
-    @include inline-block(top, top);
+    $horizontal-padding: 8px;
+    $horizontal-margin: 2px;
+    $img-width: (570 - 6*($horizontal-padding + $horizontal-margin) - 5px*2) / 3; //192px;
+    
+    @include inline-block(bottom, bottom);
     border: none;
     text-align: center;
-    width: 208px;
-    height: 184px;
-    margin: 0 2px 16px 2px;
-    padding: 8px 0;
+    max-width: $img-width;
+    width: 100% - (2*$horizontal-padding + 2*$horizontal-margin) / (208px + (2*$horizontal-padding + 2*$horizontal-margin)) * 100%;
+    width: calc(100% - #{2*$horizontal-padding + 2*$horizontal-margin});
+    margin: 0 $horizontal-margin 16px $horizontal-margin;
+    padding: 28px $horizontal-padding;
+
+    @include media-and-ie(min-width, $breakpoint-columns) {
+        height: 144px + 2*16px;
+    }
 
     &:hover,
     &:active {
@@ -464,10 +533,12 @@ nav {
     }
 
     img {
-        height: 144px;
-        margin: 0;
-        padding: 0;
-        width: 192px;
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 0 8px 0;
+        max-height: 144px; //remove once thumbnail cropping fixed
+        max-width: $img-width;
     }
 }
 

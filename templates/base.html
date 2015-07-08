@@ -16,7 +16,7 @@
     <!-- fonts -->
     <link href="http://fonts.googleapis.com/css?family=Electrolize" rel="stylesheet" type="text/css" />
   </head>
-  <body id="top">
+  <body id="top" class="{% block body_class %}{% endblock %}">
     <header>
       <div id="title">
         <div id="account">
@@ -46,13 +46,7 @@
       </nav>
     </header>
     <div id="container">
-      <section id="sidebar">
-        {% load sidebar_tags %}
-        {% sidebar %}
-      </section>
-      <article id="content">
-        {% block content %}{% endblock %}
-      </article>
+      {% block content %}{% endblock %}
       <footer>
         <p>
         <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
