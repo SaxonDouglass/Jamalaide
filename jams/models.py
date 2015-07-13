@@ -4,6 +4,8 @@ import re
 import StringIO
 from PIL import Image, ImageOps
 
+from django.contrib.auth.models import User
+
 from django import forms
 from django.conf import settings
 from django.db import models
@@ -12,29 +14,74 @@ from django.core.files.base import ContentFile
 from django.template.defaultfilters import slugify
 from django.core.context_processors import csrf
 
+def map_path(instance, filename):
+    return 'jams/'+instance.slug+'/'+instance.slug+'-map'+re.search("\.[^.]*$", filename).group()
+
+def banner_path(instance, filename):
+    return 'jams/'+instance.slug+'/'+instance.slug+'-banner'+re.search("\.[^.]*$", filename).group()
+
+def logo_path(instance, filename):
+    return 'jams/'+instance.slug+'/'+instance.slug+'-logo'+re.search("\.[^.]*$", filename).group()
+
 class Jam(models.Model):
+    class Meta:
+        permissions = (
+            ("can_post", "Can post jams"),
+            ("official", "Can post official jams"),
+        )
+
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=30)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    opening_times = models.CharField(max_length=100)
+    actual_duration = models.FloatField(blank=True, null=True)
+    deadline = models.DateTimeField(blank=True)
+    opening_times = models.TextField(max_length=100)
     venue = models.TextField()
-    website = models.URLField(blank=True) # ?
+    official = models.BooleanField(default=True)
+    website_title = models.CharField(max_length=100, blank=True)
+    website = models.URLField(blank=True)
+    registration_title = models.CharField(max_length=100, default="Register now!", blank=True)
+    registration = models.URLField(blank=True)
     brief = models.TextField(blank=True)
-
+    schedule = models.TextField(blank=True)
+    theme = models.CharField(max_length=100, blank=True)
+    map = models.ImageField(upload_to=map_path, blank=True)
+    map_link = models.URLField(blank=True)
+    banner = models.ImageField(upload_to=banner_path, blank=True)
+    logo = models.ImageField(upload_to=logo_path, blank=True)
+    
     @property
     def is_current(self):
         now = datetime.datetime.now()
         return self.start_time < now and self.end_time > now
     
+    @property
+    def is_active(self):
+        now = datetime.datetime.now()
+        return self.start_time < now and self.deadline > now
+
+    @property
+    def duration(self):
+        if not self.actual_duration:
+            return self.end_time-self.start_time
+        else:
+            return datetime.timedelta(hours=self.actual_duration)
+    
+    def save(self, *args, **kwargs):
+        if not self.deadline:
+            self.deadline = self.end_time + datetime.timedelta(days=1)
+        super(Jam, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return self.title
 
 def game_image_path(instance, filename):
-    return 'jams/'+instance.jam.slug+'/'+instance.slug+'/image'
+    return 'jams/'+instance.jam.slug+'/'+instance.slug+'/'+instance.slug+re.search("\.[^.]*$", filename).group()
 
 def game_thumb_path(instance,filename):
-    return 'jams/'+instance.jam.slug+'/'+instance.slug+'/thumbnail'
+    return 'jams/'+instance.jam.slug+'/'+instance.slug+'/thumbnail.png'
     
 class Game(models.Model):
     title = models.CharField(max_length=30)
@@ -43,10 +90,8 @@ class Game(models.Model):
     creators = models.ManyToManyField(settings.AUTH_USER_MODEL)
     brief = models.TextField()
     spotlighted = models.BooleanField(default=False)
-    image = models.ImageField(upload_to=game_image_path,
-        blank=True)
-    thumbnail = models.ImageField(upload_to=game_thumb_path,
-        blank=True, editable=False)
+    image = models.ImageField(upload_to=game_image_path, blank=True)
+    thumbnail = models.ImageField(upload_to=game_thumb_path, blank=True, editable=False)
 
     def __unicode__(self):
         return self.title
@@ -74,7 +119,7 @@ class Game(models.Model):
             working = imgFile.copy()
             working.thumbnail((192,144), Image.ANTIALIAS)
             fp = StringIO.StringIO()
-            working.save(fp, "JPEG", quality=95)
+            working.save(fp, "PNG", quality=95)
             cf = ContentFile(fp.getvalue())
             try:
                 os.remove(self.thumbnail.path)
@@ -124,7 +169,7 @@ class GameResourceForm(forms.ModelForm):
         exclude = ('game',)
 
 def team_image_path(instance, filename):
-        return 'jams/teams/'+instance.slug+'/image'
+        return 'jams/teams/'+instance.slug+'/image'+re.search("\.[^.]*$", filename).group()
 
 class Team(models.Model):
     name = models.CharField(max_length=30)

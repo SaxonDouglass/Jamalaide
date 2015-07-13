@@ -1,0 +1,6 @@
+{% load markup %}
+  <article class="item">
+    <{{heading}}>{{ article.title }}</{{heading}}>
+    <p class="small">{{article.date|date:"d F Y"}}</p>
+    {{ article.content|md }}
+  </article>

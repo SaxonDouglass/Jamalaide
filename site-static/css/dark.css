@@ -110,15 +110,30 @@ a:hover, a:active {
   text-shadow: 0 0 2px #cfa0ee;
 }
 
+a.img-link {
+  border: none;
+}
+
+a.back-link {
+  float: left;
+}
+
+a.forward-link {
+  float: right;
+}
+
 h1, h2, h3, h4, h5, h6 {
   clear: left;
   font-family: Electrolize,sans-serif;
   margin: 24px 0 16px 0;
   font-weight: bold;
+  text-align: left;
 }
 
 h1 {
-  font-size: 3em;
+  font-family: ArcadeClassic,Arial,sans-serif;
+  font-weight: normal;
+  font-size: 4em;
 }
 
 h2 {
@@ -151,6 +166,37 @@ p {
   margin-bottom: 1em;
 }
 
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+img {
+  max-width: 100%;
+}
+
+code {
+  font-family: Consolas,monospace;
+  background-color: #37254c;
+  padding: 1px 0.5em;
+}
+
+pre {
+  margin: 21px 1em 21px 1em;
+  text-align: left;
+  padding: 0.5em;
+  background-color: #37254c;
+  white-space: pre-wrap;
+}
+
+blockquote {
+  margin: 29px 1.5em;
+  font-style: italic;
+}
+
 footer {
   display: block;
   clear: both;
@@ -158,7 +204,7 @@ footer {
   position: relative;
   text-align: center;
   max-width: 950px;
-  font-size: 14px;
+  font-size: 0.875em;
 }
 @media only screen and (min-width: 1250px) {
   .wide footer {
@@ -435,28 +481,53 @@ nav li a {
   font-weight: bold;
   text-align: right;
   width: 200px;
+  line-height: 1.5em;
 }
 #container .right {
   float: left;
-  margin: 0 0 16px 16px;
+  margin: 0 0 8px 8px;
   width: 300px;
+  line-height: 1.5em;
+}
+#container .right p:last-child {
+  margin: 0;
 }
 
-#sidebar {
+#news-sidebar, #game-details, #important-jams, #jam-details {
   float: left;
   border-style: solid;
+  margin-right: -50vw;
+  border-right-width: 50vw;
   margin-left: -50vw;
   border-left-width: 50vw;
 }
+.ie8 #news-sidebar, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details {
+  margin-right: 0;
+  border-right-width: 0;
+}
+@media only screen and (min-width: 662px) {
+  #news-sidebar, #game-details, #important-jams, #jam-details {
+    margin-right: 0;
+    border-right-width: 0;
+  }
+}
 
-#news-feed {
+#news-feed, #game-sidebar, #jam-list {
+  float: left;
+  border-style: solid;
+  margin-right: -50vw;
+  border-right-width: 50vw;
+}
+.ie8 #news-feed, .ie8 #game-sidebar, .ie8 #jam-list {
   float: right;
-  border-style: solid;
-  margin-right: -50vw;
-  border-right-width: 50vw;
+}
+@media only screen and (min-width: 662px) {
+  #news-feed, #game-sidebar, #jam-list {
+    float: right;
+  }
 }
 
-#game-list {
+#game-list, #flatpage, #form, #profile {
   float: left;
   border-style: solid;
   margin-right: -50vw;
@@ -465,7 +536,8 @@ nav li a {
   border-left-width: 50vw;
 }
 
-#sidebar {
+#news-sidebar, #game-sidebar, #jam-list {
+  line-height: 1.5em;
   display: none;
   color: #d9d9d9;
   background-color: #5c3d7f;
@@ -473,37 +545,36 @@ nav li a {
   width: 96%;
   padding: 0 2% 1em 2%;
   margin-bottom: 32px;
-  font-size: small;
   text-align: center;
 }
-#sidebar.important {
+.important#news-sidebar, .important#game-sidebar, .important#jam-list {
   display: block;
 }
-.ie8 #sidebar {
+.ie8 #news-sidebar, .ie8 #game-sidebar, .ie8 #jam-list {
   width: 30%;
   display: block;
 }
 @media only screen and (min-width: 662px) {
-  #sidebar {
+  #news-sidebar, #game-sidebar, #jam-list {
     width: 30%;
     display: block;
   }
 }
-#sidebar section {
+#news-sidebar section, #game-sidebar section, #jam-list section {
   display: none;
 }
-#sidebar section.important {
+#news-sidebar section.important, #game-sidebar section.important, #jam-list section.important {
   display: block;
 }
-.ie8 #sidebar section {
+.ie8 #news-sidebar section, .ie8 #game-sidebar section, .ie8 #jam-list section {
   display: block;
 }
 @media only screen and (min-width: 662px) {
-  #sidebar section {
+  #news-sidebar section, #game-sidebar section, #jam-list section {
     display: block;
   }
 }
-#sidebar h1 {
+#news-sidebar h1, #game-sidebar h1, #jam-list h1 {
   font-family: ArcadeClassic,sans-serif;
   font-weight: normal;
   border-bottom: 2px solid white;
@@ -513,53 +584,45 @@ nav li a {
   margin: 32px 0 16px 0;
 }
 
-#news-feed {
+#news-feed, #game-details, #important-jams, #jam-details, #game-list, #flatpage, #form, #profile {
   text-align: left;
   padding: 1em 2% 1em 2%;
   margin-bottom: 32px;
   background-color: #50356f;
-  max-width: 570px;
   width: 96%;
-  float: left;
   border-color: #50356f;
 }
-.ie8 #news-feed {
-  text-align: justify;
-}
-@media only screen and (min-width: 350px) {
-  #news-feed {
-    text-align: justify;
-  }
-}
-.ie8 #news-feed {
-  width: 60%;
-  float: right;
+.ie8 #news-feed, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details, .ie8 #game-list, .ie8 #flatpage, .ie8 #form, .ie8 #profile {
   border-color: #301f42;
 }
 @media only screen and (min-width: 662px) {
-  #news-feed {
-    width: 60%;
-    float: right;
+  #news-feed, #game-details, #important-jams, #jam-details, #game-list, #flatpage, #form, #profile {
     border-color: #301f42;
   }
 }
 
-#game-list {
-  text-align: left;
-  padding: 1em 2% 1em 2%;
-  margin-bottom: 32px;
-  background-color: #50356f;
-  width: 96%;
-  float: left;
-  border-color: #50356f;
+#news-feed, #game-details, #important-jams, #jam-details {
+  max-width: 570px;
 }
-.ie8 #game-list {
-  border-color: #301f42;
+.ie8 #news-feed, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details {
+  text-align: justify;
+}
+@media only screen and (min-width: 350px) {
+  #news-feed, #game-details, #important-jams, #jam-details {
+    text-align: justify;
+  }
+}
+.ie8 #news-feed, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details {
+  width: 60%;
 }
 @media only screen and (min-width: 662px) {
-  #game-list {
-    border-color: #301f42;
+  #news-feed, #game-details, #important-jams, #jam-details {
+    width: 60%;
   }
+}
+
+#jam-list {
+  text-align: left;
 }
 
 #to-top {
@@ -635,7 +698,6 @@ nav li a {
   display: block;
   margin: 2em auto;
   max-height: 450px;
-  max-width: 600px;
 }
 
 .errorlist {
@@ -657,7 +719,7 @@ textarea {
 input:hover, select:hover,
 textarea:hover, input:active, select:active,
 textarea:active {
-  background-color: #47126b;
+  background-color: #6e1da5;
   border: solid 1px #6f548e;
   color: white;
 }
@@ -688,11 +750,8 @@ textarea {
   margin: 0 0 8px 16px;
   width: 300px;
 }
-#formset input {
-  background-color: #58356E;
-}
 #formset .box {
-  background-color: #663d80;
+  background-color: #5c3d7f;
   clear: both;
   margin: 32px 0px;
   padding: 16px;
@@ -717,7 +776,17 @@ textarea {
   width: 200px;
 }
 .button:hover, .button:active {
-  background-color: #47126b;
+  background-color: #6e1da5;
   border: solid 1px #6f548e;
   color: white;
+}
+
+.links {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.map {
+  clear: both;
+  text-align: center;
 }

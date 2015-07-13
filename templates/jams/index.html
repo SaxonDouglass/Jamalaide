@@ -1,15 +1,37 @@
 {% extends "base.html" %}
 
-{% block title %}{{title}}{% endblock %}
+{% load jam_tags %}
+
+{% block title %}Jams{% endblock %}
 
 {% block content %}
-
-<h1>{{title}}</h1>
-
-{% for jam in jams %}
+<section id="important-jams">
+  {% if current %}<section>
+    <h1>Current Jam{{ current|pluralize }}</h1>
+    {% for jam in current %}{% jam_summary jam %}{% endfor %}
+  </section>{% endif %}
+  {% if next %}<section>
+    <h1>Next Jam</h1>
+    {% jam_summary next %}
+  </section>{% endif %}
+  {% if upcoming %}<section>
+    <h1>Coming Soon</h1>
+    {% for jam in upcoming %}{% jam_summary jam %}{% endfor %}
+  </section>{% endif %}
+  {% if recent %}<section>
+    <h1>Recent Jam{{ recent|pluralize }}</h1>
+    {% for jam, games in recent %}
+    <h2><a href="/jams/{{jam.slug}}">{{ jam.title }}</a> ({{ jam.start_time|date:"jS F" }})</h2>
+    {% for game in games %}{% game_thumb game %}{% endfor %}
+    {% endfor %}
+  </section>{% endif %}
+</section>
+<section id="jam-list" class="important">
+  <h1>Other Jams</h1>
+  {% for jam in past %}
   <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
-  ({{ jam.start_time|date:"jS F Y" }})<br>
-{% endfor %}
-
+  ({{ jam.start_time|date:"F Y" }})<br>
+  {% endfor %}
+</section>
 {% endblock %}
 

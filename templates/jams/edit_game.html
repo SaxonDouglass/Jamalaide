@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %}Jamalaide - {{ jam.name }} - Submit Game{% endblock %}
+{% block title %}{{ jam.title }} - {% if game.id %}Edit{% else %}Submit{% endif %} Game{% endblock %}
 
 {% block content %}
-{% if game.id %}
+<section id="form">
+  {% if game.id %}
   <h1>Edit Game</h1>
-{% else %}
+  {% else %}
   <h1>Submit Game</h1>
-{% endif %}
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
+  {% endif %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     
     {{ form.non_field_errors }}
   
@@ -58,18 +59,18 @@
     <div id="formset">
       {{ formset.management_form }}
       {% for form in formset %}
-        {{form.id}}
-        <div class="box">
-          {% for field in form %}
-              {% if not field.is_hidden %}
-                <div class="left">{{ field.label_tag }}</div>
-                <div class="right">
-                  {{ field }}
-                </div>
-              {% endif %}
-          {% endfor %}
-          <div style="clear: left; height: 0;">&nbsp;</div>
+      {{form.id}}
+      <div class="box">
+        {% for field in form %}
+        {% if not field.is_hidden %}
+        <div class="left">{{ field.label_tag }}</div>
+        <div class="right">
+          {{ field }}
         </div>
+        {% endif %}
+        {% endfor %}
+        <div style="clear: left; height: 0;">&nbsp;</div>
+      </div>
       {% endfor %}
     </div>
     
@@ -77,5 +78,6 @@
   
   </form>
   
-</form><br />
+  <br />
+</section>
 {% endblock %}

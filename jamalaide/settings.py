@@ -94,8 +94,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
-    # our apps
     'markup',
+
+    # our apps
     'mailer',
     'accounts',
     'blogs',

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
+{% block title %}Login{% endblock %}
+
 {% block content %}
+<section id="form">
+<h1>Login</h1>
 
 {{ form.non_field_errors }}
 
@@ -23,5 +27,5 @@
 
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
-
+</section>
 {% endblock %}

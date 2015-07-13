@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load markup %}
+{% load jam_tags %}
+{% load news_tags %}
+
+{% block title %}{{jam.title}}{% endblock %}
+
+{% block content %}
+<section id="jam-details">
+  {% if jam.banner %}<img class="jam-banner" src="{{ jam.banner.url }}" alt="{{ jam.title }} banner"/>
+  {% endif %}{% if jam.is_active %}
+  <a href="{% url 'jams.views.edit_game' jam.slug %}">
+    <div class="button">Submit Game</div>
+  </a>
+  {% endif %}
+  <h1>{{jam.title}}</h1>
+
+  <div class="left">Dates</div>
+  <div class="right">{{jam.start_time|date:"jS N Y"}} - {{jam.end_time|date:"jS N Y"}}</div>
+
+  <div class="left">Duration</div>
+  <div class="right">{{ jam.duration | duration }}</div>
+
+  <div class="left">Venue</div>
+  <div class="right">{{jam.venue}}</div>
+  {% if jam.website %}
+  <div class="left">Website</div>
+  <div class="right"><a href="{{jam.website}}">{% if jam.website_title %}{{jam.website_title}}{% else %}{{jam.website}}{% endif %}</a></div>
+  {% endif %}
+  {% if jam.theme %}
+  <div class="left">Theme</div>
+  <div class="right">{{jam.theme}}</div>
+  {% endif %}
+  {% if games %}<h2>Games</h2>
+  {% for game in games %}{% game_thumb game %}{% endfor %}{% endif %}
+  {% if jam.brief %}
+  <h2>Description</h2>
+  {{jam.brief|md}}
+  {% endif %}
+  {% if news %}
+  <h2>News</h2>
+  {% for article in news %}{% news_item article 'h3' %}{% endfor %}
+  {% endif %}
+</section>
+<section id="jam-list">
+  <h1>Jams</h1>
+  {% for jam in jams %}
+  <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
+  ({{ jam.start_time|date:"F Y" }})<br>
+  {% endfor %}
+</section>
+{% endblock %}
+

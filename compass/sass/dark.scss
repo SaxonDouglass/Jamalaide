@@ -26,9 +26,10 @@ $colour-input-foreground:         $white;
 $colour-input-background:         $purple-dark;
 $colour-input-border:             $purple-dull-light;
 $colour-input-hover-foreground:   $white;
-$colour-input-hover-background:   $purple-dark;
+$colour-input-hover-background:   $purple;
 $colour-input-hover-border:       $purple-dull-light;
 $colour-selection-foreground:     $colour-primary-background;
 $colour-selection-background:     $colour-primary-foreground;
+$colour-code-background:          darken($colour-primary-background, 10%);
 
 @import "screen";

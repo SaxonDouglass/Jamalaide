@@ -3,23 +3,26 @@ from datetime import datetime
 from django.conf import settings
 from django.db import models
 
+from jams.models import Jam
+
+def image_path(instance, filename):
+    return 'blogs/'+instance.pk+'/'+filename
+
 class Article(models.Model):
+    class Meta:
+        permissions = (
+            ("can_post", "Can post articles"),
+            ("official", "Can post official articles"),
+        )
+    
     title = models.CharField(max_length=100)
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
-    date = models.DateField(blank=True)
+    date = models.DateField(default=datetime.now)
     content = models.TextField()
-    
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            self.date = datetime.now()
-        super(Article, self).save(*args, **kwargs)
+    official = models.BooleanField(default=True)
+    jams = models.ManyToManyField(Jam, blank=True)
+    header = models.ImageField(upload_to=image_path, blank=True)
+    footer = models.ImageField(upload_to=image_path, blank=True)
     
     def __unicode__(self):
         return self.title
-
-class Image(models.Model):
-    title = models.CharField(max_length=100)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
-    image = models.ImageField(upload_to=
-        lambda instance, filename: 'blogs/image/'+instance.owner.slug,
-        blank=True)

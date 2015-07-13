@@ -5,5 +5,7 @@
 {% block title %}{{ flatpage.title }}{% endblock %}
 
 {% block content %}
-{{ flatpage.content|md }}
+<section id="flatpage">
+  {{ flatpage.content|md }}
+</section>
 {% endblock %}

@@ -85,15 +85,30 @@ a {
     }
 }
 
+a.img-link {
+    border: none;
+}
+
+a.back-link {
+    float: left;
+}
+
+a.forward-link {
+    float: right;
+}
+
 %heading {
     clear: left;
     font-family: Electrolize,sans-serif;
     margin: 24px 0 16px 0;
     font-weight: bold;
+    text-align: left;
 }
 h1 {
     @extend %heading;
-    font-size: 3em;
+    font-family: ArcadeClassic,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 4em;
 }
 h2 {
     @extend %heading;
@@ -130,6 +145,37 @@ p {
     margin-bottom: 1em;
 }
 
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+img {
+    max-width: 100%;
+}
+
+code {
+    font-family: Consolas,monospace;
+    background-color: $colour-code-background;
+    padding: 1px 0.5em;
+}
+
+pre {
+    margin: 21px 1em 21px 1em;
+    text-align: left;
+    padding: 0.5em;
+    background-color: $colour-code-background;
+    white-space: pre-wrap;
+}
+
+blockquote {
+    margin: 29px 1.5em;
+    font-style: italic;
+}
+
 footer {
     display: block;
     clear: both;
@@ -137,7 +183,7 @@ footer {
     position: relative;
     text-align: center;
     @include page-width;
-    font-size: 14px;
+    font-size: 0.875em;
 
     a {
         color: $colour-primary-foreground;
@@ -368,27 +414,44 @@ nav {
         font-weight: bold;
         text-align: right;
         width: 200px;
+        line-height: 1.5em;
     }
 
     .right {
         float: left;
-        margin: 0 0 16px 16px;
+        margin: 0 0 8px 8px;
         width: 300px;
+        line-height: 1.5em;
+
+        p:last-child {
+            margin: 0;
+        }
     }
 }
 
 %fill-left {
     float: left;
     border-style: solid;
+    margin-right: -50vw;
+    border-right-width: 50vw;
     margin-left: -50vw;
     border-left-width: 50vw;
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        margin-right: 0;
+        border-right-width: 0;
+    }
 }
 
 %fill-right {
-    float: right;
+    float: left;
     border-style: solid;
     margin-right: -50vw;
     border-right-width: 50vw;
+    
+    @include media-and-ie(min-width, $breakpoint-content) {
+        float: right;
+    }
 }
 
 %fill-both {
@@ -400,16 +463,15 @@ nav {
     border-left-width: 50vw;
 }
 
-#sidebar {
+%sidebar {
+    line-height: 1.5em;
     display: none;
-    @extend %fill-left;
     color: $colour-secondary-foreground;
     background-color: $colour-secondary-background;
     border-color: $colour-secondary-border;
     width: 100% - 2 * $horizontal-padding;
     padding: 0 $horizontal-padding 1em $horizontal-padding;
     margin-bottom: 32px;
-    font-size: small;
     text-align: center;
 
     &.important {
@@ -444,17 +506,23 @@ nav {
     }
 }
 
-#news-feed {
-    @extend %fill-right;
+%content {
     text-align: left;
     padding: 1em $horizontal-padding 1em $horizontal-padding;
     margin-bottom: 32px;
     background-color: $colour-primary-background;
 
-    max-width: 570px;
     width: 100% - 2*$horizontal-padding;
-    float: left;
     border-color: $colour-primary-background;
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        border-color: $colour-primary-border;
+    }
+}
+
+%column {
+    @extend %content;
+    max-width: 570px;
 
     @include media-and-ie(min-width, $breakpoint-justify) {
         text-align: justify;
@@ -462,25 +530,63 @@ nav {
 
     @include media-and-ie(min-width, $breakpoint-content) {
         width: $content-width;
-        float: right;
-        border-color: $colour-primary-border;
     }
 }
 
+#news-sidebar {
+    @extend %sidebar;
+    @extend %fill-left;
+}
+
+#news-feed {
+    @extend %column;
+    @extend %fill-right;
+}
+
 #game-list {
+    @extend %content;
     @extend %fill-both;
+}
+
+#game-details {
+    @extend %column;
+    @extend %fill-left;
+}
+
+#game-sidebar {
+    @extend %sidebar;
+    @extend %fill-right;
+}
+
+#important-jams {
+    @extend %column;
+    @extend %fill-left;
+}
+
+#jam-list {
+    @extend %sidebar;
+    @extend %fill-right;
     text-align: left;
-    padding: 1em $horizontal-padding 1em $horizontal-padding;
-    margin-bottom: 32px;
-    background-color: $colour-primary-background;
+}
 
-    width: 100% - 2*$horizontal-padding;
-    float: left;
-    border-color: $colour-primary-background;
+#jam-details {
+    @extend %column;
+    @extend %fill-left;
+}
 
-    @include media-and-ie(min-width, $breakpoint-content) {
-        border-color: $colour-primary-border;
-    }
+#flatpage {
+    @extend %content;
+    @extend %fill-both;
+}
+
+#form {
+    @extend %content;
+    @extend %fill-both;
+}
+
+#profile {
+    @extend %content;
+    @extend %fill-both;
 }
 
 #to-top {
@@ -546,7 +652,6 @@ nav {
     display: block;
     margin: 2em auto;
     max-height: 450px;
-    max-width: 600px;
 }
 
 .errorlist {
@@ -603,12 +708,8 @@ textarea {
         width: 300px;
     }
 
-    input {
-        background-color: #58356E;
-    }
-
     .box {
-        background-color: #663d80;
+        background-color: $colour-secondary-background;
         clear: both;
         margin: 32px 0px;
         padding: 16px;
@@ -637,4 +738,14 @@ textarea {
         border: solid 1px $colour-input-hover-border;
         color: $colour-input-hover-foreground;
     }
+}
+
+.links {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.map {
+    clear: both;
+    text-align: center;
 }

@@ -1,21 +1,20 @@
 {% extends "base.html" %}
 
-{% load markup %}
+{% load sidebar_tags %}
+{% load news_tags %}
 
 {% block title %}News{% endblock %}
 
 {% block content %}
-{% load sidebar_tags %}{% sidebar %}
+{% sidebar %}
 <section id="news-feed">
   <h1>News</h1>
   {% for article in object_list %}
-  <article class="item">
-    <h2>{{ article.title }}</h2>
-    <p class="small">By <a href="/profiles/{{article.author.username}}">{{article.author.first_name}} {{article.author.last_name}}</a> on {{article.date|date:"d F Y"}}</p>
-    {{ article.content|md }}
-  </article>
+  {% news_item article %}
   {% empty %}
   <p>No articles yet.</p>
   {% endfor %}
+  {% if prev != None %}<a class="back-link" href="/news/{{prev}}">Newer</a>{% endif %}
+  {% if next != None %}<a class="forward-link" href="/news/{{next}}">Older</a>{% endif %}
 </section>
 {% endblock %}

@@ -1,4 +1,5 @@
 import markdown
+import bleach
 
 from django import template
 from django.template.defaultfilters import stringfilter
@@ -13,7 +14,11 @@ def md(text):
     """processes markdown on the string"""
     extensions = ["nl2br", ]
 
-    return mark_safe(markdown.markdown(force_unicode(text),
-                                        extensions,
-                                        safe_mode=True,
-                                        enable_attributes=False))
+    tags = bleach.ALLOWED_TAGS + ['br', 'cite', 'dd', 'dl', 'dt', 'img', 'p', 'pre', 'q', 'small', 'strike']
+    attributes = bleach.ALLOWED_ATTRIBUTES
+    attributes['img'] = {'img': ['src', 'alt']}
+    
+    html = markdown.markdown(force_unicode(text), extensions)
+    clean = bleach.clean(html, tags=tags, attributes=attributes)
+    
+    return mark_safe(clean)

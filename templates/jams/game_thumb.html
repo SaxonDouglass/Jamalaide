@@ -1,0 +1,5 @@
+{% load staticfiles %}
+    <a class="game" href="/jams/{{ game.jam.slug }}/{{ game.slug }}">
+      {% if game.thumbnail %}<img src="{{ game.thumbnail.url }}" alt="{{ game.title }} thumbnail" />{% else %}<img src="{% static 'img/game-default-thumb.png' %}" alt="Default thumbnail" />{% endif %}
+      {{ game.title }}
+    </a>

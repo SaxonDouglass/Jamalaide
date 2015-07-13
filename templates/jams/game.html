@@ -1,48 +1,56 @@
 {% extends "base.html" %}
 
 {% load markup %}
+{% load jam_tags %}
 
 {% block title %}{{game.title}}{% endblock %}
 
 {% block content %}
-
-{% if user in game.creators.all %}
+<section id="game-details">
+  {% if user in game.creators.all %}
   <a href="{% url 'jams.views.edit_game' game.jam.slug game.slug %}">
-      <div class="button">Edit</div>
+    <div class="button">Edit</div>
   </a>
-{% endif %}
+  {% endif %}
 
-<h1>{{game.title}}</h1>
+  <h1>{{game.title}}</h1>
 
-<div id="image">
-{% if game.image %}
-  <img class="gameImage" src="{{game.image.url}}" title="{{game.name}}" alt="{{game.name}}" />
-{% else %}
-  <img class="gameImage" src="{{STATIC_URL}}img/game-default.png" title="{{game.name}}" alt="{{game.name}}" />
-{% endif %}
-</div>
+  <div class="links">{% for res in resources %}<a href="{{res.url}}">{{res.title}}</a>{% if not forloop.last %} | {% endif %}{% endfor %}</div>
+  
+  <div class="image">
+    {% if game.image %}
+    <a class="img-link" href="{{game.image.url}}" target="_blank">
+      <img class="gameImage" src="{{game.image.url}}" title="{{game.title}}" alt="{{game.title}}" />
+    </a>
+    {% else %}
+    <img class="gameImage" src="{{STATIC_URL}}img/game-default.png" title="{{game.title}}" alt="{{game.title}}" />
+    {% endif %}
+  </div>
+  
+{{game.brief|md}}
 
-{{game.description|md|safe}}
+  <h2>Creators</h2>
+  <ul>
+    {% for creator in game.creators.all %}<li>{% if creator.get_full_name %}{{creator.get_full_name}}{% else %}{{creator.get_username}}{% endif %}</li>{% endfor %}
+  </ul>
 
-<h2>Details</h2>
-
-<div class="left">Jam</div>
-<div class="right">{{game.jam}}</div>
-
-<div class="left">Creators</div>
-<div class="right">
-  {% for creator in game.creators.all %}
-    {{creator.username}}<br />
-  {% endfor %}
-</div>
-
-<h2>Links</h2>
-{% for res in resources %}
-<div class="left">{{res.title}}</div>
-<div class="right"><a href="{{res.url}}">
-  {% if res.file %}Download{% else %}View{% endif %}
-</a></div>
-{% endfor %}
-
+</section>
+<section id="game-sidebar" class="important">
+  <section class="important">
+    <h1>From Jam</h1>
+    <a href="/jams/{{ jam.slug }}">
+      {{jam.title}}
+    </a><br />
+    {% if jam.start.month == jam.end.month %}
+    {{ jam.start_time|date:"jS" }}-{{ jam.end_time|date:"jS" }} {{ jam.start_time|date:"F" }}
+    {% else %}
+    {{ jam.start_time|date:"jS N" }}-{{ jam.end_time|date:"jS N" }}
+    {% endif %}
+  </section>
+  <section>
+    <h2>Other Games</h2>
+    {% for other in jam_games %}{% game_thumb other %}{% endfor %}
+  </section>
+</section>
 {% endblock %}
 
