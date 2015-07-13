@@ -38,14 +38,7 @@
 <section id="game-sidebar" class="important">
   <section class="important">
     <h1>From Jam</h1>
-    <a href="/jams/{{ jam.slug }}">
-      {{jam.title}}
-    </a><br />
-    {% if jam.start.month == jam.end.month %}
-    {{ jam.start_time|date:"jS" }}-{{ jam.end_time|date:"jS" }} {{ jam.start_time|date:"F" }}
-    {% else %}
-    {{ jam.start_time|date:"jS N" }}-{{ jam.end_time|date:"jS N" }}
-    {% endif %}
+    {% jam_sidebar jam %}
   </section>
   <section>
     <h2>Other Games</h2>

@@ -14,52 +14,64 @@
     <div class="button">Submit Game</div>
   </a>
   {% endif %}
-  <h1>{{jam.title}}</h1>
+  <section class="key-details">
+    <h1>{{jam.title}}</h1>
 
-  <div class="left">Start</div>
-  <div class="right">{{jam.start_time|date:"g:i a l jS F Y"}}</div>
+    <div class="left">Start</div>
+    <div class="right">{{jam.start_time|date:"g:i a l jS F Y"}}</div>
 
-  <div class="left">End</div>
-  <div class="right">{{jam.end_time|date:"g:i a l jS F Y"}}</div>
+    <div class="left">End</div>
+    <div class="right">{{jam.end_time|date:"g:i a l jS F Y"}}</div>
 
-  <div class="left">Duration</div>
-  <div class="right">{{ jam.duration | duration }}</div>
+    <div class="left">Duration</div>
+    <div class="right">{{ jam.duration | duration }}</div>
 
-  <div class="left">Venue</div>
-  <div class="right">{{jam.venue|md}}{% if jam.map_link and not jam.map %}
-    <p><a href="{{jam.map_link}}" target="_blank">Click here for map</a></p>{% endif %}</div>
+    <div class="left">Venue</div>
+    <div class="right">{{jam.venue|md}}{% if jam.map_link and not jam.map %}
+      <p><a href="{{jam.map_link}}" target="_blank">Click here for map</a></p>{% endif %}</div>
 
-  <div class="left">Opening Times</div>
-  <div class="right">{{jam.opening_times|md}}</div>
-  {% if jam.website %}
-  <div class="left">Website</div>
-  <div class="right"><a href="{{jam.website}}">{% if jam.website_title %}{{jam.website_title}}{% else %}{{jam.website}}{% endif %}</a></div>
-  {% endif %}
-  {% if jam.registration %}
-  <div class="left">Registration</div>
-  <div class="right"><a href="{{jam.registration}}">{% if jam.registration_title %}{{jam.registration_title}}{% else %}{{jam.registration}}{% endif %}</a></div>
-  {% endif %}
-  {% if jam.map %}<div class="map">
+    <div class="left">Opening Times</div>
+    <div class="right">{{jam.opening_times|md}}</div>
+    {% if jam.website %}
+    <div class="left">Website</div>
+    <div class="right"><a href="{{jam.website}}">{% if jam.website_title %}{{jam.website_title}}{% else %}{{jam.website}}{% endif %}</a></div>
+    {% endif %}
+    {% if jam.registration %}
+    <div class="left">Registration</div>
+    <div class="right"><a href="{{jam.registration}}">{% if jam.registration_title %}{{jam.registration_title}}{% else %}{{jam.registration}}{% endif %}</a></div>
+    {% endif %}
+    {% if jam.brief %}
+  </section>
+
+  <section>
+    <h2>Description</h2>
+    {{jam.brief|md}}
+    {% endif %}
+    {% if jam.schedule %}
+  </section>
+
+  <section>
+    <h2>Schedule</h2>
+    {{jam.schedule|md}}
+    {% endif %}
+  </section>
+
+  {% if jam.map %}<section class="map">
+    <h2>Map</h2>
     {% if jam.map_link %}<a class="img-link" href="{{jam.map_link}}" target="_blank">
       {% endif %}<img src="{{jam.map.url}}" alt="Map to venue" />{% if jam.map_link %}
     </a>{% endif %}
-  </div>{% endif %}
-  {% if jam.brief %}
-  <h2>Description</h2>
-  {{jam.brief|md}}
-  {% endif %}
-  {% if jam.schedule %}
-  <h2>Schedule</h2>
-  {{jam.schedule|md}}
-  {% endif %}
+  </section>{% endif %}
   {% if news %}
-  <h2>News</h2>
-  {% for article in news %}{% news_item article 'h3' %}{% endfor %}
-  {% endif %}
+  <section>
+    <h2>News</h2>
+    {% for article in news %}{% news_item article 'h3' %}{% endfor %}
+  </section>{% endif %}
   {% if games %}
+  <section class="games">
   <h2>Games</h2>
   {% for game in games %}{% game_thumb game %}{% endfor %}
-  {% endif %}
+  </section>{% endif %}
 </section>
 <section id="jam-list">
   <h1>Jams</h1>

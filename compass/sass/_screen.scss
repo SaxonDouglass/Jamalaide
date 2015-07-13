@@ -16,29 +16,29 @@
 
 @include font-face("ArcadeClassic", font-files("ArcadeClassic.ttf", "ArcadeClassic.eot"));
 
-$page-width: 950px;
+$page-width: 950px / 16px * 1em;
 $horizontal-padding: 2%;
 $content-width: 60%;
 
-$breakpoint-menu: 786px;
-$breakpoint-content: 662px;
+$breakpoint-menu: 786px / 16px * 1em;
+$breakpoint-content: 662px / 16px * 1em;
 $breakpoint-to-top: $breakpoint-content; //641px;
-$breakpoint-columns: 425px;
-$breakpoint-logo: 468px;
-$breakpoint-justify: 350px;
-$breakpoint-account: 290px;
+$breakpoint-columns: 425px / 16px * 1em;
+$breakpoint-logo: 468px / 16px * 1em;
+$breakpoint-justify: 350px / 16px * 1em;
+$breakpoint-account: 290px / 16px * 1em;
 
 //$breakpoint-to-top-height: 462px;
 
-@mixin page-width {
-    $margin-size: 150px;
+@mixin page-width($font-size: 1em) {
+    $margin-size: 150px / 16px * 1em;
     
-    max-width: $page-width;
+    max-width: $page-width * (1em / $font-size);
 
     @include media(min-width, $page-width + 2*$margin-size) {
         .wide & {
             max-width: 100vw - 2*$margin-size / ($page-width + 2*$margin-size) * 100vw;
-            max-width: calc(100vw - #{2*$margin-size})
+            max-width: calc(100vw - #{2*$margin-size * (1em / $font-size)})
         }
     }
 }
@@ -80,7 +80,7 @@ a {
     
     &:hover,
     &:active {
-        border: none;
+        border-color: transparent;
         @include text-shadow(0 0 2px $colour-link-foreground);
     }
 }
@@ -91,24 +91,29 @@ a.img-link {
 
 a.back-link {
     float: left;
+    font-size: 1.5em;
 }
 
 a.forward-link {
     float: right;
+    font-size: 1.5em;
 }
 
 %heading {
     clear: left;
     font-family: Electrolize,sans-serif;
-    margin: 24px 0 16px 0;
+    margin: 0 0 16px 0;
+    margin: 0 0 1rem 0;
     font-weight: bold;
     text-align: left;
+    line-height: 1em;
 }
 h1 {
     @extend %heading;
     font-family: ArcadeClassic,Arial,sans-serif;
     font-weight: normal;
     font-size: 4em;
+    margin-top: 1px / 16px * 0.25em;
 }
 h2 {
     @extend %heading;
@@ -116,12 +121,11 @@ h2 {
 }
 h3 {
     @extend %heading;
-    font-size: 2em;
-    font-weight: normal;
+    font-size: 1.5em;
 }
 h4 {
     @extend %heading;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: normal;
 }
 h5 {
@@ -164,7 +168,7 @@ code {
 }
 
 pre {
-    margin: 21px 1em 21px 1em;
+    margin: 1em 1em;
     text-align: left;
     padding: 0.5em;
     background-color: $colour-code-background;
@@ -172,7 +176,7 @@ pre {
 }
 
 blockquote {
-    margin: 29px 1.5em;
+    margin: 1.75em 1.5em;
     font-style: italic;
 }
 
@@ -182,7 +186,7 @@ footer {
     color: $colour-footer-foreground;
     position: relative;
     text-align: center;
-    @include page-width;
+    @include page-width(0.875em);
     font-size: 0.875em;
 
     a {
@@ -203,12 +207,11 @@ footer {
 header {
     display: block;
     background-color: $colour-header-border;
-    @include image-rendering(pixelated);
     width: 100%;
 
-    $height:  96px;
-    $overlap: 12px;
-    $padding: 32px;
+    $height:  6em;
+    $overlap: 12px/16px * 1em;
+    $padding: 2em;
 
     #title {
         position: relative;
@@ -221,11 +224,13 @@ header {
         }
         
         #logo {
+            @include image-rendering(pixelated);
             max-width: 100% - 2 * $horizontal-padding;
             padding-left: $horizontal-padding;
             padding-right: $horizontal-padding;
 
             @include media-and-ie(min-width, $breakpoint-logo) {
+                height: $height;
                 position: absolute;
                 bottom: -$overlap;
             }
@@ -237,7 +242,7 @@ header {
             position: absolute;
             top: $padding;
             right: $horizontal-padding;
-            width: 160px;
+            width: 3em*3;
             text-align: right;
             display: none;
 
@@ -246,7 +251,8 @@ header {
             }
 
             img {
-                margin-left: 8px;
+                margin-left: 0.5em;
+                width: 2em;
                 @include opacity(0.85);
             }
 
@@ -267,7 +273,7 @@ header {
             line-height: 1em;
             display: block;
             text-align: right;
-            padding: 8px $horizontal-padding;
+            padding: 0.5em $horizontal-padding;
 
             @include media-and-ie(min-width, $breakpoint-content) {
                 position: absolute;
@@ -287,8 +293,8 @@ header {
 }
 
 nav {
-    $font-height: 32px;
-    $bar-height: 48px;
+    $font-height: 2em;
+    $bar-height: 1.5em;
     
     display: block;
     max-width: 100%;
@@ -305,7 +311,7 @@ nav {
     
     a {
         display: block;
-        height: $font-height;
+        height: 1em;
         padding: 0;
         border: none;
         text-align: center;
@@ -323,12 +329,12 @@ nav {
             text-decoration: none;
         }
         
-        @include media(min-height, 5*$bar-height) {
-            padding: ($bar-height - $font-height)/2 0;
+        @include media(min-height, 5*$bar-height*$font-height/1em) {
+            padding: ($bar-height - 1em)/2 0 ($bar-height - 1em)/2 0;
         }
 
         @include media-and-ie(min-width, $breakpoint-content) {
-            padding: ($bar-height - $font-height)/2 $bar-height/4;
+            padding: ($bar-height - 1em)/2 $bar-height/4 ($bar-height - 1em)/2 $bar-height/4;
         }
     }
 
@@ -337,12 +343,12 @@ nav {
         display: block;
         overflow: hidden;
         width: 100%;
-        @include page-width;
+        @include page-width($font-height);
         margin: 0 auto;
         background-color: $colour-nav-background;
         
         position: absolute;
-        bottom: 40px;
+        bottom: 40px / 16px * 1em * (1em / $font-height);
 
         @include media-and-ie(min-width, $breakpoint-content) {
             position: static;
@@ -362,8 +368,8 @@ nav {
             width: auto;
 
             &:first-child {
-                margin-left: $page-width*($horizontal-padding/100%) + 60px;
-                margin-left: calc(#{$horizontal-padding} + 60px);
+                margin-left: $page-width*($horizontal-padding/100%) + 60px / 16px * 1em * (1em / $font-height);
+                margin-left: calc(#{$horizontal-padding} + 60px / 16px * 1em * (1em / $font-height));
             }
         }
 
@@ -379,12 +385,12 @@ nav {
 
 #container {
     clear: both;
-    margin: 19px auto 336px auto;
+    margin: $page-width*($horizontal-padding/100%) auto (3em*4 + 40px / 16px * 1em) auto;
     position: relative;
     @include page-width;
 
     @include media-and-ie(min-width, $breakpoint-content) {
-        margin-bottom: 96px;
+        margin-bottom: (40px / 16px * 1em);
     }
 
     ul {
@@ -470,8 +476,8 @@ nav {
     background-color: $colour-secondary-background;
     border-color: $colour-secondary-border;
     width: 100% - 2 * $horizontal-padding;
-    padding: 0 $horizontal-padding 1em $horizontal-padding;
-    margin-bottom: 32px;
+    padding: 1em $horizontal-padding 1em $horizontal-padding;
+    margin-bottom: 2em;
     text-align: center;
 
     &.important {
@@ -485,6 +491,8 @@ nav {
     
     section {
         display: none;
+        float: left;
+        width: 100%;
 
         &.important {
             display: block;
@@ -498,18 +506,40 @@ nav {
     h1 {
         font-family: ArcadeClassic,sans-serif;
         font-weight: normal;
-        border-bottom: 2px solid $colour-primary-foreground;
         color: $colour-primary-foreground;
         font-size: 2em;
+        margin-top: 0.25em;
         text-align: center;
-        margin: 32px 0 16px 0;
+        margin-bottom: 0.5em;
+    }
+
+    a.jam-link {
+        font-size: 1.2em;
+    }
+    
+    section + section {
+        margin-top: 2em;
+    }
+
+    .jam-times {
+        text-align: left;
+    }
+    
+    .jam-logo {
+        width: 100px;
+        float: left;
+        padding-right: 19px / 16px * 1em;
+    }
+
+    .button {
+        margin-bottom: 0.25em;
     }
 }
 
 %content {
     text-align: left;
     padding: 1em $horizontal-padding 1em $horizontal-padding;
-    margin-bottom: 32px;
+    margin-bottom: 2em;
     background-color: $colour-primary-background;
 
     width: 100% - 2*$horizontal-padding;
@@ -518,11 +548,20 @@ nav {
     @include media-and-ie(min-width, $breakpoint-content) {
         border-color: $colour-primary-border;
     }
+
+    section {
+        float: left;
+        clear: both;
+    }
+    
+    section + section, section + article, article + section, article + article {
+        margin-top: 2em;
+    }
 }
 
 %column {
     @extend %content;
-    max-width: 570px;
+    max-width: 570px / 16px * 1em;
 
     @include media-and-ie(min-width, $breakpoint-justify) {
         text-align: justify;
@@ -545,7 +584,8 @@ nav {
 
 #game-list {
     @extend %content;
-    @extend %fill-both;
+    @extend %fill-right;
+    //@extend %fill-both;
 }
 
 #game-details {
@@ -576,17 +616,20 @@ nav {
 
 #flatpage {
     @extend %content;
-    @extend %fill-both;
+    @extend %fill-right;
+    //@extend %fill-both;
 }
 
 #form {
     @extend %content;
-    @extend %fill-both;
+    @extend %fill-right;
+    //@extend %fill-both;
 }
 
 #profile {
     @extend %content;
-    @extend %fill-both;
+    @extend %fill-right;
+    //@extend %fill-both;
 }
 
 #to-top {
@@ -611,26 +654,30 @@ nav {
     }
 }
 
-#game-list {
+#game-list, .games {
     text-align: left;
 }
 
 .game {
-    $horizontal-padding: 8px;
-    $horizontal-margin: 2px;
-    $img-width: (570 - 6*($horizontal-padding + $horizontal-margin) - 5px*2) / 3; //192px;
+    $horizontal-padding: 0.5em;
+    $horizontal-margin: 2px / 16px * 1em;
+    $img-width: (570px / 16px * 1em - 6*($horizontal-padding + $horizontal-margin) - 5px*2 / 16px * 1em) / 3; //192px;
     
     @include inline-block(bottom, bottom);
     border: none;
     text-align: center;
     max-width: $img-width;
-    width: 100% - (2*$horizontal-padding + 2*$horizontal-margin) / (208px + (2*$horizontal-padding + 2*$horizontal-margin)) * 100%;
+    width: 100% - (2*$horizontal-padding + 2*$horizontal-margin) / (208px / 16px * 1em + (2*$horizontal-padding + 2*$horizontal-margin)) * 100%;
     width: calc(100% - #{2*$horizontal-padding + 2*$horizontal-margin});
-    margin: 0 $horizontal-margin 16px $horizontal-margin;
-    padding: 28px $horizontal-padding;
+    margin: 0 $horizontal-margin 0.5em $horizontal-margin;
+    padding: 1em $horizontal-padding;
 
     @include media-and-ie(min-width, $breakpoint-columns) {
-        height: 144px + 2*16px;
+        height: 144px / 16px * 1em + 2em;
+    }
+
+    %sidebar & {
+        height: auto;
     }
 
     &:hover,
@@ -642,8 +689,8 @@ nav {
         display: block;
         width: 100%;
         margin: 0 auto;
-        padding: 0 0 8px 0;
-        max-height: 144px; //remove once thumbnail cropping fixed
+        padding: 0 0 0.5em 0;
+        max-height: 144px / 16px * 1em; //remove once thumbnail cropping fixed
         max-width: $img-width;
     }
 }
@@ -651,7 +698,7 @@ nav {
 .gameImage {
     display: block;
     margin: 2em auto;
-    max-height: 450px;
+    max-height: 450px / 16px * 1em;
 }
 
 .errorlist {
@@ -679,8 +726,8 @@ nav {
 
 input {
     @extend %input;
-    padding: 4px 4px;
-    width: 392px;
+    padding: 0.25em 0.25em;
+    width: 100%; //392px;
 }
 
 input[type="checkbox"] {
@@ -690,7 +737,7 @@ input[type="checkbox"] {
 select,
 textarea {
     @extend %input;
-    width: 400px;
+    width: 100%; //400px;
 }
 
 #formset {
@@ -720,17 +767,17 @@ textarea {
 .button {
     display: block;
     cursor: pointer;
+    font-size: 2em;
     background-color: $colour-input-background;
     border: solid 1px $colour-input-border;
-    @include border-radius(4px);
+    @include border-radius(0.125em);
     clear: left;
     color: $colour-input-foreground;
     font-family: ArcadeClassic,sans-serif;
-    font-size: 2em;
-    margin: 16px auto;
-    padding: 4px;
+    margin: 0.5em auto;
+    padding: 0.125em;
     text-align: center;
-    width: 200px;
+    width: 200px / 32px * 1em;
 
     &:hover,
     &:active {

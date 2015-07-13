@@ -14,34 +14,40 @@
     <div class="button">Submit Game</div>
   </a>
   {% endif %}
-  <h1>{{jam.title}}</h1>
+  <section class="key-details">
+    <h1>{{jam.title}}</h1>
 
-  <div class="left">Dates</div>
-  <div class="right">{{jam.start_time|date:"jS N Y"}} - {{jam.end_time|date:"jS N Y"}}</div>
+    <div class="left">Dates</div>
+    <div class="right">{{jam.start_time|date:"jS N Y"}} - {{jam.end_time|date:"jS N Y"}}</div>
 
-  <div class="left">Duration</div>
-  <div class="right">{{ jam.duration | duration }}</div>
+    <div class="left">Duration</div>
+    <div class="right">{{ jam.duration | duration }}</div>
 
-  <div class="left">Venue</div>
-  <div class="right">{{jam.venue}}</div>
-  {% if jam.website %}
-  <div class="left">Website</div>
-  <div class="right"><a href="{{jam.website}}">{% if jam.website_title %}{{jam.website_title}}{% else %}{{jam.website}}{% endif %}</a></div>
-  {% endif %}
-  {% if jam.theme %}
-  <div class="left">Theme</div>
-  <div class="right">{{jam.theme}}</div>
-  {% endif %}
-  {% if games %}<h2>Games</h2>
-  {% for game in games %}{% game_thumb game %}{% endfor %}{% endif %}
+    <div class="left">Venue</div>
+    <div class="right">{{jam.venue}}</div>
+    {% if jam.website %}
+    <div class="left">Website</div>
+    <div class="right"><a href="{{jam.website}}">{% if jam.website_title %}{{jam.website_title}}{% else %}{{jam.website}}{% endif %}</a></div>
+    {% endif %}
+    {% if jam.theme %}
+    <div class="left">Theme</div>
+    <div class="right">{{jam.theme}}</div>
+    {% endif %}
+  </section>
+  {% if games %}<section class="games">
+    <h2>Games</h2>
+    {% for game in games %}{% game_thumb game %}{% endfor %}
+  </section>{% endif %}
   {% if jam.brief %}
-  <h2>Description</h2>
-  {{jam.brief|md}}
-  {% endif %}
+  <section>
+    <h2>Description</h2>
+    {{jam.brief|md}}
+  </section>{% endif %}
   {% if news %}
+  <section>
   <h2>News</h2>
   {% for article in news %}{% news_item article 'h3' %}{% endfor %}
-  {% endif %}
+  </section>{% endif %}
 </section>
 <section id="jam-list">
   <h1>Jams</h1>

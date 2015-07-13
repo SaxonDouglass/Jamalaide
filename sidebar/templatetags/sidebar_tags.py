@@ -19,5 +19,5 @@ def sidebar(context):
     if len(upcoming) > 0:
         nextJam = upcoming[0]
     
-    return { 'user': request.user, 'upcoming': upcoming[1:], 'next': nextJam, 'recent': recent, 'spotlight': spotlight } 
+    return { 'request': request, 'upcoming': upcoming[1:], 'next': nextJam, 'recent': recent, 'spotlight': spotlight } 
     

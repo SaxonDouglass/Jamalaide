@@ -1,3 +1,5 @@
+import datetime
+
 from django import template
 
 from jams.models import Jam
@@ -7,6 +9,11 @@ register = template.Library()
 @register.inclusion_tag('jams/jam_summary.html')
 def jam_summary(jam):
     return { 'jam': jam }
+
+@register.inclusion_tag('jams/jam_sidebar.html', takes_context = True)
+def jam_sidebar(context, jam):
+    request = context['request']
+    return { 'jam': jam, 'user': request.user, 'now': datetime.datetime.now() }
 
 @register.inclusion_tag('jams/game_thumb.html')
 def game_thumb(game):
