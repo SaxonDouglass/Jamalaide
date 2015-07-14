@@ -6,7 +6,7 @@ from django.db import models
 from jams.models import Jam
 
 def image_path(instance, filename):
-    return 'blogs/'+instance.pk+'/'+filename
+    return 'blogs/'+str(instance.pk)+'/'+filename
 
 class Article(models.Model):
     class Meta:

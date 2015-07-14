@@ -635,6 +635,7 @@ nav li a {
   }
 }
 #news-feed section, #game-details section, #important-jams section, #jam-details section, #about section, #game-list section, #flatpage section, #form section, #profile section {
+  width: 100%;
   float: left;
   clear: both;
 }
