@@ -365,7 +365,7 @@ nav a {
 nav a:link, nav a:visited {
   color: white;
 }
-nav a:active, nav a:hover {
+nav a:active, nav a:hover, nav a.open {
   background-color: white;
   color: #47126b;
   text-decoration: none;
@@ -408,6 +408,20 @@ nav ul {
     position: static;
   }
 }
+nav #js-menu {
+  position: static;
+}
+nav #js-menu.hidden {
+  display: none;
+}
+.ie8 nav #js-menu.hidden {
+  display: block;
+}
+@media only screen and (min-width: 41.375em) {
+  nav #js-menu.hidden {
+    display: block;
+  }
+}
 nav li {
   display: block;
   width: 100%;
@@ -447,7 +461,7 @@ nav li a {
 
 #container {
   clear: both;
-  margin: 1.1875em auto 14.5em auto;
+  margin: 1.1875em auto 17.5em auto;
   position: relative;
   max-width: 59.375em;
 }
@@ -457,12 +471,15 @@ nav li a {
     max-width: calc(100vw - 18.75em);
   }
 }
+#container.js-menu {
+  margin-bottom: 3.5em;
+}
 .ie8 #container {
-  margin-bottom: 2.5em;
+  margin-bottom: 3.5em;
 }
 @media only screen and (min-width: 41.375em) {
   #container {
-    margin-bottom: 2.5em;
+    margin-bottom: 3.5em;
   }
 }
 #container ul {
@@ -593,7 +610,7 @@ nav li a {
   text-align: left;
 }
 #news-sidebar .jam-logo, #game-sidebar .jam-logo, #jam-list .jam-logo {
-  width: 100px;
+  width: 6.25em;
   float: left;
   padding-right: 1.1875em;
 }
@@ -650,13 +667,9 @@ nav li a {
 }
 
 #to-top {
-  display: block;
-  width: 100%;
   text-align: center;
+  width: 100%;
   bottom: 0;
-  right: 0;
-  border: 0;
-  background-color: white;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85);
   opacity: 0.85;
   -ms-interpolation-mode: nearest-neighbor;
@@ -664,15 +677,25 @@ nav li a {
   image-rendering: -o-crisp-edges;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: pixelated;
-}
-.ie8 #to-top {
   position: fixed;
+}
+#to-top a {
+  display: block;
+  width: 100%;
+  background-color: white;
+  height: 2.5em;
+  bottom: 0;
+  right: 0;
+  border: none;
+}
+.ie8 #to-top a {
   width: auto;
+  position: fixed;
 }
 @media only screen and (min-width: 41.375em) {
-  #to-top {
-    position: fixed;
+  #to-top a {
     width: auto;
+    position: fixed;
   }
 }
 #to-top:hover, #to-top:active {

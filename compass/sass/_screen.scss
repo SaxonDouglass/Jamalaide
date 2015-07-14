@@ -323,7 +323,8 @@ nav {
         }
 
         &:active,
-        &:hover {
+        &:hover,
+        &.open {
             background-color: $colour-primary-foreground;
             color: $colour-nav-background;
             text-decoration: none;
@@ -352,6 +353,18 @@ nav {
 
         @include media-and-ie(min-width, $breakpoint-content) {
             position: static;
+        }
+    }
+
+    #js-menu {
+        position: static;
+
+        &.hidden {
+            display: none;
+
+            @include media-and-ie(min-width, $breakpoint-content) {
+                display: block;
+            }
         }
     }
     
@@ -385,12 +398,16 @@ nav {
 
 #container {
     clear: both;
-    margin: $page-width*($horizontal-padding/100%) auto (3em*4 + 40px / 16px * 1em) auto;
+    margin: $page-width*($horizontal-padding/100%) auto (3em*5 + 40px / 16px * 1em) auto;
     position: relative;
     @include page-width;
 
+    &.js-menu {
+        margin-bottom: (40px / 16px * 1em) + 1em;
+    }
+
     @include media-and-ie(min-width, $breakpoint-content) {
-        margin-bottom: (40px / 16px * 1em);
+        margin-bottom: (40px / 16px * 1em) + 1em;
     }
 
     ul {
@@ -526,7 +543,7 @@ nav {
     }
     
     .jam-logo {
-        width: 100px;
+        width: 100px/16px*1em;
         float: left;
         padding-right: 19px / 16px * 1em;
     }
@@ -633,19 +650,26 @@ nav {
 }
 
 #to-top {
-    display: block;
-    width: 100%;
     text-align: center;
+    width: 100%;
     bottom: 0;
-    right: 0;
-    border: 0;
-    background-color: white;
     @include opacity(0.85);
     @include image-rendering(pixelated);
+    position: fixed;
 
-    @include media-and-ie(min-width, $breakpoint-to-top) {
-        position: fixed;
-        width: auto;
+    a {
+        display: block;
+        width: 100%;
+        background-color: white;
+        height: 40px/16px*1em;
+        bottom: 0;
+        right: 0;
+        border: none;
+
+        @include media-and-ie(min-width, $breakpoint-to-top) {
+            width: auto;
+            position: fixed;
+        }
     }
 
     &:hover,
