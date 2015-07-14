@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load markup %}
+{% load account_tags %}
+
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+{% block content %}
+<section id="about">
+  {{ flatpage.content|md }}
+</section>
+<section id="committee" class="important">
+  <section id="committee-members" class="important">
+    <h1>Committee</h1>
+    {% committee_members %}
+  </section>
+  <section class="important">
+    <h1>Contact Us</h1>
+    <p><a href="mailto:contact@jamalaide.org.au">contact@jamalaide.org.au</a><br />
+    <a href="/accounts/register">Become a member</a></p>
+  </section>
+</section>
+{% endblock %}

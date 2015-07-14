@@ -531,7 +531,7 @@ nav {
     }
 
     a.jam-link {
-        font-size: 1.2em;
+        font-size: 1.4em;
     }
     
     section + section {
@@ -649,6 +649,16 @@ nav {
     //@extend %fill-both;
 }
 
+#about {
+    @extend %column;
+    @extend %fill-left;
+}
+
+#committee {
+    @extend %sidebar;
+    @extend %fill-right;
+}
+
 #to-top {
     text-align: center;
     width: 100%;
@@ -676,6 +686,10 @@ nav {
     &:active {
         @include opacity(1);
     }
+}
+
+.jam-banner {
+    padding-bottom: 1em;
 }
 
 #game-list, .games {

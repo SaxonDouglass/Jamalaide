@@ -18,3 +18,21 @@ def user_post_save_callback(sender, **kwargs):
         profile = Profile();
         profile.user = instance
         profile.save()
+
+class CommitteeMember(models.Model):
+    class Meta:
+        ordering = ['-priority', 'title', 'member__first_name', 'member__last_name', 'member__username']
+
+    title = models.CharField(max_length=30, blank=True)
+    priority = models.IntegerField(default=0)
+    member = models.ForeignKey(settings.AUTH_USER_MODEL)
+    email = models.EmailField(blank=True, null=True)
+
+    def __unicode__(self):
+        name = self.member.get_full_name()
+        if (not name):
+            name = self.member.username
+        if self.title:
+            return name + " ("+ self.title + ")"
+        else:
+            return name

@@ -100,14 +100,14 @@ html, body {
 a {
   text-decoration: none;
   border-bottom: 1px white dotted;
-  color: #cfa0ee;
+  color: #fff4cc;
 }
 a:visited {
-  color: #b974e7;
+  color: #ffe999;
 }
 a:hover, a:active {
   border-color: transparent;
-  text-shadow: 0 0 2px #cfa0ee;
+  text-shadow: 0 0 2px #fff4cc;
 }
 
 a.img-link {
@@ -517,7 +517,7 @@ nav li a {
   margin: 0;
 }
 
-#news-sidebar, #game-details, #important-jams, #jam-details {
+#news-sidebar, #game-details, #important-jams, #jam-details, #about {
   float: left;
   border-style: solid;
   margin-right: -50vw;
@@ -525,33 +525,33 @@ nav li a {
   margin-left: -50vw;
   border-left-width: 50vw;
 }
-.ie8 #news-sidebar, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details {
+.ie8 #news-sidebar, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details, .ie8 #about {
   margin-right: 0;
   border-right-width: 0;
 }
 @media only screen and (min-width: 41.375em) {
-  #news-sidebar, #game-details, #important-jams, #jam-details {
+  #news-sidebar, #game-details, #important-jams, #jam-details, #about {
     margin-right: 0;
     border-right-width: 0;
   }
 }
 
-#news-feed, #game-list, #game-sidebar, #jam-list, #flatpage, #form, #profile {
+#news-feed, #game-list, #game-sidebar, #jam-list, #flatpage, #form, #profile, #committee {
   float: left;
   border-style: solid;
   margin-right: -50vw;
   border-right-width: 50vw;
 }
-.ie8 #news-feed, .ie8 #game-list, .ie8 #game-sidebar, .ie8 #jam-list, .ie8 #flatpage, .ie8 #form, .ie8 #profile {
+.ie8 #news-feed, .ie8 #game-list, .ie8 #game-sidebar, .ie8 #jam-list, .ie8 #flatpage, .ie8 #form, .ie8 #profile, .ie8 #committee {
   float: right;
 }
 @media only screen and (min-width: 41.375em) {
-  #news-feed, #game-list, #game-sidebar, #jam-list, #flatpage, #form, #profile {
+  #news-feed, #game-list, #game-sidebar, #jam-list, #flatpage, #form, #profile, #committee {
     float: right;
   }
 }
 
-#news-sidebar, #game-sidebar, #jam-list {
+#news-sidebar, #game-sidebar, #jam-list, #committee {
   line-height: 1.5em;
   display: none;
   color: #d9d9d9;
@@ -562,36 +562,36 @@ nav li a {
   margin-bottom: 2em;
   text-align: center;
 }
-.important#news-sidebar, .important#game-sidebar, .important#jam-list {
+.important#news-sidebar, .important#game-sidebar, .important#jam-list, .important#committee {
   display: block;
 }
-.ie8 #news-sidebar, .ie8 #game-sidebar, .ie8 #jam-list {
+.ie8 #news-sidebar, .ie8 #game-sidebar, .ie8 #jam-list, .ie8 #committee {
   width: 30%;
   display: block;
 }
 @media only screen and (min-width: 41.375em) {
-  #news-sidebar, #game-sidebar, #jam-list {
+  #news-sidebar, #game-sidebar, #jam-list, #committee {
     width: 30%;
     display: block;
   }
 }
-#news-sidebar section, #game-sidebar section, #jam-list section {
+#news-sidebar section, #game-sidebar section, #jam-list section, #committee section {
   display: none;
   float: left;
   width: 100%;
 }
-#news-sidebar section.important, #game-sidebar section.important, #jam-list section.important {
+#news-sidebar section.important, #game-sidebar section.important, #jam-list section.important, #committee section.important {
   display: block;
 }
-.ie8 #news-sidebar section, .ie8 #game-sidebar section, .ie8 #jam-list section {
+.ie8 #news-sidebar section, .ie8 #game-sidebar section, .ie8 #jam-list section, .ie8 #committee section {
   display: block;
 }
 @media only screen and (min-width: 41.375em) {
-  #news-sidebar section, #game-sidebar section, #jam-list section {
+  #news-sidebar section, #game-sidebar section, #jam-list section, #committee section {
     display: block;
   }
 }
-#news-sidebar h1, #game-sidebar h1, #jam-list h1 {
+#news-sidebar h1, #game-sidebar h1, #jam-list h1, #committee h1 {
   font-family: ArcadeClassic,sans-serif;
   font-weight: normal;
   color: white;
@@ -600,25 +600,25 @@ nav li a {
   text-align: center;
   margin-bottom: 0.5em;
 }
-#news-sidebar a.jam-link, #game-sidebar a.jam-link, #jam-list a.jam-link {
-  font-size: 1.2em;
+#news-sidebar a.jam-link, #game-sidebar a.jam-link, #jam-list a.jam-link, #committee a.jam-link {
+  font-size: 1.4em;
 }
-#news-sidebar section + section, #game-sidebar section + section, #jam-list section + section {
+#news-sidebar section + section, #game-sidebar section + section, #jam-list section + section, #committee section + section {
   margin-top: 2em;
 }
-#news-sidebar .jam-times, #game-sidebar .jam-times, #jam-list .jam-times {
+#news-sidebar .jam-times, #game-sidebar .jam-times, #jam-list .jam-times, #committee .jam-times {
   text-align: left;
 }
-#news-sidebar .jam-logo, #game-sidebar .jam-logo, #jam-list .jam-logo {
+#news-sidebar .jam-logo, #game-sidebar .jam-logo, #jam-list .jam-logo, #committee .jam-logo {
   width: 6.25em;
   float: left;
   padding-right: 1.1875em;
 }
-#news-sidebar .button, #game-sidebar .button, #jam-list .button {
+#news-sidebar .button, #game-sidebar .button, #jam-list .button, #committee .button {
   margin-bottom: 0.25em;
 }
 
-#news-feed, #game-details, #important-jams, #jam-details, #game-list, #flatpage, #form, #profile {
+#news-feed, #game-details, #important-jams, #jam-details, #about, #game-list, #flatpage, #form, #profile {
   text-align: left;
   padding: 1em 2% 1em 2%;
   margin-bottom: 2em;
@@ -626,38 +626,38 @@ nav li a {
   width: 96%;
   border-color: #50356f;
 }
-.ie8 #news-feed, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details, .ie8 #game-list, .ie8 #flatpage, .ie8 #form, .ie8 #profile {
+.ie8 #news-feed, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details, .ie8 #about, .ie8 #game-list, .ie8 #flatpage, .ie8 #form, .ie8 #profile {
   border-color: #301f42;
 }
 @media only screen and (min-width: 41.375em) {
-  #news-feed, #game-details, #important-jams, #jam-details, #game-list, #flatpage, #form, #profile {
+  #news-feed, #game-details, #important-jams, #jam-details, #about, #game-list, #flatpage, #form, #profile {
     border-color: #301f42;
   }
 }
-#news-feed section, #game-details section, #important-jams section, #jam-details section, #game-list section, #flatpage section, #form section, #profile section {
+#news-feed section, #game-details section, #important-jams section, #jam-details section, #about section, #game-list section, #flatpage section, #form section, #profile section {
   float: left;
   clear: both;
 }
-#news-feed section + section, #game-details section + section, #important-jams section + section, #jam-details section + section, #game-list section + section, #flatpage section + section, #form section + section, #profile section + section, #news-feed section + article, #game-details section + article, #important-jams section + article, #jam-details section + article, #game-list section + article, #flatpage section + article, #form section + article, #profile section + article, #news-feed article + section, #game-details article + section, #important-jams article + section, #jam-details article + section, #game-list article + section, #flatpage article + section, #form article + section, #profile article + section, #news-feed article + article, #game-details article + article, #important-jams article + article, #jam-details article + article, #game-list article + article, #flatpage article + article, #form article + article, #profile article + article {
+#news-feed section + section, #game-details section + section, #important-jams section + section, #jam-details section + section, #about section + section, #game-list section + section, #flatpage section + section, #form section + section, #profile section + section, #news-feed section + article, #game-details section + article, #important-jams section + article, #jam-details section + article, #about section + article, #game-list section + article, #flatpage section + article, #form section + article, #profile section + article, #news-feed article + section, #game-details article + section, #important-jams article + section, #jam-details article + section, #about article + section, #game-list article + section, #flatpage article + section, #form article + section, #profile article + section, #news-feed article + article, #game-details article + article, #important-jams article + article, #jam-details article + article, #about article + article, #game-list article + article, #flatpage article + article, #form article + article, #profile article + article {
   margin-top: 2em;
 }
 
-#news-feed, #game-details, #important-jams, #jam-details {
+#news-feed, #game-details, #important-jams, #jam-details, #about {
   max-width: 35.625em;
 }
-.ie8 #news-feed, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details {
+.ie8 #news-feed, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details, .ie8 #about {
   text-align: justify;
 }
 @media only screen and (min-width: 21.875em) {
-  #news-feed, #game-details, #important-jams, #jam-details {
+  #news-feed, #game-details, #important-jams, #jam-details, #about {
     text-align: justify;
   }
 }
-.ie8 #news-feed, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details {
+.ie8 #news-feed, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details, .ie8 #about {
   width: 60%;
 }
 @media only screen and (min-width: 41.375em) {
-  #news-feed, #game-details, #important-jams, #jam-details {
+  #news-feed, #game-details, #important-jams, #jam-details, #about {
     width: 60%;
   }
 }
@@ -703,6 +703,10 @@ nav li a {
   opacity: 1;
 }
 
+.jam-banner {
+  padding-bottom: 1em;
+}
+
 #game-list, .games {
   text-align: left;
 }
@@ -729,7 +733,7 @@ nav li a {
     height: 11em;
   }
 }
-#news-sidebar .game, #game-sidebar .game, #jam-list .game {
+#news-sidebar .game, #game-sidebar .game, #jam-list .game, #committee .game {
   height: auto;
 }
 .game:hover, .game:active {

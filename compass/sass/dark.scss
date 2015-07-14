@@ -17,9 +17,9 @@ $colour-primary-border:           shade($colour-primary-background, $border-shad
 $colour-secondary-foreground:     $grey;
 $colour-secondary-background:     $purple-dull;
 $colour-secondary-border:         shade($colour-secondary-background, $border-shade);
-$colour-link-foreground:          lighten($purple, 40%);
+$colour-link-foreground:          $pale-orange;
 $colour-link-background:          $purple-dark;
-$colour-visited-foreground:       lighten($purple, 30%);
+$colour-visited-foreground:       darken($pale-orange, 10%);
 $colour-footer-foreground:        lighten($colour-background, 15%);
 $colour-error-foreground:         $pale-red;
 $colour-input-foreground:         $white;
