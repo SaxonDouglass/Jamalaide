@@ -73,12 +73,6 @@
   {% for game in games %}{% game_thumb game %}{% endfor %}
   </section>{% endif %}
 </section>
-<section id="jam-list">
-  <h1>Jams</h1>
-  {% for jam in jams %}
-  <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
-  ({{ jam.start_time|date:"F Y" }})<br>
-  {% endfor %}
-</section>
+{% jam_list %}
 {% endblock %}
 

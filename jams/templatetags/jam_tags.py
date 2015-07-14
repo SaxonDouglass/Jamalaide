@@ -15,6 +15,13 @@ def jam_sidebar(context, jam):
     request = context['request']
     return { 'jam': jam, 'user': request.user, 'now': datetime.datetime.now() }
 
+@register.inclusion_tag('jams/jam_list.html')
+def jam_list():
+    current = list(Jam.objects.filter(start_time__lt=datetime.datetime.now(), end_time__gt=datetime.datetime.now()).order_by('end_time'))
+    future = list(Jam.objects.filter(start_time__gt=datetime.datetime.now()).order_by('end_time'))
+    past = list(Jam.objects.filter(end_time__lt=datetime.datetime.now()).order_by('-end_time'))
+    return { 'current': current, 'future': future, 'past': past }
+
 @register.inclusion_tag('jams/game_thumb.html')
 def game_thumb(game):
     return { 'game': game }

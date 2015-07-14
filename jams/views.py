@@ -21,22 +21,21 @@ def jams(request):
     recent_games = [(jam, jam.game_set.order_by('?')[:3]) for jam in recent[:2]]
 
     return render_to_response('jams/index.html',
-                              {'current': current, 'next': nextJam, 'upcoming': upcoming[1:], 'recent': recent_games, 'past': recent[2:]},
+                              {'current': current, 'next': nextJam, 'upcoming': upcoming[1:], 'recent': recent_games},
                               context_instance=RequestContext(request))
 
 def jam(request, jam_slug):
     jam = get_object_or_404(Jam, slug=jam_slug)
     games = jam.game_set.all().order_by('title')
     news = jam.article_set.all()
-    jams = Jam.objects.all().order_by('-end_time')
     
     if jam.end_time > datetime.datetime.now():
         return render_to_response('jams/future-jam.html',
-                                  {'jam': jam, 'jams': jams, 'games': games, 'news': news},
+                                  {'jam': jam, 'games': games, 'news': news},
                                   context_instance=RequestContext(request))
     else:
         return render_to_response('jams/past-jam.html',
-                                  {'jam': jam, 'jams': jams, 'games': games, 'news': news},
+                                  {'jam': jam, 'games': games, 'news': news},
                                   context_instance=RequestContext(request))
 
 def games(request):

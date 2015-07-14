@@ -18,7 +18,7 @@
     <h1>Coming Soon</h1>
     {% for jam in upcoming %}{% jam_summary jam %}{% endfor %}
   </section>{% endif %}
-  {% if recent %}<section>
+  {% if recent %}<section class="games">
     <h1>Recent Jam{{ recent|pluralize }}</h1>
     {% for jam, games in recent %}
     <h2><a href="/jams/{{jam.slug}}">{{ jam.title }}</a> ({{ jam.start_time|date:"jS F" }})</h2>
@@ -26,12 +26,6 @@
     {% endfor %}
   </section>{% endif %}
 </section>
-<section id="jam-list" class="important">
-  <h1>Other Jams</h1>
-  {% for jam in past %}
-  <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
-  ({{ jam.start_time|date:"F Y" }})<br>
-  {% endfor %}
-</section>
+{% jam_list %}
 {% endblock %}
 
