@@ -2,7 +2,8 @@
   {% if current %}<section>
     <h1>Current Jam{{ current|pluralize }}</h1>
     {% for jam in current %}
-    <a href="/jams/{{jam.slug}}">{{jam.title}}</a><br>
+    <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
+    (ends {{ jam.end_time|date:"F jS" }})<br>
     {% endfor %}
   </section>{% endif %}
   {% if future %}<section>

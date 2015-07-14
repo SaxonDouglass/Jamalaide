@@ -97,7 +97,6 @@ INSTALLED_APPS = (
     'markup',
 
     # our apps
-    'mailer',
     'accounts',
     'blogs',
     'jams',

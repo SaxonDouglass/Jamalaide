@@ -139,7 +139,7 @@ def resource_file_path(instance, filename):
 class GameResource(models.Model):
     title = models.CharField(max_length=20)
     game = models.ForeignKey(Game,related_name='resources')
-    link = models.CharField(max_length=256,blank=True,null=True)
+    link = models.CharField(max_length=256,blank=True)
     file = models.FileField(upload_to=resource_file_path ,blank=True,null=True)
     url = models.CharField(max_length=256,editable=False)
 
@@ -169,13 +169,14 @@ class GameResourceForm(forms.ModelForm):
         exclude = ('game',)
 
 def team_image_path(instance, filename):
-        return 'jams/teams/'+instance.slug+'/image'+re.search("\.[^.]*$", filename).group()
+        return 'teams/'+instance.slug+'/'+instance.slug+re.search("\.[^.]*$", filename).group()
 
 class Team(models.Model):
     name = models.CharField(max_length=30)
     slug = models.SlugField(max_length=30, editable=False, unique=True)
     members = models.ManyToManyField(settings.AUTH_USER_MODEL)
-    brief = models.TextField(blank=True)
+    brief = models.TextField(max_length=300, blank=True)
+    extended = models.TextField(blank=True)
     image = models.ImageField(upload_to=team_image_path, blank=True)
 
     def __unicode__(self):

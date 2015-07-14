@@ -3,9 +3,16 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-class Profile(models.Model):    
+def profile_image_path(instance, filename):
+    return 'accounts/'+instance.user.username+'/'+instance.user.username+re.search("\.[^.]*$", filename).group()
+
+class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    brief = models.TextField(blank=True)
+    image = models.ImageField(upload_to=profile_image_path, blank=True)
+    show_email = models.BooleanField()
+    name = models.CharField(max_length=30, blank=True)
+    brief = models.TextField(max_length=300, blank=True)
+    extended = models.TextField(blank=True)
     def __unicode__(self):
         return self.user.get_full_name()
 
@@ -36,3 +43,10 @@ class CommitteeMember(models.Model):
             return name + " ("+ self.title + ")"
         else:
             return name
+
+class CaptchaQuestion(models.Model):
+    question = models.CharField(max_length=100)
+    answer = models.CharField(max_length=30)
+
+    def __unicode__(self):
+        return self.question

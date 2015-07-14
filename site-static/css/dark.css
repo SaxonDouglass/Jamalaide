@@ -787,6 +787,11 @@ input[type="checkbox"] {
   width: auto;
 }
 
+input[readonly="readonly"] {
+  background: none;
+  border: none;
+}
+
 select,
 textarea {
   width: 100%;
