@@ -6,22 +6,23 @@
 
 {% block content %}
 <section id="important-jams">
+  <h1>Jams</h1>
   {% if current %}<section>
-    <h1>Current Jam{{ current|pluralize }}</h1>
+    <h2>Current Jam{{ current|pluralize }}</h2>
     {% for jam in current %}{% jam_summary jam %}{% endfor %}
   </section>{% endif %}
   {% if next %}<section>
-    <h1>Next Jam</h1>
+    <h2>Next Jam</h2>
     {% jam_summary next %}
   </section>{% endif %}
   {% if upcoming %}<section>
-    <h1>Coming Soon</h1>
+    <h2>Coming Soon</h2>
     {% for jam in upcoming %}{% jam_summary jam %}{% endfor %}
   </section>{% endif %}
   {% if recent %}<section class="games">
-    <h1>Recent Jam{{ recent|pluralize }}</h1>
+    <h2>Recent Jam{{ recent|pluralize }}</h2>
     {% for jam, games in recent %}
-    <h2><a href="/jams/{{jam.slug}}">{{ jam.title }}</a> ({{ jam.start_time|date:"jS F" }})</h2>
+    <h3><a href="/jams/{{jam.slug}}">{{ jam.title }}</a> ({{ jam.start_time|date:"jS F" }})</h3>
     {% for game in games %}{% game_thumb game %}{% endfor %}
     {% endfor %}
   </section>{% endif %}

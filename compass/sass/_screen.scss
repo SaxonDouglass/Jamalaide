@@ -20,6 +20,7 @@ $page-width: 950px / 16px * 1em;
 $horizontal-padding: 2%;
 $content-width: 60%;
 
+$breakpoint-header: 806px / 16px * 1em;
 $breakpoint-menu: 786px / 16px * 1em;
 $breakpoint-content: 662px / 16px * 1em;
 $breakpoint-to-top: $breakpoint-content; //641px;
@@ -108,13 +109,13 @@ a.forward-link {
     text-align: left;
     line-height: 1em;
 }
+
 h1 {
     @extend %heading;
-    font-family: ArcadeClassic,Arial,sans-serif;
-    font-weight: normal;
-    font-size: 4em;
-    margin-top: 1px / 16px * 0.25em;
+    margin-top: 13px / 16px * 0.25em;
+    font-size: 3em;
 }
+
 h2 {
     @extend %heading;
     font-size: 2em;
@@ -246,7 +247,7 @@ header {
             text-align: right;
             display: none;
 
-            @include media-and-ie(min-width, $breakpoint-content) {            
+            @include media-and-ie(min-width, $breakpoint-content) {
                 display: block;
             }
 
@@ -275,7 +276,7 @@ header {
             text-align: right;
             padding: 0.5em $horizontal-padding;
 
-            @include media-and-ie(min-width, $breakpoint-content) {
+            @include media-and-ie(min-width, $breakpoint-header) {
                 position: absolute;
                 vertical-align: bottom;
             }
@@ -319,13 +320,13 @@ nav {
 
         &:link,
         &:visited {
-            color: $colour-primary-foreground;
+            color: $colour-nav-foreground;
         }
 
         &:active,
         &:hover,
         &.open {
-            background-color: $colour-primary-foreground;
+            background-color: $colour-nav-foreground;
             color: $colour-nav-background;
             text-decoration: none;
         }
@@ -433,21 +434,31 @@ nav {
     .left {
         clear: left;
         display: block;
-        float: left;
         font-weight: bold;
-        text-align: right;
-        width: 200px;
         line-height: 1.5em;
+        text-align: left;
+        
+        @include media-and-ie(min-width, $breakpoint-columns) {
+            float: left;
+            text-align: right;
+            width: 40%;
+        }
     }
 
     .right {
-        float: left;
-        margin: 0 0 8px 8px;
-        width: 300px;
         line-height: 1.5em;
+        text-align: left;
+        margin-bottom: 0.5em;
 
         p:last-child {
             margin: 0;
+        }
+
+        @include media-and-ie(min-width, $breakpoint-columns) {
+            float: left;
+            padding-left: 0.5em;
+            @include box-sizing(border-box);
+            width: 60%;
         }
     }
 }
@@ -590,6 +601,20 @@ nav {
     }
 }
 
+#news-feed,
+#game-list,
+#important-jams,
+#about,
+#form {
+    h1 {
+        font-family: ArcadeClassic,Arial,sans-serif;
+        font-weight: normal;
+        font-size: 4em;
+        margin-top: 1px / 16px * 0.25em;
+    }
+}
+
+
 #news-sidebar {
     @extend %sidebar;
     @extend %fill-left;
@@ -602,8 +627,7 @@ nav {
 
 #game-list {
     @extend %content;
-    @extend %fill-right;
-    //@extend %fill-both;
+    @extend %fill-both;
 }
 
 #game-details {
@@ -634,20 +658,17 @@ nav {
 
 #flatpage {
     @extend %content;
-    @extend %fill-right;
-    //@extend %fill-both;
+    @extend %fill-both;
 }
 
 #form {
     @extend %content;
-    @extend %fill-right;
-    //@extend %fill-both;
+    @extend %fill-both;
 }
 
 #profile {
     @extend %content;
-    @extend %fill-right;
-    //@extend %fill-both;
+    @extend %fill-both;
 }
 
 #about {
@@ -763,10 +784,13 @@ nav {
     }
 }
 
-input {
+textarea,
+input,
+select{
     @extend %input;
     padding: 0.25em 0.25em;
-    width: 100%; //392px;
+    @include box-sizing(border-box);
+    width: 100%;
 }
 
 input[type="checkbox"] {
@@ -778,27 +802,7 @@ input[readonly="readonly"] {
     border: none;
 }
 
-select,
-textarea {
-    @extend %input;
-    width: 100%; //400px;
-}
-
 #formset {
-    .left {
-        clear: left;
-        display: block;
-        font-weight: bold;
-        text-align: right;
-        width: 184px;
-    }
-
-    .right {
-        float: left;
-        margin: 0 0 8px 16px;
-        width: 300px;
-    }
-
     .box {
         background-color: $colour-secondary-background;
         clear: both;

@@ -2,7 +2,7 @@
     {% if jam.banner %}<a class="img-link" href="/jams/{{jam.slug}}">
       <img class="jam-banner" src="{{ jam.banner.url }}" alt="{{ jam.title }} banner"/>
     </a>
-    {% endif %}<h2><a href="/jams/{{jam.slug}}">{{ jam.title }}</a></h2>
+    {% endif %}<h3><a href="/jams/{{jam.slug}}">{{ jam.title }}</a></h3>
     <p>{{ jam.start_time|date:"g:i a jS N" }}-{{ jam.end_time|date:"g:i a jS N" }} ({{ jam.duration | duration }})</p>
     {% if jam.is_active %}<a href="{% url 'jams.views.edit_game' jam.slug %}">
       <div class="button">Submit Game</div>

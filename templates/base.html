@@ -22,10 +22,10 @@
       <div id="title">
         <div id="account">
           {% if user.is_authenticated %}
-          <p>Welcome, {{ user.username }}.</p>
+          <p>Welcome, {{ user.profile.get_full_name }}.</p>
           <p><a href="{% url 'profile' %}">Profile</a> - <a href="{% url 'logout' %}">Logout</a></p>
           {% else %}
-          <p><a href="{% url 'login' %}">Login</a></p>
+          <p><a href="{% url 'register' %}">Register</a> - <a href="{% url 'login' %}">Login</a></p>
           {% endif %}
         </div>
         <img id="logo" src="{{STATIC_URL}}img/header.png" alt="Jamalaide" />
@@ -56,6 +56,6 @@
         </p>
       </footer>
     </div>
-    <divv id="to-top"><a href="#top"><img src="{{STATIC_URL}}img/top.png" alt="To top" /></a></div>
+    <div id="to-top"><a href="#top"><img src="{{STATIC_URL}}img/top.png" alt="To top" /></a></div>
   </body>
 </html>

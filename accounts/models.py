@@ -1,3 +1,5 @@
+import re
+
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
@@ -8,23 +10,22 @@ def profile_image_path(instance, filename):
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    image = models.ImageField(upload_to=profile_image_path, blank=True)
-    show_email = models.BooleanField()
-    name = models.CharField(max_length=30, blank=True)
-    brief = models.TextField(max_length=300, blank=True)
-    extended = models.TextField(blank=True)
-    def __unicode__(self):
-        return self.user.get_full_name()
+    name = models.CharField(max_length=30, blank=True, verbose_name="Display Name")
+    image = models.ImageField(upload_to=profile_image_path, blank=True, verbose_name="Profile Image")
+    show_email = models.BooleanField(default=False, help_text="Show email address on your public profile")
+    brief = models.TextField(max_length=300, blank=True, verbose_name="Brief Description/Bio", help_text="(max length: 300 characters)")
+    extended = models.TextField(blank=True, verbose_name="Extended Description/Bio")
 
-# Signal handlers
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def user_post_save_callback(sender, **kwargs):
-    created = kwargs['created']
-    instance = kwargs['instance']
-    if created:
-        profile = Profile();
-        profile.user = instance
-        profile.save()
+    def __unicode__(self):
+        return self.get_full_name()
+
+    def get_full_name(self):
+        if self.name:
+            return self.name
+        elif self.user.get_full_name():
+            return self.user.get_full_name()
+        else:
+            return self.user.username
 
 class CommitteeMember(models.Model):
     class Meta:

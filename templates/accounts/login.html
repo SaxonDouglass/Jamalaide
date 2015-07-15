@@ -27,5 +27,7 @@
 
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
+
+<p><a href="{% url 'register' %}?next={{ next }}">New User</a> | <a href="{% url 'password_reset' %}">Forgot Password?</a></p>
 </section>
 {% endblock %}

@@ -100,14 +100,14 @@ html, body {
 a {
   text-decoration: none;
   border-bottom: 1px white dotted;
-  color: #fff4cc;
+  color: #ffa3b3;
 }
 a:visited {
-  color: #ffe999;
+  color: #ffa3b3;
 }
 a:hover, a:active {
   border-color: transparent;
-  text-shadow: 0 0 2px #fff4cc;
+  text-shadow: 0 0 2px #ffa3b3;
 }
 
 a.img-link {
@@ -135,10 +135,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-family: ArcadeClassic,Arial,sans-serif;
-  font-weight: normal;
-  font-size: 4em;
-  margin-top: 0.01563em;
+  margin-top: 0.20313em;
+  font-size: 3em;
 }
 
 h2 {
@@ -319,7 +317,7 @@ header #title #account {
   position: absolute;
   vertical-align: bottom;
 }
-@media only screen and (min-width: 41.375em) {
+@media only screen and (min-width: 50.375em) {
   header #title #account {
     position: absolute;
     vertical-align: bottom;
@@ -501,20 +499,47 @@ nav li a {
 #container .left {
   clear: left;
   display: block;
-  float: left;
   font-weight: bold;
-  text-align: right;
-  width: 200px;
   line-height: 1.5em;
+  text-align: left;
+}
+.ie8 #container .left {
+  float: left;
+  text-align: right;
+  width: 40%;
+}
+@media only screen and (min-width: 26.5625em) {
+  #container .left {
+    float: left;
+    text-align: right;
+    width: 40%;
+  }
 }
 #container .right {
-  float: left;
-  margin: 0 0 8px 8px;
-  width: 300px;
   line-height: 1.5em;
+  text-align: left;
+  margin-bottom: 0.5em;
 }
 #container .right p:last-child {
   margin: 0;
+}
+.ie8 #container .right {
+  float: left;
+  padding-left: 0.5em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 60%;
+}
+@media only screen and (min-width: 26.5625em) {
+  #container .right {
+    float: left;
+    padding-left: 0.5em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 60%;
+  }
 }
 
 #news-sidebar, #game-details, #important-jams, #jam-details, #about {
@@ -536,25 +561,34 @@ nav li a {
   }
 }
 
-#news-feed, #game-list, #game-sidebar, #jam-list, #flatpage, #form, #profile, #committee {
+#news-feed, #game-sidebar, #jam-list, #committee {
   float: left;
   border-style: solid;
   margin-right: -50vw;
   border-right-width: 50vw;
 }
-.ie8 #news-feed, .ie8 #game-list, .ie8 #game-sidebar, .ie8 #jam-list, .ie8 #flatpage, .ie8 #form, .ie8 #profile, .ie8 #committee {
+.ie8 #news-feed, .ie8 #game-sidebar, .ie8 #jam-list, .ie8 #committee {
   float: right;
 }
 @media only screen and (min-width: 41.375em) {
-  #news-feed, #game-list, #game-sidebar, #jam-list, #flatpage, #form, #profile, #committee {
+  #news-feed, #game-sidebar, #jam-list, #committee {
     float: right;
   }
+}
+
+#game-list, #flatpage, #form, #profile {
+  float: left;
+  border-style: solid;
+  margin-right: -50vw;
+  border-right-width: 50vw;
+  margin-left: -50vw;
+  border-left-width: 50vw;
 }
 
 #news-sidebar, #game-sidebar, #jam-list, #committee {
   line-height: 1.5em;
   display: none;
-  color: #d9d9d9;
+  color: white;
   background-color: #5c3d7f;
   border-color: #37244c;
   width: 96%;
@@ -663,6 +697,17 @@ nav li a {
   }
 }
 
+#news-feed h1,
+#game-list h1,
+#important-jams h1,
+#about h1,
+#form h1 {
+  font-family: ArcadeClassic,Arial,sans-serif;
+  font-weight: normal;
+  font-size: 4em;
+  margin-top: 0.01563em;
+}
+
 #jam-list {
   text-align: left;
 }
@@ -756,31 +801,39 @@ nav li a {
 }
 
 .errorlist {
-  color: #ff8fa2;
+  color: #ffa3b3;
 }
 
 .small {
-  color: #d9d9d9;
+  color: white;
   font-size: small;
   font-weight: normal;
 }
 
-input, select,
-textarea {
+textarea,
+input,
+select {
   background-color: #47126b;
   border: solid 1px #6f548e;
   color: white;
 }
-input:hover, select:hover,
-textarea:hover, input:active, select:active,
-textarea:active {
+textarea:hover,
+input:hover,
+select:hover, textarea:active,
+input:active,
+select:active {
   background-color: #6e1da5;
   border: solid 1px #6f548e;
   color: white;
 }
 
-input {
+textarea,
+input,
+select {
   padding: 0.25em 0.25em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
 }
 
@@ -793,23 +846,6 @@ input[readonly="readonly"] {
   border: none;
 }
 
-select,
-textarea {
-  width: 100%;
-}
-
-#formset .left {
-  clear: left;
-  display: block;
-  font-weight: bold;
-  text-align: right;
-  width: 184px;
-}
-#formset .right {
-  float: left;
-  margin: 0 0 8px 16px;
-  width: 300px;
-}
 #formset .box {
   background-color: #5c3d7f;
   clear: both;

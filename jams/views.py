@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render_to_response, get_object_or_404, ge
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django.forms.models import inlineformset_factory
+from django.contrib.auth.decorators import login_required
 
 from jams.models import *
 
@@ -57,6 +58,7 @@ def game(request, jam_slug, game_slug):
         {'jam': jam, 'game': game, 'jam_games': jam_games, 'resources': resources},
         context_instance=RequestContext(request))
 
+@login_required
 def edit_game(request, jam_slug, game_slug=None):
     ResourceFormSet = inlineformset_factory(Game, GameResource, fields=("title", "link", "file"), extra=4, max_num=4)
     
@@ -69,8 +71,6 @@ def edit_game(request, jam_slug, game_slug=None):
         game = Game()
     
     if request.method == 'POST':
-        if not request.user.is_authenticated():
-            return HttpResponseRedirect('/accounts/login')
         form = GameForm(request.POST, request.FILES, instance=game)
         formset = ResourceFormSet(request.POST, request.FILES,
             instance=game)
@@ -84,8 +84,6 @@ def edit_game(request, jam_slug, game_slug=None):
             formset.save()
             return HttpResponseRedirect('/jams/'+game.jam.slug+"/"+game.slug)
     else:
-        if not request.user.is_authenticated():
-            return HttpResponseRedirect('/accounts/login')
         form = GameForm(instance=game)
         formset = ResourceFormSet(instance=game)
     

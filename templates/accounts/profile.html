@@ -1,9 +1,36 @@
 {% extends "base.html" %}
 
+{% load jam_tags %}
+
+{% block title %}Profile{% endblock %}
+
 {% block content %}
 <section id="profile">
+<section>
 <h1>Profile</h1>
 
-Would you like to <a href="{% url 'password_change' %}">change your password</a>?
+{% if profile.image %}<img src="{{profile.image.url}}" alt="Profile picture" />{% endif %}
+
+<div class="left">Display name</div>
+<div class="right">{{profile.get_full_name}}</div>
+
+{% if profile.show_email %}<div class="left">Email address</div>
+<div class="right"><a href="mailto:{{profile.user.email}}">{{profile.user.email}}</a></div>{% endif %}
+
+{% if profile.brief %}<div class="left">Brief Bio</div>
+<div class="right">{{profile.brief}}</div>{% endif %}
+
+{% if profile.extended %}<div class="left">Extended Bio</div>
+<div class="right">{{profile.extended}}</div>{% endif %}
+
+Would you like to <a href="{% url 'update_profile' %}">update your profile</a> or <a href="{% url 'password_change' %}">change your password</a>?
+</section>
+<section>
+{% if games %}<h2>Your games</h2>
+{% for game in games %}
+{% game_thumb game %}
+{% endfor %}
+{% endif %}
+</section>
 </section>
 {% endblock %}
