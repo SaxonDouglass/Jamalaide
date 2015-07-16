@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<section id="form">
+<h1>Update profile</h1>
+
+{{ form.non_field_errors }}
+
+<form method="post" action="{% url 'update_profile' %}" enctype="multipart/form-data">
+{% csrf_token %}
+
+{% for element in form %}
+<div class="left">{{ element.label_tag }}{% if element.help_text %}
+<div class="small">{{ element.help_text }}</div>{% endif %}</div>
+<div class="right">
+    {{ element }}
+    {{ element.errors }}
+</div>
+{% endfor %}
+
+<input class="button" type="submit" value="Update" />
+</form>
+</section>
+{% endblock %}

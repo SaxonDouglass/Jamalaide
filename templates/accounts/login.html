@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
+{% block title %}Login{% endblock %}
+
 {% block content %}
+<section id="form">
+<h1>Login</h1>
 
 {{ form.non_field_errors }}
 
-<form method="post" action="{% url accounts-login %}">
+<form method="post" action="{% url 'login' %}">
 {% csrf_token %}
 
 <div class="left">{{ form.username.label_tag }}</div>
@@ -19,9 +23,11 @@
     {{ form.password.errors }}
 </div>
 
-<input id="submit" type="submit" value="Login" />
+<input class="button" type="submit" value="Login" />
 
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
+<p><a href="{% url 'register' %}?next={{ next }}">New User</a> | <a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+</section>
 {% endblock %}

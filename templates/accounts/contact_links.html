@@ -1,0 +1,4 @@
+{% for link in links %}{% if link.type %}
+{{link.type}}: {% endif %}
+<a href="{{ link.link }}">{{link.description}}</a><br />
+{% endfor %}

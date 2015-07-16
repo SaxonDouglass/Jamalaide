@@ -1,26 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Jamalaide - Games{% endblock %}
+{% load jam_tags %}
+
+{% block title %}Games{% endblock %}
+
+{% block body_class %}wide{% endblock %}
 
 {% block content %}
-<h1>Games</h1>
-<div id="game_list">
-  {% if games %}
-    {% for game in games %}
-    <div class="game">
-      <a href="/jams/{{ game.jam.url }}/{{ game.url }}">
-        {% if game.image %}
-          <img src="{{ game.thumbnail.url }}" alt="" />
-        {% else %}
-          <img src="{{STATIC_URL}}img/game-default-thumb.png" alt="" />
-        {% endif %}
-        {{ game.name }}
-      </a>
-    </div>
-    {% endfor %}
-  {% else %}
-    Oh dear, there don't appear to be any games! Why don't you make
-    something and submit it?
-  {% endif %}
-</div>
+<section id="game-list">
+  <h1>Games</h1>
+  {% for jam, games in recent %}<h2>From <a href="/jams/{{ jam.slug }}">{{ jam.title }}</a></h2>
+  <p>
+    {% for game in games %}{% game_thumb game %}{% endfor %}
+  </p>{% endfor %}
+  {% if spotlight %}<h2>Spotlighted games</h2>
+  <p>
+    {% for game in spotlight %}{% game_thumb game %}{% endfor %}
+  </p>{% endif %}
+  {% if games %}<h2>Other games</h2>
+  <p>
+    {% for game in games %}{% game_thumb game %}{% endfor %}
+  </p>{% endif %}
+</section>
 {% endblock %}

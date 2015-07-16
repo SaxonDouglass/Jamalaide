@@ -1,60 +1,76 @@
 import datetime
-from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
+from django.shortcuts import redirect, render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django.forms.models import inlineformset_factory
+from django.contrib.auth.decorators import login_required
 
 from jams.models import *
 
-def future(request):
-    jams = Jam.objects.filter(end__gt=datetime.datetime.now()).order_by('end')
+def upcoming(request):
+    return redirect('jams.views.jams', permanent=True)
+
+def jams(request):
+    current = list(Jam.objects.filter(start_time__lt=datetime.datetime.now(), end_time__gt=datetime.datetime.now()).order_by('end_time'))
+    upcoming = list(Jam.objects.filter(start_time__gt=datetime.datetime.now()).order_by('end_time'))
+    recent = list(Jam.objects.filter(end_time__lt=datetime.datetime.now()).order_by('-end_time'))
+
+    nextJam = None
+    if len(upcoming) > 0:
+        nextJam = upcoming[0]
+
+    recent_games = [(jam, jam.game_set.order_by('?')[:3]) for jam in recent[:2]]
+
     return render_to_response('jams/index.html',
-                              {'jams': jams, 'title': "Upcoming Jams"},
+                              {'current': current, 'next': nextJam, 'upcoming': upcoming[1:], 'recent': recent_games},
                               context_instance=RequestContext(request))
 
-def past(request):
-    jams = Jam.objects.filter(end__lt=datetime.datetime.now()).order_by('-end')
-    return render_to_response('jams/index.html',
-                              {'jams': jams, 'title': "Jams"},
-                              context_instance=RequestContext(request))
-
-def jam(request, jam_url):
-    jam = get_object_or_404(Jam, url=jam_url)
-    duration = jam.end-jam.start
-    hours = duration.days*24 + duration.seconds/3600
-    minutes = duration.seconds%3600/60
-    games = Game.objects.filter(jam=jam)
-    return render_to_response('jams/jam.html',
-                              {'jam': jam, 'hours': hours, 'minutes': minutes, 'games': games},
-                              context_instance=RequestContext(request))
+def jam(request, jam_slug):
+    jam = get_object_or_404(Jam, slug=jam_slug)
+    games = jam.game_set.all().order_by('title')
+    news = jam.article_set.all()
+    
+    if jam.end_time > datetime.datetime.now():
+        return render_to_response('jams/future-jam.html',
+                                  {'jam': jam, 'games': games, 'news': news},
+                                  context_instance=RequestContext(request))
+    else:
+        return render_to_response('jams/past-jam.html',
+                                  {'jam': jam, 'games': games, 'news': news},
+                                  context_instance=RequestContext(request))
 
 def games(request):
-    games = Game.objects.all()
-    return render_to_response('jams/games.html', {'games': games},
+    recent = Jam.objects.filter(end_time__lt=datetime.datetime.now()).exclude(game=None).order_by('-end_time')[:2]
+    recent_games = [(jam, jam.game_set.order_by('title')) for jam in recent]
+    spotlighted = Game.objects.filter(spotlighted=True).exclude(jam__in=recent).order_by('title')
+    games = Game.objects.filter(spotlighted=False).exclude(jam__in=recent).order_by('title')
+    return render_to_response('jams/games.html', {'recent': recent_games, 'spotlight': spotlighted, 'games': games},
                               context_instance=RequestContext(request))
 
-def game(request, jam_url, game_url):
-    jam = get_object_or_404(Jam, url=jam_url)
-    game = get_object_or_404(Game, url=game_url, jam=jam)
+def game(request, jam_slug, game_slug):
+    jam = get_object_or_404(Jam, slug=jam_slug)
+    game = get_object_or_404(Game, slug=game_slug, jam=jam)
     resources = GameResource.objects.filter(game=game)
+
+    jam_games = Game.objects.filter(jam=jam).exclude(pk=game.pk).order_by('?')[:5]
+    
     return render_to_response('jams/game.html',
-        {'game': game, 'resources': resources},
+        {'jam': jam, 'game': game, 'jam_games': jam_games, 'resources': resources},
         context_instance=RequestContext(request))
 
-def edit_game(request, jam_url, game_url=None):
-    ResourceFormSet = inlineformset_factory(Game, GameResource, extra=4, max_num=4)
+@login_required
+def edit_game(request, jam_slug, game_slug=None):
+    ResourceFormSet = inlineformset_factory(Game, GameResource, fields=("title", "link", "file"), extra=4, max_num=4)
     
-    jam = get_object_or_404(Jam, url=jam_url)
-    if game_url:
-        game = get_object_or_404(Game, url=game_url)
+    jam = get_object_or_404(Jam, slug=jam_slug)
+    if game_slug:
+        game = get_object_or_404(Game, slug=game_slug)
         if request.user not in game.creators.all():
-            return HttpResponseRedirect('/jams/'+game.jam.url+"/"+game.url)
+            return HttpResponseRedirect('/jams/'+game.jam.slug+"/"+game.slug)
     else:
         game = Game()
     
     if request.method == 'POST':
-        if not request.user.is_authenticated():
-            return HttpResponseRedirect('/accounts/login')
         form = GameForm(request.POST, request.FILES, instance=game)
         formset = ResourceFormSet(request.POST, request.FILES,
             instance=game)
@@ -66,10 +82,8 @@ def edit_game(request, jam_url, game_url=None):
             game.save()
             
             formset.save()
-            return HttpResponseRedirect('/jams/'+game.jam.url+"/"+game.url)
+            return HttpResponseRedirect('/jams/'+game.jam.slug+"/"+game.slug)
     else:
-        if not request.user.is_authenticated():
-            return HttpResponseRedirect('/accounts/login')
         form = GameForm(instance=game)
         formset = ResourceFormSet(instance=game)
     
@@ -82,34 +96,3 @@ def edit_game(request, jam_url, game_url=None):
     c.update(csrf(request))
     return render_to_response('jams/edit_game.html', c,
         context_instance=RequestContext(request))
-
-def edit_res(request, jam_url, game_url, res_id=None):
-    game = get_object_or_404(Game, url=game_url)
-    if res_id:
-        res = get_object_or_404(GameResource, pk=res_id)
-    else:
-        res = GameResource()
-
-    if request.method == 'POST':
-        form = GameResourceForm(request.POST, request.FILES, instance=res)
-        if request.user in game.creators.all() and form.is_valid():
-            res = form.save(commit = False)
-            res.game = game
-            res.save()
-            return HttpResponseRedirect('/jams/'+game.jam.url+"/"+game.url)
-    else:
-        form = GameResourceForm(instance=res)
-    
-    c = {
-        'form':form,
-        'res':res,
-    }
-    c.update(csrf(request))
-    return render_to_response('jams/edit_res.html', c,
-        context_instance=RequestContext(request))
-
-def rm_res(request, jam_url, game_url, res_id=None):
-    res = get_object_or_404(GameResource, pk=res_id)
-    if request.user in res.game.creators.all():
-        res.delete()
-    return HttpResponseRedirect('/jams/'+res.game.jam.url+"/"+res.game.url)

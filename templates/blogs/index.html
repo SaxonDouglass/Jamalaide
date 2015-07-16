@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load sidebar_tags %}
+{% load news_tags %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+{% sidebar %}
+<section id="news-feed">
+  <h1>News</h1>
+  {% for article in object_list %}
+  {% news_item article %}
+  {% empty %}
+  <p>No articles yet.</p>
+  {% endfor %}
+  <section>
+  {% if prev != None %}<a class="back-link" href="/news/{{prev}}">Newer Posts</a>{% endif %}
+  {% if next != None %}<a class="forward-link" href="/news/{{next}}">Older Posts</a>{% endif %}
+  </section>
+</section>
+{% endblock %}

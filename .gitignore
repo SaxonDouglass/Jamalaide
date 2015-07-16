@@ -1,5 +1,11 @@
 *.pyc
 *~
-local_settings.py
+\#*\#
+.\#*
+/db
+/media
+/jamalaide/local_settings.py
 /media/uploads
-
+/compass/Gem/
+/compass/.sass-cache/
+migrations

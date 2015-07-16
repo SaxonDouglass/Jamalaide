@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Jamalaide - Mailer - Compose{% endblock %}
+
+{% block content %}
+<h1>Compose Mail</h1>
+<form method="post">
+  {% csrf_token %}
+    
+    {{ form.non_field_errors }}
+  
+    <label class="left" for="id_name">Subject</label>
+    <div class="right">
+      {{ form.subject }}
+      {{ form.subject.errors }}
+    </div>
+
+    <label class="left" for="id_name">Body</label>
+    <div class="right">
+      {{ form.body }}
+      {{ form.body.errors }}
+    </div>
+    
+    <label class="left" for="id_creators">Recipients</label>
+    <div class="right">
+      {{ form.recipients }}<br>
+      {{ form.recipients.errors }}
+    </div>
+   
+    <input id="save" class="button" type="submit" value="Save" />
+    <input id="send" class="button" type="submit" value="Send" />
+    <input id="discard" class="button" type="submit" value="Discard" />
+  
+  </form>
+  
+</form><br />
+{% endblock %}

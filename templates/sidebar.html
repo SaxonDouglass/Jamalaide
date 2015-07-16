@@ -1,54 +1,27 @@
-	<div>
-            {% if current %}
-                <div id="current">
-                    <h1>Jamming Now!</h1>
-                    {% if user.is_authenticated %}
-                    <a href="{% url jams.views.edit_game current.url %}">
-                        <div class="button">Submit Game</div>
-                    </a>
-                    for
-                    {% endif %}
-                    <a href="/jams/{{current.url}}">{{ current.name }}</a> which ends:<br>
-                    {{ current.end|date:"g:i a l jS F Y" }}
-                </div>
-            {% endif %}
-        
-            {% if next %}
-                <div id="next">
-                    <h1>Upcoming Jams</h1>
-                    <a href="/jams/{{next.url}}">
-                      {{ next.name }}
-                    </a><br />
-                    {% if next.start.month == next.end.month %}
-                    {{ next.start|date:"jS" }}-{{ next.end|date:"jS" }} {{ next.start|date:"F" }}
-                    {% else %}
-                    {{ next.start|date:"jS" }} {{ next.start|date:"N" }}-{{ next.end|date:"jS" }} {{ next.end|date:"N" }}
-                    {% endif %}
-                </div>
-            {% endif %}
-        
-            {% if prev %}
-                <div id="prev">
-                    <h1>Recent Jams</h1>
-                    <a href="/jams/{{prev.url}}">
-                      {{ prev.name }}
-                    </a><br />
-                    {% if prev.start.month == prev.end.month %}
-                    {{ prev.start|date:"jS" }}-{{ prev.end|date:"jS" }} {{ prev.start|date:"F" }}
-                    {% else %}
-                    {{ prev.start|date:"jS" }} {{ prev.start|date:"N" }}-{{ prev.end|date:"jS" }} {{ prev.end|date:"N" }}
-                    {% endif %}
-                </div>
-            {% endif %}
-        
-            <div id="contact">
-                <h1>Stay Connected</h1>
-                <div id="social">
-                  <a href="http://www.facebook.com/jamalaide"><img src="/static/img/facebook.png" alt="Facebook" /></a>
-                  <a href="https://twitter.com/jamalaide"><img src="/static/img/twitter.png" alt="Twitter" /></a>
-                  <a href="https://plus.google.com/110487040627096308769"><img src="/static/img/gplus.png" alt="Google+" /></a>
-                </div>
-                Email: <a href="mailto:contact@jamalaide.org.au">contact@jamalaide.org.au</a><br />
-                IRC: <a href="https://webchat.freenode.net/?channels=jamalaide&amp;uio=MTE9Mjg353">#jamalaide on freenode</a>
-            </div>
-	</div>
+{% load staticfiles %}
+{% load jam_tags %}
+	<section id="news-sidebar"{% if next %} class="important"{% endif %}>
+          {% if next %}<section class="important">
+            {% if next.is_current %}<h1>Jamming Now!</h1>{% else %}<h1>Next Jam</h1>{% endif %}
+            {% jam_sidebar next %}
+          </section>
+          {% endif %}
+          {% for jam in upcoming %}
+          <section{% if jam.is_current %} class="important"{% endif %}>
+            {% if jam.is_current %}<h1>Jamming Now!</h1>{% else %}<h1>Coming Soon</h1>{% endif %}
+            {% jam_sidebar jam %}
+          </section>
+          {% endfor %}
+          {% for jam in recent %}
+          <section>
+            <h1>Recent Jam</h1>
+            {% jam_sidebar jam %}
+          </section>
+          {% endfor %}
+          {% if spotlight %}<section>
+            <h1>Game Spotlight</h1>
+            {% for game in spotlight %}
+            {% game_thumb game %}
+            {% endfor %}
+          </section>{% endif %}
+	</section>

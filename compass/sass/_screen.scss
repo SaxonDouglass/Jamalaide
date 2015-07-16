@@ -1,0 +1,844 @@
+/* In this file you should write your main styles. (or centralize your imports) */
+
+@import "compass/reset";
+@import "compass/css3/box-sizing";
+@import "compass/css3/border-radius";
+@import "compass/css3/font-face";
+@import "compass/css3/images";
+@import "compass/css3/inline-block";
+@import "compass/css3/opacity";
+@import "compass/css3/selection";
+@import "compass/css3/text-shadow";
+
+@import "image-rendering";
+
+@import "media";
+
+@include font-face("ArcadeClassic", font-files("ArcadeClassic.ttf", "ArcadeClassic.eot"));
+
+$page-width: 950px / 16px * 1em;
+$horizontal-padding: 2%;
+$content-width: 60%;
+
+$breakpoint-header: 806px / 16px * 1em;
+$breakpoint-menu: 786px / 16px * 1em;
+$breakpoint-content: 662px / 16px * 1em;
+$breakpoint-to-top: $breakpoint-content; //641px;
+$breakpoint-columns: 425px / 16px * 1em;
+$breakpoint-logo: 468px / 16px * 1em;
+$breakpoint-justify: 350px / 16px * 1em;
+$breakpoint-account: 290px / 16px * 1em;
+
+//$breakpoint-to-top-height: 462px;
+
+@mixin page-width($font-size: 1em) {
+    $margin-size: 150px / 16px * 1em;
+    
+    max-width: $page-width * (1em / $font-size);
+
+    @include media(min-width, $page-width + 2*$margin-size) {
+        .wide & {
+            max-width: 100vw - 2*$margin-size / ($page-width + 2*$margin-size) * 100vw;
+            max-width: calc(100vw - #{2*$margin-size * (1em / $font-size)})
+        }
+    }
+}
+
+* {
+    @include selection($colour-selection-background, $colour-selection-foreground);
+}
+
+html {
+    background-color: $colour-background;
+}
+
+body {
+    @include image-rendering(auto);
+    color: $colour-primary-foreground;
+    font-family: sans-serif;
+    min-height: 100vh;
+    position: relative;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    border-bottom: 1px $colour-primary-foreground dotted;
+    color: $colour-link-foreground;
+
+    &:visited {
+        color: $colour-visited-foreground;
+    }
+    
+    &:hover,
+    &:active {
+        border-color: transparent;
+        @include text-shadow(0 0 2px $colour-link-foreground);
+    }
+}
+
+a.img-link {
+    border: none;
+}
+
+a.back-link {
+    float: left;
+    font-size: 1.5em;
+}
+
+a.forward-link {
+    float: right;
+    font-size: 1.5em;
+}
+
+%heading {
+    clear: left;
+    font-family: Electrolize,sans-serif;
+    margin: 0 0 16px 0;
+    margin: 0 0 1rem 0;
+    font-weight: bold;
+    text-align: left;
+    line-height: 1em;
+}
+
+h1 {
+    @extend %heading;
+    margin-top: 13px / 16px * 0.25em;
+    font-size: 3em;
+}
+
+h2 {
+    @extend %heading;
+    font-size: 2em;
+}
+h3 {
+    @extend %heading;
+    font-size: 1.5em;
+}
+h4 {
+    @extend %heading;
+    font-size: 1.2em;
+    font-weight: normal;
+}
+h5 {
+    @extend %heading
+}
+h6 {
+    @extend %heading
+}
+
+dl {
+    margin: 1em 0 1em 0;
+}
+dt {
+    font-weight: bold;
+}
+dd {
+    margin-left: 1em;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+img {
+    max-width: 100%;
+}
+
+code {
+    font-family: Consolas,monospace;
+    background-color: $colour-code-background;
+    padding: 1px 0.5em;
+}
+
+pre {
+    margin: 1em 1em;
+    text-align: left;
+    padding: 0.5em;
+    background-color: $colour-code-background;
+    white-space: pre-wrap;
+}
+
+blockquote {
+    margin: 1.75em 1.5em;
+    font-style: italic;
+}
+
+footer {
+    display: block;
+    clear: both;
+    color: $colour-footer-foreground;
+    position: relative;
+    text-align: center;
+    @include page-width(0.875em);
+    font-size: 0.875em;
+
+    a {
+        color: $colour-primary-foreground;
+        border: none;
+
+        img {
+            @include opacity(0.85);
+        }
+
+        &:hover img,
+        &:active img {
+            @include opacity(1);
+        }
+    }
+}
+
+header {
+    display: block;
+    background-color: $colour-header-border;
+    width: 100%;
+
+    $height:  6em;
+    $overlap: 12px/16px * 1em;
+    $padding: 2em;
+
+    #title {
+        position: relative;
+        margin: 0 auto 0 auto;
+        @include page-width;
+        background-color: $colour-header-background;
+
+        @include media-and-ie(min-width, $breakpoint-logo) {
+            height: $height + $padding - $overlap;
+        }
+        
+        #logo {
+            max-width: 100% - 2 * $horizontal-padding;
+            padding-left: $horizontal-padding;
+            padding-right: $horizontal-padding;
+
+            @include media-and-ie(min-width, $breakpoint-logo) {
+                height: $height;
+                position: absolute;
+                bottom: -$overlap;
+            }
+            
+            pointer-events: none;
+        }
+
+        #social {
+            position: absolute;
+            top: $padding;
+            right: $horizontal-padding;
+            width: 3em*3;
+            text-align: right;
+            display: none;
+
+            @include media-and-ie(min-width, $breakpoint-content) {
+                display: block;
+            }
+
+            img {
+                margin-left: 0.5em;
+                width: 2em;
+                @include opacity(0.85);
+            }
+
+            a {
+                border: none;
+                background: none;
+
+                &:hover img,
+                &:active img {
+                    @include opacity(1);
+                }
+            }
+        }
+
+        #account {
+            bottom: 0;
+            right: 0;
+            line-height: 1em;
+            display: block;
+            text-align: right;
+            padding: 0.5em $horizontal-padding;
+
+            @include media-and-ie(min-width, $breakpoint-header) {
+                position: absolute;
+                vertical-align: bottom;
+            }
+
+            p {
+                margin: 0;
+                display: inline;
+                
+                @include media-and-ie(max-width, $breakpoint-account) {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+nav {
+    $font-height: 2em;
+    $bar-height: 1.5em;
+    
+    display: block;
+    max-width: 100%;
+    background-color: $colour-nav-border;
+    font-family: ArcadeClassic,Arial,sans-serif;
+    font-size: $font-height;
+    font-weight: normal;
+
+    #menu-link {
+        @include media-and-ie(min-width, $breakpoint-content) {
+            display: none;
+        }
+    }
+    
+    a {
+        display: block;
+        height: 1em;
+        padding: 0;
+        border: none;
+        text-align: center;
+        background-color: $colour-nav-background;
+
+        &:link,
+        &:visited {
+            color: $colour-nav-foreground;
+        }
+
+        &:active,
+        &:hover,
+        &.open {
+            background-color: $colour-nav-foreground;
+            color: $colour-nav-background;
+            text-decoration: none;
+        }
+        
+        @include media(min-height, 5*$bar-height*$font-height/1em) {
+            padding: ($bar-height - 1em)/2 0 ($bar-height - 1em)/2 0;
+        }
+
+        @include media-and-ie(min-width, $breakpoint-content) {
+            padding: ($bar-height - 1em)/2 $bar-height/4 ($bar-height - 1em)/2 $bar-height/4;
+        }
+    }
+
+    ul {
+        list-style: none;
+        display: block;
+        overflow: hidden;
+        width: 100%;
+        @include page-width($font-height);
+        margin: 0 auto;
+        background-color: $colour-nav-background;
+        
+        position: absolute;
+        bottom: 40px / 16px * 1em * (1em / $font-height);
+
+        @include media-and-ie(min-width, $breakpoint-content) {
+            position: static;
+        }
+    }
+
+    #js-menu {
+        position: static;
+
+        &.hidden {
+            display: none;
+
+            @include media-and-ie(min-width, $breakpoint-content) {
+                display: block;
+            }
+        }
+    }
+    
+    li {
+        display: block;
+        width: 100%;
+        float: left;
+
+        @include media-and-ie(min-width, $breakpoint-menu) {
+            margin-right: $bar-height/2;
+        }
+
+        @include media-and-ie(min-width, $breakpoint-content) {
+            width: auto;
+
+            &:first-child {
+                margin-left: $page-width*($horizontal-padding/100%) + 60px / 16px * 1em * (1em / $font-height);
+                margin-left: calc(#{$horizontal-padding} + 60px / 16px * 1em * (1em / $font-height));
+            }
+        }
+
+        a {
+            position: relative;
+        }
+    }
+}
+
+#page-wrap {
+    position: relative;
+}
+
+#container {
+    clear: both;
+    margin: $page-width*($horizontal-padding/100%) auto (3em*5 + 40px / 16px * 1em) auto;
+    position: relative;
+    @include page-width;
+
+    &.js-menu {
+        margin-bottom: (40px / 16px * 1em) + 1em;
+    }
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        margin-bottom: (40px / 16px * 1em) + 1em;
+    }
+
+    ul {
+        list-style: square image-url('bullet.png') outside;
+        text-indent: 0;
+        margin-left: 2em;
+    }
+
+    ol {
+        list-style-position: outside;
+        text-indent: 0;
+        margin-left: 2em;
+    }
+
+    li {
+        margin: 0.5em 0;
+    }
+
+    p {
+        line-height: 1.5em;
+    }
+
+    .left {
+        clear: left;
+        display: block;
+        font-weight: bold;
+        line-height: 1.5em;
+        text-align: left;
+        
+        @include media-and-ie(min-width, $breakpoint-columns) {
+            float: left;
+            text-align: right;
+            width: 40%;
+        }
+    }
+
+    .right {
+        line-height: 1.5em;
+        text-align: left;
+        margin-bottom: 0.5em;
+
+        p:last-child {
+            margin: 0;
+        }
+
+        @include media-and-ie(min-width, $breakpoint-columns) {
+            float: left;
+            padding-left: 0.5em;
+            @include box-sizing(border-box);
+            width: 60%;
+        }
+    }
+}
+
+%fill-left {
+    float: left;
+    border-style: solid;
+    margin-right: -50vw;
+    border-right-width: 50vw;
+    margin-left: -50vw;
+    border-left-width: 50vw;
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        margin-right: 0;
+        border-right-width: 0;
+    }
+}
+
+%fill-right {
+    float: left;
+    border-style: solid;
+    margin-right: -50vw;
+    border-right-width: 50vw;
+    
+    @include media-and-ie(min-width, $breakpoint-content) {
+        float: right;
+    }
+}
+
+%fill-both {
+    float: left;
+    border-style: solid;
+    margin-right: -50vw;
+    border-right-width: 50vw;
+    margin-left: -50vw;
+    border-left-width: 50vw;
+}
+
+%sidebar {
+    line-height: 1.5em;
+    display: none;
+    color: $colour-secondary-foreground;
+    background-color: $colour-secondary-background;
+    border-color: $colour-secondary-border;
+    width: 100% - 2 * $horizontal-padding;
+    padding: 1em $horizontal-padding 1em $horizontal-padding;
+    margin-bottom: 2em;
+    text-align: center;
+
+    &.important {
+        display: block;
+    }
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        width: 100% - $content-width - 5 * $horizontal-padding;
+        display: block;
+    }
+    
+    section {
+        display: none;
+        float: left;
+        width: 100%;
+
+        &.important {
+            display: block;
+        }
+
+        @include media-and-ie(min-width, $breakpoint-content) {
+            display: block;
+        }
+    }
+    
+    h1 {
+        font-family: ArcadeClassic,sans-serif;
+        font-weight: normal;
+        color: $colour-primary-foreground;
+        font-size: 2em;
+        margin-top: 0.25em;
+        text-align: center;
+        margin-bottom: 0.5em;
+    }
+
+    a.jam-link {
+        font-size: 1.4em;
+    }
+    
+    section + section {
+        margin-top: 2em;
+    }
+
+    .jam-times {
+        text-align: left;
+    }
+    
+    .jam-logo {
+        width: 100px/16px*1em;
+        float: left;
+        padding-right: 19px / 16px * 1em;
+    }
+
+    .button {
+        margin-bottom: 0.25em;
+    }
+}
+
+%content {
+    text-align: left;
+    padding: 1em $horizontal-padding 1em $horizontal-padding;
+    margin-bottom: 2em;
+    background-color: $colour-primary-background;
+
+    width: 100% - 2*$horizontal-padding;
+    border-color: $colour-primary-background;
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        border-color: $colour-primary-border;
+    }
+
+    section {
+        width: 100%;
+        float: left;
+        clear: both;
+    }
+    
+    section + section, section + article, article + section, article + article {
+        margin-top: 2em;
+    }
+}
+
+%column {
+    @extend %content;
+    max-width: 570px / 16px * 1em;
+
+    @include media-and-ie(min-width, $breakpoint-justify) {
+        text-align: justify;
+    }
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        width: $content-width;
+    }
+}
+
+#news-feed,
+#game-list,
+#important-jams,
+#about,
+#form {
+    h1 {
+        font-family: ArcadeClassic,Arial,sans-serif;
+        font-weight: normal;
+        font-size: 4em;
+        margin-top: 1px / 16px * 0.25em;
+    }
+}
+
+
+#news-sidebar {
+    @extend %sidebar;
+    @extend %fill-left;
+}
+
+#news-feed {
+    @extend %column;
+    @extend %fill-right;
+}
+
+#game-list {
+    @extend %content;
+    @extend %fill-both;
+}
+
+#game-details {
+    @extend %column;
+    @extend %fill-left;
+}
+
+#game-sidebar {
+    @extend %sidebar;
+    @extend %fill-right;
+}
+
+#important-jams {
+    @extend %column;
+    @extend %fill-left;
+}
+
+#jam-list {
+    @extend %sidebar;
+    @extend %fill-right;
+    text-align: left;
+}
+
+#jam-details {
+    @extend %column;
+    @extend %fill-left;
+}
+
+#flatpage {
+    @extend %content;
+    @extend %fill-both;
+}
+
+#form {
+    @extend %content;
+    @extend %fill-both;
+}
+
+#profile {
+    @extend %content;
+    @extend %fill-both;
+}
+
+#about {
+    @extend %column;
+    @extend %fill-left;
+}
+
+#committee {
+    @extend %sidebar;
+    @extend %fill-right;
+}
+
+#to-top {
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    @include opacity(0.85);
+    @include image-rendering(pixelated);
+    position: fixed;
+
+    a {
+        display: block;
+        width: 100%;
+        background-color: white;
+        height: 40px/16px*1em;
+        bottom: 0;
+        right: 0;
+        border: none;
+
+        @include media-and-ie(min-width, $breakpoint-to-top) {
+            width: auto;
+            position: fixed;
+        }
+    }
+
+    img {
+        height: 100%;
+    }
+
+    &:hover,
+    &:active {
+        @include opacity(1);
+    }
+}
+
+.jam-banner {
+    padding-bottom: 1em;
+}
+
+#game-list, .games {
+    text-align: left;
+}
+
+.game {
+    $horizontal-padding: 0.5em;
+    $horizontal-margin: 2px / 16px * 1em;
+    $img-width: (570px / 16px * 1em - 6*($horizontal-padding + $horizontal-margin) - 5px*2 / 16px * 1em) / 3; //192px;
+    
+    @include inline-block(bottom, bottom);
+    border: none;
+    text-align: center;
+    max-width: $img-width;
+    width: 100% - (2*$horizontal-padding + 2*$horizontal-margin) / (208px / 16px * 1em + (2*$horizontal-padding + 2*$horizontal-margin)) * 100%;
+    width: calc(100% - #{2*$horizontal-padding + 2*$horizontal-margin});
+    margin: 0 $horizontal-margin 0.5em $horizontal-margin;
+    padding: 1em $horizontal-padding;
+
+    @include media-and-ie(min-width, $breakpoint-columns) {
+        height: 144px / 16px * 1em + 2em;
+    }
+
+    %sidebar & {
+        height: auto;
+    }
+
+    &:hover,
+    &:active {
+        background-color: $colour-link-background;
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 0 0.5em 0;
+        max-height: 144px / 16px * 1em; //remove once thumbnail cropping fixed
+        max-width: $img-width;
+    }
+}
+
+.gameImage {
+    display: block;
+    margin: 2em auto;
+    max-height: 450px / 16px * 1em;
+}
+
+.errorlist {
+    color: $colour-error-foreground;
+}
+
+.small {
+    color: $colour-secondary-foreground;
+    font-size: small;
+    font-weight: normal;
+}
+
+%input {
+    background-color: $colour-input-background;
+    border: solid 1px $colour-input-border;
+    color: $colour-input-foreground;
+    
+    &:hover,
+    &:active {
+        background-color: $colour-input-hover-background;
+        border: solid 1px $colour-input-hover-border;
+        color: $colour-input-hover-foreground;
+    }
+}
+
+textarea,
+input,
+select{
+    @extend %input;
+    padding: 0.25em 0.25em;
+    @include box-sizing(border-box);
+    width: 100%;
+}
+
+input[type="checkbox"] {
+    width: auto;
+}
+
+input[readonly="readonly"] {
+    background: none;
+    border: none;
+}
+
+#formset {
+    .box {
+        background-color: $colour-secondary-background;
+        clear: both;
+        margin: 32px 0px;
+        padding: 16px;
+        margin-bottom: 1em;
+    }
+}
+
+.button {
+    display: block;
+    cursor: pointer;
+    font-size: 2em;
+    background-color: $colour-input-background;
+    border: solid 1px $colour-input-border;
+    @include border-radius(0.125em);
+    clear: left;
+    color: $colour-input-foreground;
+    font-family: ArcadeClassic,sans-serif;
+    margin: 0.5em auto;
+    padding: 0.125em;
+    text-align: center;
+    width: 200px / 32px * 1em;
+
+    &:hover,
+    &:active {
+        background-color: $colour-input-hover-background;
+        border: solid 1px $colour-input-hover-border;
+        color: $colour-input-hover-foreground;
+    }
+}
+
+.links {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.map {
+    clear: both;
+    text-align: center;
+}

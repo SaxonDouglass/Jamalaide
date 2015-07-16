@@ -1,0 +1,36 @@
+/* Import this theme using the following HTML or equivalent:
+ * <link href="/static/css/dark.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "colours";
+
+$border-shade: 40%;
+
+$colour-background:               $purple-light;
+$colour-border:                   shade($colour-background, $border-shade);
+$colour-header-background:        $purple;
+$colour-header-border:            shade($colour-header-background, $border-shade);
+$colour-nav-foreground:           $white;
+$colour-nav-background:           $purple-dark;
+$colour-nav-border:               shade($colour-nav-background, $border-shade);
+$colour-primary-foreground:       $white;
+$colour-primary-background:       $purple-dull-dark;
+$colour-primary-border:           shade($colour-primary-background, $border-shade);
+$colour-secondary-foreground:     $white;
+$colour-secondary-background:     $purple-dull;
+$colour-secondary-border:         shade($colour-secondary-background, $border-shade);
+$colour-link-foreground:          $pale-red;
+$colour-link-background:          $purple-dark;
+$colour-visited-foreground:       $pale-red;
+$colour-footer-foreground:        lighten($colour-background, 15%);
+$colour-error-foreground:         $pale-red;
+$colour-input-foreground:         $white;
+$colour-input-background:         $purple-dark;
+$colour-input-border:             $purple-dull-light;
+$colour-input-hover-foreground:   $white;
+$colour-input-hover-background:   $purple;
+$colour-input-hover-border:       $purple-dull-light;
+$colour-selection-foreground:     $colour-primary-background;
+$colour-selection-background:     $colour-primary-foreground;
+$colour-code-background:          darken($colour-primary-background, 10%);
+
+@import "screen";

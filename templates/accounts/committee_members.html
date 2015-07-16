@@ -1,0 +1,11 @@
+<p>
+  {% for member in executive %}
+    {{member.title}}:
+    <a href="mailto:{% if member.email %}{{member.email}}{% else %}{{member.member.username}}@jamalaide.org.au{% endif %}">{{member.member.profile.get_full_name}}</a><br />
+  {% endfor %}
+</p>
+<p>General Committee:<br />
+  {% for member in general %}
+    <a href="mailto:{% if member.email %}{{member.email}}{% else %}{{member.member.username}}@jamalaide.org.au{% endif %}">{{member.member.profile.get_full_name}}</a><br />
+  {% endfor %}
+<ul></p>

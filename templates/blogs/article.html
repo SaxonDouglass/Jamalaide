@@ -1,0 +1,8 @@
+{% load markup %}
+  <article class="item">
+    <{{heading}}>{{ article.title }}</{{heading}}>
+    <p class="small">{{article.date|date:"d F Y"}}</p>
+    {% if article.header %}<img src="{{article.header.url}}" alt="Header image for {{article.title}}" />{% endif %}
+    {{ article.content|md }}
+    {% if article.footer %}<img src="{{article.footer.url}}" alt="Footer image for {{article.title}}" />{% endif %}
+  </article>

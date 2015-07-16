@@ -1,0 +1,12 @@
+/* Colour scheme to be used by website */
+
+$white:              hsl(  0,   0, 100);  // #FFFFFF
+$grey:               hsl(  0,   0,  85);  // #DDDDDD
+$pale-red:           hsl(350, 100,  82);  // #FF91A4
+
+$purple:             hsl(276,  70,  38);
+$purple-light:       tint( $purple, 35%);
+$purple-dark:        shade($purple, 35%);
+$purple-dull:        hsl(268,  35,  37);
+$purple-dull-light:  tint( $purple-dull,  12%);
+$purple-dull-dark:   shade($purple-dull,  12%);

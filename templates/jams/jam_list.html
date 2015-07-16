@@ -1,0 +1,23 @@
+<section id="jam-list" class="important">
+  {% if current %}<section class="important">
+    <h1>Current Jam{{ current|pluralize }}</h1>
+    {% for jam in current %}
+    <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
+    (ends {{ jam.end_time|date:"F jS" }})<br>
+    {% endfor %}
+  </section>{% endif %}
+  {% if future %}<section class="important">
+    <h1>Upcoming Jam{{ future|pluralize }}</h1>
+    {% for jam in future %}
+    <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
+    ({{ jam.start_time|date:"F Y" }})<br>
+    {% endfor %}
+  </section>{% endif %}
+  {% if past %}<section class="important">
+    <h1>Past Jam{{ past|pluralize }}</h1>
+    {% for jam in past %}
+    <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
+    ({{ jam.start_time|date:"F Y" }})<br>
+    {% endfor %}
+    </section>{% endif %}
+</section>

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+{% block content %}
+<section id="flatpage">
+  {{ flatpage.content|md }}
+</section>
+{% endblock %}
