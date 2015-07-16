@@ -438,7 +438,7 @@ nav li {
 }
 .ie8 nav li:first-child {
   margin-left: 3.0625em;
-  margin-left: calc(2% + 60px / 16px * 1em * (1em / $font-height));
+  margin-left: calc(2% + 1.875em);
 }
 @media only screen and (min-width: 41.375em) {
   nav li {
@@ -446,7 +446,7 @@ nav li {
   }
   nav li:first-child {
     margin-left: 3.0625em;
-    margin-left: calc(2% + 60px / 16px * 1em * (1em / $font-height));
+    margin-left: calc(2% + 1.875em);
   }
 }
 nav li a {
@@ -708,6 +708,32 @@ nav li a {
   margin-top: 0.01563em;
 }
 
+#game-details {
+  max-width: 37.5em;
+}
+.ie8 #game-details {
+  width: 63.15789%;
+}
+@media only screen and (min-width: 41.375em) {
+  #game-details {
+    width: 63.15789%;
+  }
+}
+@media only screen and (min-width: 61.375em) {
+  #game-details {
+    width: 100%;
+  }
+}
+
+.ie8 #game-sidebar {
+  width: 26.84211%;
+}
+@media only screen and (min-width: 41.375em) {
+  #game-sidebar {
+    width: 26.84211%;
+  }
+}
+
 #jam-list {
   text-align: left;
 }
@@ -765,7 +791,7 @@ nav li a {
   *display: inline;
   border: none;
   text-align: center;
-  max-width: 10.41667em;
+  max-width: 12em;
   width: 91.22807%;
   width: calc(100% - 1.25em);
   margin: 0 0.125em 0.5em 0.125em;
@@ -787,11 +813,24 @@ nav li a {
 }
 .game img {
   display: block;
-  width: 100%;
   margin: 0 auto;
   padding: 0 0 0.5em 0;
   max-height: 9em;
+  max-width: 100%;
+}
+.ie8 .game img {
+  max-width: 12em;
+}
+@media only screen and (min-width: 13em) {
+  .game img {
+    max-width: 12em;
+  }
+}
+#important-jams .game, #jam-details .game {
   max-width: 10.41667em;
+}
+#important-jams .game img, #jam-details .game img {
+  max-width: 100%;
 }
 
 .gameImage {
@@ -849,8 +888,8 @@ input[readonly="readonly"] {
 #formset .box {
   background-color: #5c3d7f;
   clear: both;
-  margin: 32px 0px;
-  padding: 16px;
+  margin: 2em 0;
+  padding: 1em;
   margin-bottom: 1em;
 }
 

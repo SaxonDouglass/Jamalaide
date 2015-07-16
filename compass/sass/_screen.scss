@@ -19,6 +19,7 @@
 $page-width: 950px / 16px * 1em;
 $horizontal-padding: 2%;
 $content-width: 60%;
+$game-content-width: 600px/950px * 100%;
 
 $breakpoint-header: 806px / 16px * 1em;
 $breakpoint-menu: 786px / 16px * 1em;
@@ -383,7 +384,7 @@ nav {
 
             &:first-child {
                 margin-left: $page-width*($horizontal-padding/100%) + 60px / 16px * 1em * (1em / $font-height);
-                margin-left: calc(#{$horizontal-padding} + 60px / 16px * 1em * (1em / $font-height));
+                margin-left: calc(#{$horizontal-padding} + #{60px / 16px * 1em * (1em / $font-height)});
             }
         }
 
@@ -633,11 +634,25 @@ nav {
 #game-details {
     @extend %column;
     @extend %fill-left;
+
+    max-width: 600px/16px * 1em;
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        width: $game-content-width;
+    }
+
+    @include media(min-width, $page-width + 2em) {
+        width: 100%;
+    }
 }
 
 #game-sidebar {
     @extend %sidebar;
     @extend %fill-right;
+
+    @include media-and-ie(min-width, $breakpoint-content) {
+        width: 100% - $game-content-width - 5 * $horizontal-padding;
+    }
 }
 
 #important-jams {
@@ -721,7 +736,8 @@ nav {
 .game {
     $horizontal-padding: 0.5em;
     $horizontal-margin: 2px / 16px * 1em;
-    $img-width: (570px / 16px * 1em - 6*($horizontal-padding + $horizontal-margin) - 5px*2 / 16px * 1em) / 3; //192px;
+    $img-width: 192px / 16px * 1em;
+    $img-narrow: (570px / 16px * 1em - 6*($horizontal-padding + $horizontal-margin) - 5px*2 / 16px * 1em) / 3;
     
     @include inline-block(bottom, bottom);
     border: none;
@@ -747,11 +763,22 @@ nav {
 
     img {
         display: block;
-        width: 100%;
         margin: 0 auto;
         padding: 0 0 0.5em 0;
         max-height: 144px / 16px * 1em; //remove once thumbnail cropping fixed
-        max-width: $img-width;
+        max-width: 100%;
+
+        @include media-and-ie(min-width, $img-width + 1em) {
+            max-width: $img-width;
+        }
+    }
+
+    #important-jams &, #jam-details & {
+        max-width: $img-narrow;
+
+        img {
+            max-width: 100%;
+        }
     }
 }
 
@@ -806,8 +833,8 @@ input[readonly="readonly"] {
     .box {
         background-color: $colour-secondary-background;
         clear: both;
-        margin: 32px 0px;
-        padding: 16px;
+        margin: 2em 0;
+        padding: 1em;
         margin-bottom: 1em;
     }
 }

@@ -20,7 +20,7 @@
   <div class="image">
     {% if game.image %}
     <a class="img-link" href="{{game.image.url}}" target="_blank">
-      <img class="gameImage" src="{{game.image.url}}" title="{{game.title}}" alt="{{game.title}}" />
+      <img class="gameImage" src="{{game.display_image.url}}" title="{{game.title}}" alt="{{game.title}}" />
     </a>
     {% else %}
     <img class="gameImage" src="{{STATIC_URL}}img/game-default.png" title="{{game.title}}" alt="{{game.title}}" />

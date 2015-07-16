@@ -8,7 +8,10 @@
 
 {% block content %}
 <section id="jam-details">
-  {% if jam.banner %}<img class="jam-banner" src="{{ jam.banner.url }}" alt="{{ jam.title }} banner"/>
+  {% if jam.banner %}{% if jam.banner_svg %}<picture>
+    <source type="image/svg+xml" srcset="{{jam.banner_svg.url}}" />
+    {% endif %}<img class="jam-banner" src="{{ jam.banner.url }}" alt="{{ jam.title }} banner"/>{% if jam.banner_svg %}
+  </picture>{% endif %}
   {% endif %}{% if jam.is_active %}
   <a href="{% url 'jams.views.edit_game' jam.slug %}">
     <div class="button">Submit Game</div>
@@ -59,7 +62,10 @@
   {% if jam.map %}<section class="map">
     <h2>Map</h2>
     {% if jam.map_link %}<a class="img-link" href="{{jam.map_link}}" target="_blank">
-      {% endif %}<img src="{{jam.map.url}}" alt="Map to venue" />{% if jam.map_link %}
+      {% endif %}{% if jam.map_svg %}<picture>
+        <source type="image/svg+xml" srcset="{{jam.map_svg.url}}" />
+        {% endif %}<img src="{{jam.map.url}}" alt="Map to venue" />{% if jam.map_svg %}
+      </picture>{% endif %}{% if jam.map_link %}
     </a>{% endif %}
   </section>{% endif %}
   {% if news %}
