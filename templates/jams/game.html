@@ -5,6 +5,8 @@
 
 {% block title %}{{game.title}}{% endblock %}
 
+{% block description %}<meta name="description" content="{{game.title}} is a game by {% for creator in game.creators.all %}{{creator.profile.get_full_name}}{% if not forloop.last %}{% ifequal forloop.revcounter 2 %}, and {% else %}, {% endifequal %}{% else %}{% endif %}{% endfor %}. It was created at {{game.jam.title}}." />{% endblock %}
+
 {% block content %}
 <section id="game-details">
   {% if user in game.creators.all %}

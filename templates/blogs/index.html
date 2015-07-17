@@ -5,6 +5,8 @@
 
 {% block title %}News{% endblock %}
 
+{% block description %}{% if homepage %}<meta name="description" content="Jamalaide is a club for people who make games in Adelaide: hobbyists, indies, students, and game developers. Jamalaide runs local jams and the Adelaide site for international jams like Global Game Jam and Ludum Dare." />{% endif %}{% endblock %}
+
 {% block content %}
 {% sidebar %}
 <section id="news-feed">

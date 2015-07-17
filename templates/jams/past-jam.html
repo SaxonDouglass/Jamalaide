@@ -6,6 +6,8 @@
 
 {% block title %}{{jam.title}}{% endblock %}
 
+{% block description %}<meta name="description" content="{{jam.title}} is a game jam that ran in {{ jam.end_time|date:"F Y"}}. It ran for {{ jam.duration | duration }}{% if jam.theme %} and the theme was {{jam.theme }}{%endif %}." />{% endblock %}
+
 {% block content %}
 <section id="jam-details">
   {% if jam.banner %}{% if jam.banner_svg %}<picture>

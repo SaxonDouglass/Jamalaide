@@ -4,8 +4,13 @@ from django.shortcuts import render_to_response
 
 from blogs.models import Article
 
-def news(request, page=0):
-    page=int(page)
+def news(request, page=None):
+    if page == None:
+        page = 0
+        homepage = True
+    else:
+        page = int(page)
+        homepage = False
     prev_page = None
     next_page = None
     if page > 0:
@@ -15,6 +20,6 @@ def news(request, page=0):
         object_list = object_list[:5]
         next_page = page + 1
     return render_to_response('blogs/index.html',
-                              {'object_list': object_list, 'prev': prev_page, 'next': next_page},
+                              {'object_list': object_list, 'prev': prev_page, 'next': next_page, 'homepage': homepage},
                               context_instance=RequestContext(request))
     

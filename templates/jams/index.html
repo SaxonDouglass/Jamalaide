@@ -4,6 +4,8 @@
 
 {% block title %}Jams{% endblock %}
 
+{% block description %}<meta name="description" content="Jamalaide's next jam is {{next.title}} on the {{next.start_time | date:"jS" }} of {{next.start_time | date:"F" }}. The most recent jam was {{ recent.0.0.title }}." />{% endblock %}
+
 {% block content %}
 <section id="important-jams">
   <h1>Jams</h1>

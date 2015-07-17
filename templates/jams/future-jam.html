@@ -6,6 +6,8 @@
 
 {% block title %}{{jam.title}}{% endblock %}
 
+{% block description %}<meta name="description" content="{{jam.title}} is an upcoming game jam that begins at {{ jam.start_time|date:"g:i a"}} on the {{ jam.start_time|date:"jS"}} of {{ jam.start_time|date:"F" }}." />{% endblock %}
+
 {% block content %}
 <section id="jam-details">
   {% if jam.banner %}{% if jam.banner_svg %}<picture>
