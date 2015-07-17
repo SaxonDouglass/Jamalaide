@@ -8,7 +8,10 @@
 
 {% block content %}
 <section id="jam-details">
-  {% if jam.banner %}<img class="jam-banner" src="{{ jam.banner.url }}" alt="{{ jam.title }} banner"/>
+  {% if jam.banner %}{% if jam.banner_svg %}<picture>
+    <source type="image/svg+xml" srcset="{{jam.banner_svg.url}}" />
+    {% endif %}<img class="jam-banner" src="{{ jam.banner.url }}" alt="{{ jam.title }} banner"/>{% if jam.banner_svg %}
+  </picture>{% endif %}
   {% endif %}{% if jam.is_active %}
   <a href="{% url 'jams.views.edit_game' jam.slug %}">
     <div class="button">Submit Game</div>

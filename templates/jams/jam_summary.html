@@ -1,6 +1,9 @@
 {% load jam_tags %}
     {% if jam.banner %}<a class="img-link" href="/jams/{{jam.slug}}">
-      <img class="jam-banner" src="{{ jam.banner.url }}" alt="{{ jam.title }} banner"/>
+      {% if jam.banner_svg %}<picture>
+        <source type="image/svg+xml" srcset="{{jam.banner_svg.url}}" />
+        {% endif %}<img class="jam-banner" src="{{ jam.banner.url }}" alt="{{ jam.title }} banner"/>{% if jam.banner_svg %}
+      </picture>{% endif %}
     </a>
     {% endif %}<h3><a href="/jams/{{jam.slug}}">{{ jam.title }}</a></h3>
     <p>{{ jam.start_time|date:"g:i a jS N" }}-{{ jam.end_time|date:"g:i a jS N" }} ({{ jam.duration | duration }})</p>

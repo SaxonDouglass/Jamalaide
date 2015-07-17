@@ -17,11 +17,20 @@ from django.core.context_processors import csrf
 def map_path(instance, filename):
     return 'jams/'+instance.slug+'/'+instance.slug+'-map'+re.search("\.[^.]*$", filename).group()
 
+def map_svg_path(instance, filename):
+    return 'jams/'+instance.slug+'/'+instance.slug+'-map.svg'
+
 def banner_path(instance, filename):
     return 'jams/'+instance.slug+'/'+instance.slug+'-banner'+re.search("\.[^.]*$", filename).group()
 
+def banner_svg_path(instance, filename):
+    return 'jams/'+instance.slug+'/'+instance.slug+'-banner.svg'
+
 def logo_path(instance, filename):
     return 'jams/'+instance.slug+'/'+instance.slug+'-logo'+re.search("\.[^.]*$", filename).group()
+
+def logo_svg_path(instance, filename):
+    return 'jams/'+instance.slug+'/'+instance.slug+'-logo.svg'
 
 class Jam(models.Model):
     class Meta:
@@ -48,9 +57,12 @@ class Jam(models.Model):
     schedule = models.TextField(blank=True)
     theme = models.CharField(max_length=100, blank=True)
     map = models.ImageField(upload_to=map_path, blank=True)
+    map_svg = models.FileField(upload_to=map_svg_path, blank=True)
     map_link = models.URLField(blank=True)
     banner = models.ImageField(upload_to=banner_path, blank=True)
+    banner_svg = models.FileField(upload_to=banner_svg_path, blank=True)
     logo = models.ImageField(upload_to=logo_path, blank=True)
+    logo_svg = models.FileField(upload_to=logo_svg_path, blank=True)
     
     @property
     def is_current(self):
@@ -80,6 +92,9 @@ class Jam(models.Model):
 def game_image_path(instance, filename):
     return 'jams/'+instance.jam.slug+'/'+instance.slug+'/'+instance.slug+re.search("\.[^.]*$", filename).group()
 
+def game_display_path(instance, filename):
+    return 'jams/'+instance.jam.slug+'/'+instance.slug+'/image.png'
+
 def game_thumb_path(instance,filename):
     return 'jams/'+instance.jam.slug+'/'+instance.slug+'/thumbnail.png'
     
@@ -91,6 +106,7 @@ class Game(models.Model):
     brief = models.TextField()
     spotlighted = models.BooleanField(default=False)
     image = models.ImageField(upload_to=game_image_path, blank=True)
+    display_image = models.ImageField(upload_to=game_display_path, blank=True, editable=False)
     thumbnail = models.ImageField(upload_to=game_thumb_path, blank=True, editable=False)
 
     def __unicode__(self):
@@ -99,7 +115,7 @@ class Game(models.Model):
     def save(self, *args, **kwargs):
         if self.pk is not None:
             old_obj = Game.objects.get(pk = self.pk)
-            if self.image is not None and self.image.path != old_obj.image.path:
+            if old_obj.image and (not self.image or self.image.path != old_obj.image.path):
                 try:
                     os.remove(old_obj.image.path)
                 except:
@@ -116,6 +132,16 @@ class Game(models.Model):
             imgFile = Image.open(self.image.path)
             if imgFile.mode not in ('L', 'RGB'):
                 imgFile = imgFile.convert('RGB')
+            working = imgFile.copy()
+            working.thumbnail((600,450), Image.ANTIALIAS)
+            fp = StringIO.StringIO()
+            working.save(fp, "PNG", quality=95)
+            cf = ContentFile(fp.getvalue())
+            try:
+                os.remove(self.display_image.path)
+            except:
+                pass
+            self.display_image.save(name=self.image.name, content=cf, save=False);
             working = imgFile.copy()
             working.thumbnail((192,144), Image.ANTIALIAS)
             fp = StringIO.StringIO()
@@ -146,7 +172,7 @@ class GameResource(models.Model):
     def save(self):
         if self.pk is not None:
             old = GameResource.objects.get(pk = self.pk)
-            if self.file is not None and self.file.path != old.file.path:
+            if old.file and (not self.file or self.file.path != old.file.path):
                 try:
                     os.remove(old.file.path)
                 except:

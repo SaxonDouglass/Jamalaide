@@ -22,7 +22,9 @@ class Article(models.Model):
     official = models.BooleanField(default=True)
     jams = models.ManyToManyField(Jam, blank=True)
     header = models.ImageField(upload_to=image_path, blank=True)
+    header_svg = models.FileField(upload_to=image_path, blank=True)
     footer = models.ImageField(upload_to=image_path, blank=True)
+    footer_svg = models.FileField(upload_to=image_path, blank=True)
     
     def __unicode__(self):
         return self.title

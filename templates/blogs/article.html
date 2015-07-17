@@ -1,8 +1,14 @@
 {% load markup %}
   <article class="item">
     <{{heading}}>{{ article.title }}</{{heading}}>
-    <p class="small">{{article.date|date:"d F Y"}}</p>
-    {% if article.header %}<img src="{{article.header.url}}" alt="Header image for {{article.title}}" />{% endif %}
-    {{ article.content|md }}
-    {% if article.footer %}<img src="{{article.footer.url}}" alt="Footer image for {{article.title}}" />{% endif %}
+    <p class="small">{{article.date|date:"d F Y"}}</p>{% if article.header %}
+    {% if article.header_svg %}<picture>
+      <source type="image/svg+xml" srcset="{{article.header_svg.url}}" />
+      {% endif %}<img src="{{article.header.url}}" alt="Header image for {{article.title}}" />{% if article.header_svg %}
+    </picture>{% endif %}{% endif %}
+    {{ article.content|md }}{% if article.footer %}
+    {% if article.footer_svg %}<picture>
+      <source type="image/svg+xml" srcset="{{article.footer_svg.url}}" />
+      {% endif %}<img src="{{article.footer.url}}" alt="Footer image for {{article.title}}" />{% if article.footer_svg %}
+    </picture>{% endif %}{% endif %}
   </article>

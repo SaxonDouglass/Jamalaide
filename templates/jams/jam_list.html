@@ -4,6 +4,18 @@
     {% for jam in current %}
     <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
     (ends {{ jam.end_time|date:"F jS" }})<br>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Event",
+      "name": "{{jam.title}}",
+      "startDate" : "{{jam.start_time|date:'c'}}",
+      "endDate" : "{{jam.end_time|date:'c'}}",
+      "duration" : "P{{jam.duration.days}}DT{{jam.duration.seconds}}S",
+      "url" : "http://www.jamalaide.org.au/jams/{{jam.slug}}",
+      "location" : "{{jam.venue}}"
+    }
+    </script>
     {% endfor %}
   </section>{% endif %}
   {% if future %}<section class="important">
@@ -11,6 +23,18 @@
     {% for jam in future %}
     <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
     ({{ jam.start_time|date:"F Y" }})<br>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Event",
+      "name": "{{jam.title}}",
+      "startDate" : "{{jam.start_time|date:'c'}}",
+      "endDate" : "{{jam.end_time|date:'c'}}",
+      "duration" : "P{{jam.duration.days}}DT{{jam.duration.seconds}}S",
+      "url" : "http://www.jamalaide.org.au/jams/{{jam.slug}}",
+      "location" : "{{jam.venue}}"
+    }
+    </script>
     {% endfor %}
   </section>{% endif %}
   {% if past %}<section class="important">
@@ -18,6 +42,18 @@
     {% for jam in past %}
     <a href="/jams/{{jam.slug}}">{{jam.title}}</a>
     ({{ jam.start_time|date:"F Y" }})<br>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Event",
+      "name": "{{jam.title}}",
+      "startDate" : "{{jam.start_time|date:'c'}}",
+      "endDate" : "{{jam.end_time|date:'c'}}",
+      "duration" : "P{{jam.duration.days}}DT{{jam.duration.seconds}}S",
+      "url" : "http://www.jamalaide.org.au/jams/{{jam.slug}}",
+      "location" : "{{jam.venue}}"
+    }
+    </script>
     {% endfor %}
     </section>{% endif %}
 </section>
