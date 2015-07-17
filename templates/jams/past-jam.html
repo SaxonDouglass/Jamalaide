@@ -29,7 +29,7 @@
     <div class="right">{{ jam.duration | duration }}</div>
 
     <div class="left">Venue</div>
-    <div class="right">{{jam.venue}}</div>
+    <div class="right">{{jam.venue | md}}</div>
     {% if jam.website %}
     <div class="left">Website</div>
     <div class="right"><a href="{{jam.website}}">{% if jam.website_title %}{{jam.website_title}}{% else %}{{jam.website}}{% endif %}</a></div>
