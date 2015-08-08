@@ -31,16 +31,16 @@
 
         var link = document.getElementById("menu-link");
         var menu = document.getElementById("menu");
-        var container = document.getElementById("container");
-        menu.id = "js-menu";
-        menu.className = "hidden";
-        container.className = "js-menu";
+        var js_menu = menu.cloneNode(true);
+        js_menu.id = "js-menu";
+        js_menu.className = "hidden";
+        menu.parentNode.insertBefore(js_menu, menu);
         link.onclick = function () {
-          if (menu.className == "hidden") {
+          if (js_menu.className == "hidden") {
             link.className = "open";
-            menu.className = "visible";
+            js_menu.className = "visible";
           } else {
-            menu.className = "hidden";
+            js_menu.className = "hidden";
             link.className = "";
           }
           return false;

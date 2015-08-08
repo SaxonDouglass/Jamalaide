@@ -355,12 +355,12 @@ nav {
     #js-menu {
         position: static;
 
+        @include media-and-ie(min-width, $breakpoint-content) {
+            display: none;
+        }
+        
         &.hidden {
             display: none;
-
-            @include media-and-ie(min-width, $breakpoint-content) {
-                display: block;
-            }
         }
     }
     
@@ -398,10 +398,6 @@ nav {
     position: relative;
     line-height: 1.5em;
     @include page-width;
-
-    &.js-menu {
-        margin-bottom: (40px / 16px * 1em) + 1em;
-    }
 
     @include media-and-ie(min-width, $breakpoint-content) {
         margin-bottom: (40px / 16px * 1em) + 1em;

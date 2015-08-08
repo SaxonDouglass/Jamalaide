@@ -396,16 +396,16 @@ nav ul {
 nav #js-menu {
   position: static;
 }
-nav #js-menu.hidden {
+.ie8 nav #js-menu {
   display: none;
 }
-.ie8 nav #js-menu.hidden {
-  display: block;
-}
 @media only screen and (min-width: 41.375em) {
-  nav #js-menu.hidden {
-    display: block;
+  nav #js-menu {
+    display: none;
   }
+}
+nav #js-menu.hidden {
+  display: none;
 }
 nav li {
   display: block;
@@ -456,9 +456,6 @@ nav li a {
     max-width: 76vw;
     max-width: calc(100vw - 18.75em);
   }
-}
-#container.js-menu {
-  margin-bottom: 3.5em;
 }
 .ie8 #container {
   margin-bottom: 3.5em;
