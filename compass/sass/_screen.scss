@@ -396,6 +396,7 @@ nav {
     clear: both;
     margin: $page-width*($horizontal-padding/100%) auto (3em*5 + 40px / 16px * 1em) auto;
     position: relative;
+    line-height: 1.5em;
     @include page-width;
 
     &.js-menu {
@@ -422,15 +423,10 @@ nav {
         margin: 0.5em 0;
     }
 
-    p {
-        line-height: 1.5em;
-    }
-
     .left {
         clear: left;
         display: block;
         font-weight: bold;
-        line-height: 1.5em;
         text-align: left;
         
         @include media-and-ie(min-width, $breakpoint-columns) {
@@ -441,7 +437,6 @@ nav {
     }
 
     .right {
-        line-height: 1.5em;
         text-align: left;
         margin-bottom: 0.5em;
 
@@ -493,7 +488,6 @@ nav {
 }
 
 %sidebar {
-    line-height: 1.5em;
     display: none;
     color: $colour-secondary-foreground;
     background-color: $colour-secondary-background;

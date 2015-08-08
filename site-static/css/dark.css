@@ -63,16 +63,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   src: url('/static/font/ArcadeClassic.ttf') format('truetype'), url('/static/font/ArcadeClassic.eot') format('embedded-opentype');
 }
 *::-moz-selection {
-  color: #513670;
+  color: #50356f;
   background-color: white;
 }
 *::selection {
-  color: #513670;
+  color: #50356f;
   background-color: white;
 }
 
 html {
-  background-color: #a16cc5;
+  background-color: #a06cc4;
 }
 
 body {
@@ -174,7 +174,7 @@ img {
 
 code {
   font-family: Consolas,monospace;
-  background-color: #38254e;
+  background-color: #37254c;
   padding: 1px 0.5em;
 }
 
@@ -182,7 +182,7 @@ pre {
   margin: 1em 1em;
   text-align: left;
   padding: 0.5em;
-  background-color: #38254e;
+  background-color: #37254c;
   white-space: pre-wrap;
 }
 
@@ -194,7 +194,7 @@ blockquote {
 footer {
   display: block;
   clear: both;
-  color: #c4a3db;
+  color: #c3a3da;
   position: relative;
   text-align: center;
   max-width: 67.85714em;
@@ -326,7 +326,7 @@ header #title #account p {
 nav {
   display: block;
   max-width: 100%;
-  background-color: #2b0b40;
+  background-color: #2a0a40;
   font-family: ArcadeClassic,Arial,sans-serif;
   font-size: 2em;
   font-weight: normal;
@@ -345,14 +345,14 @@ nav a {
   padding: 0;
   border: none;
   text-align: center;
-  background-color: #48136b;
+  background-color: #47126b;
 }
 nav a:link, nav a:visited {
   color: white;
 }
 nav a:active, nav a:hover, nav a.open {
   background-color: white;
-  color: #48136b;
+  color: #47126b;
   text-decoration: none;
 }
 @media only screen and (min-height: 15em) {
@@ -375,7 +375,7 @@ nav ul {
   width: 100%;
   max-width: 29.6875em;
   margin: 0 auto;
-  background-color: #48136b;
+  background-color: #47126b;
   position: absolute;
   bottom: 1.25em;
 }
@@ -448,6 +448,7 @@ nav li a {
   clear: both;
   margin: 1.1875em auto 17.5em auto;
   position: relative;
+  line-height: 1.5em;
   max-width: 59.375em;
 }
 @media only screen and (min-width: 78.125em) {
@@ -480,14 +481,10 @@ nav li a {
 #container li {
   margin: 0.5em 0;
 }
-#container p {
-  line-height: 1.5em;
-}
 #container .left {
   clear: left;
   display: block;
   font-weight: bold;
-  line-height: 1.5em;
   text-align: left;
 }
 .ie8 #container .left {
@@ -503,7 +500,6 @@ nav li a {
   }
 }
 #container .right {
-  line-height: 1.5em;
   text-align: left;
   margin-bottom: 0.5em;
 }
@@ -573,11 +569,10 @@ nav li a {
 }
 
 #news-sidebar, #game-sidebar, #jam-list, #committee {
-  line-height: 1.5em;
   display: none;
   color: white;
   background-color: #5c3d7f;
-  border-color: #37254c;
+  border-color: #37244c;
   width: 96%;
   padding: 1em 2% 1em 2%;
   margin-bottom: 2em;
@@ -643,16 +638,16 @@ nav li a {
   text-align: left;
   padding: 1em 2% 1em 2%;
   margin-bottom: 2em;
-  background-color: #513670;
+  background-color: #50356f;
   width: 96%;
-  border-color: #513670;
+  border-color: #50356f;
 }
 .ie8 #news-feed, .ie8 #game-details, .ie8 #important-jams, .ie8 #jam-details, .ie8 #about, .ie8 #game-list, .ie8 #flatpage, .ie8 #form, .ie8 #profile {
-  border-color: #312043;
+  border-color: #301f42;
 }
 @media only screen and (min-width: 41.375em) {
   #news-feed, #game-details, #important-jams, #jam-details, #about, #game-list, #flatpage, #form, #profile {
-    border-color: #312043;
+    border-color: #301f42;
   }
 }
 #news-feed section, #game-details section, #important-jams section, #jam-details section, #about section, #game-list section, #flatpage section, #form section, #profile section {
@@ -799,7 +794,7 @@ nav li a {
   height: auto;
 }
 .game:hover, .game:active {
-  background-color: #48136b;
+  background-color: #47126b;
 }
 .game img {
   display: block;
@@ -842,8 +837,8 @@ nav li a {
 textarea,
 input,
 select {
-  background-color: #48136b;
-  border: solid 1px #70548e;
+  background-color: #47126b;
+  border: solid 1px #6f548e;
   color: white;
 }
 textarea:hover,
@@ -852,7 +847,7 @@ select:hover, textarea:active,
 input:active,
 select:active {
   background-color: #6e1da5;
-  border: solid 1px #70548e;
+  border: solid 1px #6f548e;
   color: white;
 }
 
@@ -887,8 +882,8 @@ input[readonly="readonly"] {
   display: block;
   cursor: pointer;
   font-size: 2em;
-  background-color: #48136b;
-  border: solid 1px #70548e;
+  background-color: #47126b;
+  border: solid 1px #6f548e;
   -moz-border-radius: 0.125em;
   -webkit-border-radius: 0.125em;
   border-radius: 0.125em;
@@ -902,7 +897,7 @@ input[readonly="readonly"] {
 }
 .button:hover, .button:active {
   background-color: #6e1da5;
-  border: solid 1px #70548e;
+  border: solid 1px #6f548e;
   color: white;
 }
 
