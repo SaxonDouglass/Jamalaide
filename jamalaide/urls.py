@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^news/', include('blogs.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^jams/', include('jams.urls')),
+    url(r'^devs/', include('devs.urls')),
     url(r'^games/?$', 'jams.views.games'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {

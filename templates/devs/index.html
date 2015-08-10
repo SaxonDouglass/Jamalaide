@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Devs{% endblock %}
+
+{% block description %}<meta name="description" content="Discover the wide range of developers who are members of Jamalaide, and explore the games they have created at our jams.." />{% endblock %}
+
+{% block content %}
+<section id="flatpage">
+  {% if teams %}<section>
+    <h1>Teams</h1>
+    <ul>{% for team in teams %}
+      <li><a href="/devs/{{team.slug}}">{{team.name}}</a></li>{% endfor %}
+    </ul>
+  </section>
+  
+  {% endif %}<section>
+    <h1>Individuals</h1>
+    <ul>{% for profile in users %}
+      <li><a href="/devs/{{profile.slug}}">{{profile.get_full_name}}</a></li>{% endfor %}
+    </ul>
+  </section>
+</section>
+{% endblock %}

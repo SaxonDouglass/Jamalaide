@@ -1,4 +1,5 @@
 import datetime
+import itertools
 import os
 import re
 import StringIO
@@ -13,6 +14,8 @@ from django.db.models.signals import pre_save
 from django.core.files.base import ContentFile
 from django.template.defaultfilters import slugify
 from django.core.context_processors import csrf
+
+from accounts.models import Team
 
 def map_path(instance, filename):
     return 'jams/'+instance.slug+'/'+instance.slug+'-map'+re.search("\.[^.]*$", filename).group()
@@ -40,7 +43,7 @@ class Jam(models.Model):
         )
 
     title = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=30)
+    slug = models.SlugField(max_length=30, unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
@@ -100,8 +103,9 @@ def game_thumb_path(instance,filename):
     
 class Game(models.Model):
     title = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=30, editable=False, unique=True)
+    slug = models.SlugField(max_length=30, editable=False)
     jam = models.ForeignKey(Jam)
+    team = models.ManyToManyField(Team, blank=True)
     creators = models.ManyToManyField(settings.AUTH_USER_MODEL)
     brief = models.TextField()
     spotlighted = models.BooleanField(default=False)
@@ -109,6 +113,9 @@ class Game(models.Model):
     display_image = models.ImageField(upload_to=game_display_path, blank=True, editable=False)
     thumbnail = models.ImageField(upload_to=game_thumb_path, blank=True, editable=False)
 
+    class Meta:
+        unique_together = ("jam", "slug")
+    
     def __unicode__(self):
         return self.title
 
@@ -120,8 +127,16 @@ class Game(models.Model):
                     os.remove(old_obj.image.path)
                 except:
                     pass
-        else:
-            self.slug = slugify(self.title)
+        if not self.slug:
+            max_length = Game._meta.get_field('slug').max_length
+            self.slug = orig = slugify(self.title)[:max_length]
+
+            for x in itertools.count(1):
+                if not Game.objects.filter(slug=self.slug, jam=self.jam).exists():
+                    break
+
+                # Truncate the original slug dynamically. Minus 1 for the hyphen.
+                self.slug = "%s-%d" % (orig[:max_length - len(str(x)) - 1], x)
 
         try:
             os.remove(self.thumbnail.path)
@@ -193,21 +208,3 @@ class GameResourceForm(forms.ModelForm):
     class Meta:
         model = GameResource
         exclude = ('game',)
-
-def team_image_path(instance, filename):
-        return 'teams/'+instance.slug+'/'+instance.slug+re.search("\.[^.]*$", filename).group()
-
-class Team(models.Model):
-    name = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=30, editable=False, unique=True)
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL)
-    brief = models.TextField(max_length=300, blank=True)
-    extended = models.TextField(blank=True)
-    image = models.ImageField(upload_to=team_image_path, blank=True)
-
-    def __unicode__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Team, self).save(*args, **kwargs)

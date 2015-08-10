@@ -3,20 +3,24 @@
 {% load jam_tags %}
 {% load markup %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}Devs - {{profile.get_full_name}}{% endblock %}
 
 {% block content %}
 <section id="profile">
 <section>
-<h1>Profile</h1>
+<h1>{{profile.get_full_name}}</h1>
 
 {% if profile.image %}<img src="{{profile.image.url}}" alt="Profile picture" />{% endif %}
 
-<div class="left">Display name</div>
-<div class="right">{{profile.get_full_name}}</div>
-
 {% if profile.show_email %}<div class="left">Email address</div>
 <div class="right"><a href="mailto:{{profile.user.email}}">{{profile.user.email}}</a></div>{% endif %}
+
+{% if profile.user.teams.all %}<div class="left">Teams</div>
+<div class="right">
+  <ul>{% for team in profile.user.teams.all %}
+    <li><a href="/devs/{{team.slug}}">{{team.name}}</a></li>{% endfor %}
+  </ul>
+</div>{% endif %}
 
 {% if profile.brief %}<div class="left">Brief Bio</div>
 <div class="right">{{profile.brief | md}}</div>{% endif %}
@@ -24,10 +28,10 @@
 {% if profile.extended %}<div class="left">Extended Bio</div>
 <div class="right">{{profile.extended | md}}</div>{% endif %}
 
-Would you like to <a href="{% url 'update_profile' %}">update your profile</a> or <a href="{% url 'password_change' %}">change your password</a>?
+{% if profile.user == request.user %}Would you like to <a href="{% url 'update_profile' %}">update your profile</a> or <a href="{% url 'password_change' %}">change your password</a>?{% endif %}
 </section>
 <section>
-{% if games %}<h2>Your games</h2>
+{% if games %}<h2>Games</h2>
 {% for game in games %}
 {% game_thumb game %}
 {% endfor %}

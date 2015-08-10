@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load jam_tags %}
+{% load markup %}
+
+{% block title %}Devs - {{team.name}}{% endblock %}
+
+{% block content %}
+<section id="profile">
+<section>
+<h1>{{team.name}}</h1>
+
+{% if team.image %}<img src="{{team.image.url}}" alt="Profile picture" />{% endif %}
+
+<div class="left">Members</div>
+<div class="right">
+  <ul>{% for user in team.members.all %}
+    <li><a href="/devs/{{user.profile.slug}}">{{user.profile.get_full_name}}</a></li>{% endfor %}
+  </ul>
+</div>
+
+{% if team.brief %}<div class="left">Brief Bio</div>
+<div class="right">{{team.brief | md}}</div>{% endif %}
+
+{% if team.extended %}<div class="left">Extended Bio</div>
+<div class="right">{{team.extended | md}}</div>{% endif %}
+</section>
+<section>
+{% if games %}<h2>Games</h2>
+{% for game in games %}
+{% game_thumb game %}
+{% endfor %}
+{% endif %}
+</section>
+</section>
+{% endblock %}

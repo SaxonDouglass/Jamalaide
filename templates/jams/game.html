@@ -33,7 +33,7 @@
 
   <h2>Creators</h2>
   <ul>
-    {% for creator in game.creators.all %}<li>{{creator.profile.get_full_name}}</li>{% endfor %}
+    {% for creator in game.creators.all %}<li><a href="/devs/{{creator.profile.slug}}">{{creator.profile.get_full_name}}</a></li>{% endfor %}
   </ul>
 
 </section>

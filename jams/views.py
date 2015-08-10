@@ -64,7 +64,7 @@ def edit_game(request, jam_slug, game_slug=None):
     
     jam = get_object_or_404(Jam, slug=jam_slug)
     if game_slug:
-        game = get_object_or_404(Game, slug=game_slug)
+        game = get_object_or_404(Game, slug=game_slug, jam=jam)
         if request.user not in game.creators.all():
             return HttpResponseRedirect('/jams/'+game.jam.slug+"/"+game.slug)
     else:
