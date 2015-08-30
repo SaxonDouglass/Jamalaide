@@ -28,7 +28,7 @@ def jams(request):
 def jam(request, jam_slug):
     jam = get_object_or_404(Jam, slug=jam_slug)
     games = jam.game_set.all().order_by('title')
-    news = jam.article_set.all()
+    news = jam.article_set.all().order_by('-date')
     
     if jam.end_time > datetime.datetime.now():
         return render_to_response('jams/future-jam.html',
